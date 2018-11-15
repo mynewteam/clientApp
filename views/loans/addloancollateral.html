@@ -1,0 +1,513 @@
+<div class="content-container" ng-controller="AddLoanCollateralController">
+    <ul class="breadcrumb">
+        <li><a href="#/viewloanaccount/{{loanId}}">{{'label.anchor.viewloanaccount' | translate}}</a></li>
+        <li class="active">{{'label.anchor.addloancollateral' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h4>{{'label.anchor.addloancollateral' | translate}}</h4>
+            </div>
+
+            <form name="addloancollateralform" class="form-horizontal" ng-submit="submit()">
+                <api-validate></api-validate>
+                <fieldset>
+                    <uib-tabset tabset-name="collateralTabset">
+                        <uib-tab heading="{{'label.tab.land' | translate}}" has-permission='ALL_FUNCTIONS_READ'>
+                            <h3>{{'label.heading.landsysteminformation'| translate}}</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.SystemCollateralId'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>0000000001</option>
+                                        <option>0000000002</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <h3>{{'label.heading.CollateralInformation'| translate}}</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CollateralName'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>លិខិតផ្ទេរសិទ្ធិកាន់កាប់</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.CollateralId'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" placeholder="collateral ID">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.DateIssue'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.NatureCollateral'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>ដីស្រែ</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CollateralSize'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.CollateralPrice'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.Provine'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>កណ្ដាល</option>
+                                        <option>តាកែវ</option>
+                                        <option>គំពត</option>
+                                        <option>ព្រៃវែអ</option>
+                                    </select>
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.NumberOfCopied'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CollateralStatus'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+
+                                        <option>Register</option>
+                                        <option>pending</option>
+
+                                    </select>
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.DetailLocation'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <textarea class="form-control" rows="8"></textarea>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <h3>{{'label.heading.CollateralOwner'| translate}}</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CustomerName1'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.Sex1'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>Female</option>
+                                        <option>Male</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.NationalId1'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+
+                                <label class="control-label col-sm-2"></label>
+                                <div class="col-sm-3">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CustomerName2'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.Sex2'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>Female</option>
+                                        <option>Male</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.NationalId2'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+                                <div class="row" style="text-align: center;">
+
+                                    <button id="cancel" type="reset" class="btn btn-default" ng-click="cancel()">Remove
+                                    </button>
+                                    <button id="save" type="submit" has-permission='CREATE_COLLATERAL' class="btn btn-primary">  Add </button>
+
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="row" style="text-align: center;">
+
+                                <button id="cancel" type="reset" class="btn btn-default" ng-click="cancel()">{{'label.button.cancel'
+                                    | translate}}
+                                </button>
+                                <button id="save" type="submit" has-permission='CREATE_COLLATERAL' class="btn btn-primary">{{
+                                    'label.button.save' | translate }}</button>
+
+                            </div>
+
+
+
+                        </uib-tab>
+                        <uib-tab heading="{{'label.tab.moto' | translate}}" has-permission='READ_CLIENT'>
+                            <h3>{{'label.heading.MotoSystemInformation'| translate}}</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.SystemCollateralId'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>0000000001</option>
+                                        <option>0000000002</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <h3>{{'label.heading.CollateralInformation'| translate}}</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CollateralName' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>បណ្ណសម្គាល់យានយន្ត</option>
+                                        <option>?????????????????</option>
+                                    </select>
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.CollateralId' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.DateIssue' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                                <label class="control-label col-sm-2">{{'label.form.CollateralPrice' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CollateraloldPrice' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.CollateralLocation' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.Branch' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.Type' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.Colour' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.NumberOfCopied' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.EngineNo' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.FrameNo' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CollateralStatus' | translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>Register</option>
+                                        <option>pending</option>
+                                    </select>
+
+                                </div>
+
+                                <label class="control-label col-sm-2"></label>
+                                <div class="col-sm-3">
+
+                                </div>
+                            </div>
+                            <hr>
+                            <h3>{{'label.heading.CollateralOwner'| translate}}</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CustomerName1'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.Sex1'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>Female</option>
+                                        <option>Male</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.NationalId1'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+
+                                <label class="control-label col-sm-2"></label>
+                                <div class="col-sm-3">
+                                    <div class="row" style="text-align: center;">
+                                        <button id="cancel" type="reset" class="btn btn-default" ng-click="cancel()">Rmove
+                                        </button>
+                                        <button id="save" type="submit" has-permission='CREATE_COLLATERAL' class="btn btn-primary">Add</button>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row" style="text-align: center;">
+                                <button id="cancel" type="reset" class="btn btn-default" ng-click="cancel()">{{'label.button.cancel'
+                                    | translate}}
+                                </button>
+                                <button id="save" type="submit" has-permission='CREATE_COLLATERAL' class="btn btn-primary">{{
+                                    'label.button.save' | translate }}</button>
+
+                            </div>
+
+                        </uib-tab>
+                        <uib-tab heading="{{'label.tab.carandtruck' | translate}}" has-permission='READ_LOAN'>
+                            <h3>{{'label.heading.CarAndTruck'| translate}}</h3>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.SystemCollateralId'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>0000000001</option>
+                                        <option>0000000001</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <h3>{{'label.heading.CollateralInformation'| translate}}</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CollateralName'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>???????????????????</option>
+                                        <option>????????????????????</option>
+                                    </select>
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.CollateralId'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.DateIssue'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.CollateralPrice'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.NumberOfCopied'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.CollateraloldPrice'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.Branch'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.Type'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.Colour'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.EngineNo'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.FrameNo'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.ClassicNo'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.Hpower'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.Year'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.NoOfAlexs'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.NofCylinders'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CylindersDisp'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.CollateralStatus'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>Register</option>
+                                        <option>pending</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.DetailLocation'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control">
+                                </div>
+                                <label class="control-label col-sm-2"></label>
+                                <div class="col-sm-3">
+
+                                </div>
+                            </div>
+
+
+                            <hr>
+                            <h3>{{'label.heading.CollateralOwner'| translate}}</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.CustomerName1'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+
+                                <label class="control-label col-sm-2">{{'label.form.Sex1'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control">
+                                        <option>Female</option>
+                                        <option>Male</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.form.NationalId1'| translate}}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text">
+                                </div>
+
+                                <label class="control-label col-sm-2"></label>
+                                <div class="col-sm-3" style="text-align:center">
+                                    <button id="" type="" class="btn btn-default" ng-click="cancel()">Remove
+                                    </button>
+                                    <button id="save" type="submit" has-permission='' class="btn btn-primary">  Add </button>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row" style="text-align: center;">
+                                <button id="cancel" type="reset" class="btn btn-default" ng-click="cancel()">{{'label.button.cancel'
+                                    | translate}}
+                                </button>
+                                <button id="save" type="submit" has-permission='CREATE_COLLATERAL' class="btn btn-primary">{{
+                                    'label.button.save' | translate }}</button>
+                            </div>
+                        </uib-tab>
+                    </uib-tabset>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
