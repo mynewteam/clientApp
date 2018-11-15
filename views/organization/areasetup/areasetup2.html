@@ -1,41 +1,13 @@
-<div class="content-container" ng-controller="AreaSetupController">
-
-
-
+<div class="content-container" ng-controller="areasetup">
 
     <div class="card">
         <div class="content">
             <div class="toolbar">
-                <h4>Setup Area</h4>
+                <h4>Collateral Listing</h4>
             </div>
+            <br>
 
-
-
-            <!-- on-finish="finishedWizard()" on-cancel="cancelledWizard()" -->
-            <wizard current-step="step" class="card well">
-                <wz-step wz-title="Starting">
-                    <h1>This is the first step</h1>
-                    <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
-                    <input type="submit" wz-next value="Continue" />
-                </wz-step>
-                <wz-step wz-title="Continuing">
-                    <h1>Continuing</h1>
-                    <p>You have continued here!</p>
-                    <input type="submit" wz-next value="Go on" />
-                </wz-step>
-                <wz-step wz-title="More steps">
-                    <p>Even more steps!!</p>
-                    <input type="submit" wz-next value="Finish now" />
-                </wz-step>
-            </wizard>
-
-
-
-
-
-
-
-            <fieldset>
+            <!-- <fieldset>
                 <br>
                 <div class="form-group">
                     <div class="col-sm-6">
@@ -70,28 +42,51 @@
                         </div>
                     </div>
                 </div>
-            </fieldset>
+            </fieldset> -->
             <fieldset>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>Branch ID</th>
+                                        <th>System Collateral ID</th>
+                                        <th>Collateral Type</th>
+                                        <th>Collateral ID</th>
+                                        <th>Collateral Name</th>
+                                        <th>Collateral Price</th>
                                         <th>Province</th>
+                                        <th>Account No</th>
+                                        <th>Date Issue</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Kandal</td>
+                                        <td>000</td>
+                                        <td>000000</td>
+                                        <td>Land</td>
+
+                                        <td>0121212120</td>
+
+                                        <td>I don't know</td>
+
+                                        <td>130000</td>
+
+                                        <td>42100050</td>
+
+                                        <td>2600602019</td>
+
+                                        <td>D</td>
+
                                         <td>
                                             <a href="#" class="fa fa-pencil fa fa-large">Edit</a>
                                             <a href="#" class="fa icon-remove-sign">Delete</a>
                                         </td>
                                     </tr>
                                 </tbody>
-                                <tfoot>
+                                <!-- <tfoot>
                                     <tr>
                                         <td>
                                             <input type="text" class="form-control" placeholder="Province">
@@ -100,14 +95,14 @@
                                             <button class="btn btn-primary">New</button>
                                         </td>
                                     </tr>
-                                </tfoot>
+                                </tfoot> -->
                             </table>
                         </div>
                     </div>
                 </div>
 
             </fieldset>
-            <fieldset>
+            <!-- <fieldset>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <div class="table-responsive">
@@ -142,8 +137,8 @@
                     </div>
                 </div>
 
-            </fieldset>
-            <fieldset>
+            </fieldset> -->
+            <!-- <fieldset>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <div class="table-responsive">
@@ -213,7 +208,7 @@
                         </div>
                     </div>
                 </div>
-            </fieldset>
+            </fieldset> -->
         </div>
     </div>
 </div>

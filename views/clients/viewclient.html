@@ -671,6 +671,8 @@
 						<button class="btn btn-primary pull-right" ng-click="routeTo()"><i class="icon-plus icon-white"></i>{{'label.button.addAddress' | translate}}</button>
 						<br>
 
+
+
 						<table class="table" ng-repeat="address in addresses"  class="table table-condensed">
 							<thead>
 							<tr class="graybg">
@@ -991,6 +993,7 @@
 						</tbody>
 					</table>
 				</uib-tab>
+
 				<uib-tab heading="{{'label.heading.documents' | translate}}" select="getClientDocuments()" has-permission='READ_DOCUMENT'>
 					<div class="pull-right">
 						<a href="#/addclientdocument/{{client.id}}" class="btn btn-primary" has-permission='CREATE_DOCUMENT'><i
@@ -1024,6 +1027,7 @@
 					  <object height="60%" width="70%" ng-show="preview" data="{{fileUrl}}" type="{{fileType}}"></object>
 				  </div>
 				</uib-tab>
+
 				<uib-tab heading="{{clientdatatable.registeredTableName}}" ng-repeat="clientdatatable in clientdatatables"
 						 select="dataTableChange(clientdatatable)" has-permission='READ_{{clientdatatable.registeredTableName}}'>
 					<api-validate></api-validate>
@@ -1066,6 +1070,7 @@
 						</div>
 					</div>
 				</uib-tab>
+				
 				<uib-tab heading="{{ 'label.heading.notes' | translate }}" has-permission='READ_CLIENTNOTE'>
 					<br/>
 					<form class="form">

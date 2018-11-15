@@ -612,6 +612,8 @@
   "#Clients": "....",
   "#Headings": "..",
   "label.heading.address": "Address",
+
+
   "label.heading.familymembers": "Family Members",
   "label.heading.identities": "Identities",
   "label.heading.uniqueidentification": "Unique ID #",
@@ -3298,7 +3300,7 @@
   "chargeCalculationType.percent.of.amount.and.interest": "% Loan Amount + Interest",
   "chargeCalculationType.percent.of.interest": "% Interest",
   "chargeCalculationType.percent.of.disbursement.amount": "% Disbursement Amount",
-  "chargeCalculationType.percent.of.outstanding": "% Outstanding",
+  "chargeCalculationType.percent.of.outstanding.amount": "% Outstanding",
   "chargepaymentmode.regular": "Regular Mode",
   "chargepaymentmode.accounttransfer": "Account Transfer Mode",
   "validation.msg.charge.name.cannot.be.blank": "Name cannot be blank.",
@@ -4320,6 +4322,8 @@
   "reportRunFrequency.monthly": "Monthly",
   "reportRunFrequency.yearly": "Yearly",
   "reportRunFrequency.custom": "Custom",
+
+
   "----End---": "--End of file--- "     
  
 }

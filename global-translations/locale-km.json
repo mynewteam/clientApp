@@ -2502,6 +2502,7 @@
 	"chargeCalculationType.percent.of.amount": "% ទំហំទឹកប្រាក់",
 	"chargeCalculationType.percent.of.amount.and.interest": "% ទំហំឥណទាន + ការប្រាក់",
 	"chargeCalculationType.percent.of.interest": "% ការប្រាក់",
+	"chargeCalculationType.percent.of.outstanding.amount": "% សមតុល្យឥណទាន",
 	"chargepaymentmode.regular": "របៀបធម្មតា",
 	"chargepaymentmode.accounttransfer": "បែបផ្ទេរគណនី",
 	"validation.msg.charge.name.cannot.be.blank": "ឈ្មោះមិនអាចទទេបានទេ",
@@ -3143,7 +3144,6 @@
 	"label.button.paymenttype": "បន្ថែមប្រភេទនៃការទូទាត់",
 	"label.input.iscashpayment": "ទូទាត់ជាសាច់ប្រាក់?",
 	"label.anchor.editpaymenttype": "កែប្រែមធ្យោបាយទូទាត់",
-
 
 	"label.form.Pheng": "pheng",
 	"label.form.Country": "ប្រទេស",

@@ -76,8 +76,9 @@
 						</div>
 					</div>
 				</div>
-	        </div>
-
+			</div>
+			
+			
 			<div data-ng-switch on="showNonPersonOptions">
 				<div data-ng-switch-when="false">
 					<div class="form-group">
@@ -93,7 +94,23 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			
+			<div data-ng-switch on="showNonPersonOptions">
+				<div data-ng-switch-when="false">
+					<div class="form-group">
+						<label class="control-label col-sm-2">Khmer Name<span class="required">*</span></label>
+						<div class="col-sm-3">
+							<input type="text" id="khmername" name="khmername" ng-model="formData.khmername" class="form-control" />
+						</div>
+						<div class="col-sm-3">
+							<form-validate valattributeform="editclientform" valattribute="khmername"/>
+						</div>
+					</div>
+				</div>
 	        </div>
+
+
 			<div data-ng-switch on="showNonPersonOptions">
 				<div data-ng-switch-when="true">
 					<div class="form-group">
