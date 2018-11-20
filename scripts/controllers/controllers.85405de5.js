@@ -4522,8 +4522,8 @@
                         }
                         if (scope.addressArray[i].isActive) {
                             temp.isActive = scope.addressArray[i].isActive;
-
                         }
+                        
                         scope.formData.address.push(temp);
                     }
                 }
@@ -4597,6 +4597,11 @@
     mifosX.controllers = _.extend(module, {
         EditClientController: function (scope, routeParams, resourceFactory, location, http, dateFilter, API_VERSION, Upload, $rootScope) {
             scope.offices = [];
+            scope.villagekh=[];
+            scope.communekh=[];
+            scope.districtkh = [];
+            scope.provincekh = [];
+            scope.countrykh = [];
             scope.date = {};
             scope.restrictDate = new Date();
             scope.savingproducts = [];
@@ -4620,6 +4625,7 @@
                     firstname: data.firstname,
                     lastname: data.lastname,
                     khmername: data.khmername,
+                    // tbl_village_id : data.addressKhmer.id,
                     middlename: data.middlename,
                     active: data.active,
                     accountNo: data.accountNo,
@@ -4691,6 +4697,21 @@
                     scope.date.submittedOnDate = new Date(submittedOnDate);
                 }
 
+                resourceFactory.addressVillage.get({ id: data.addressKhmer.id },function(data_village){
+
+                    resourceFactory.addressCommune.get({},function(data_commune){
+
+                        resourceFactory.addressDistrict.get({}, function(data_district){
+
+                            resourceFactory.addressProvince.get({}, function(data_province){
+                                
+                                resourceFactory.addressCountry.get({}, function(data_country){
+
+                                })
+                            })
+                        })
+                    })
+                })
             });
 
             scope.displayPersonOrNonPersonOptions = function (legalFormId) {
@@ -4772,9 +4793,6 @@
                     var dobDate = dateFilter(data.dateOfBirth, scope.df);
                     scope.date.dateOfBirth = new Date(dobDate);
                 }
-
-
-
             });
 
 
