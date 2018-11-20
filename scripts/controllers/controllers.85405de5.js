@@ -4696,18 +4696,18 @@
                     var submittedOnDate = dateFilter(data.timeline.submittedOnDate, scope.df);
                     scope.date.submittedOnDate = new Date(submittedOnDate);
                 }
+                resourceFactory.addressCountry.get({}, function(data_country){
+                    scope.countrykh = data_country;
+                })
 
-                resourceFactory.addressVillage.get({ id: data.addressKhmer.id },function(data_village){
-
-                    resourceFactory.addressCommune.get({},function(data_commune){
-
-                        resourceFactory.addressDistrict.get({}, function(data_district){
-
-                            resourceFactory.addressProvince.get({}, function(data_province){
-                                
-                                resourceFactory.addressCountry.get({}, function(data_country){
-
-                                })
+                resourceFactory.addressAllVillage.get({ id: data.addressKhmer.id },function(data_village){
+                    scope.villagekh = data_village;
+                    resourceFactory.addressAllCommune.get({id: data_village[0].tbl_commune_id },function(data_commune){
+                        scope.communekh = data_commune;
+                        resourceFactory.addressAllDistrict.get({id: data_commune[0].tbl_district_id }, function(data_district){
+                            scope.districtkh = data_district;
+                            resourceFactory.addressAllProvince.get({id: data_district[0].tbl_province_id}, function(adata_province){
+                                scope.provincekh = adata_province;
                             })
                         })
                     })

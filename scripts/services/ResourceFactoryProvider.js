@@ -572,6 +572,19 @@
                     addressVillage: defineResource(apiVer + "/address/village/commune/:id", {}, {
                         get: { method: 'GET', params: {}, isArray: true }
                     }),
+                    //edit client
+                    addressAllVillage: defineResource(apiVer + "/address/allvillage/:id", {}, {
+                        get: { method: 'GET', params: {}, isArray: true }
+                    }),
+                    addressAllCommune: defineResource(apiVer + "/address/allcommune/:id", {}, {
+                        get: { method: 'GET', params: {}, isArray: true }
+                    }),
+                    addressAllDistrict: defineResource(apiVer + "/address/alldistrict/:id", {}, {
+                        get: { method: 'GET', params: {}, isArray: true }
+                    }),
+                    addressAllProvince: defineResource(apiVer + "/address/allprovince/:id", {}, {
+                        get: { method: 'GET', params: {}, isArray: true }
+                    }),
                     //--------------
                     addressFieldConfiguration: defineResource(apiVer + "/fieldconfiguration/:entity", {}, {
                         get: { method: 'GET', params: {}, isArray: true }
