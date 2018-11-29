@@ -573,16 +573,16 @@
                         get: { method: 'GET', params: {}, isArray: true }
                     }),
                     //edit client
-                    addressAllVillage: defineResource(apiVer + "/address/allvillage/:id", {}, {
+                    addressAllVillage: defineResource(apiVer + "/address/village/allvillage/:id", {}, {
                         get: { method: 'GET', params: {}, isArray: true }
                     }),
-                    addressAllCommune: defineResource(apiVer + "/address/allcommune/:id", {}, {
+                    addressAllCommune: defineResource(apiVer + "/address/commune/allcommune/:id", {}, {
                         get: { method: 'GET', params: {}, isArray: true }
                     }),
-                    addressAllDistrict: defineResource(apiVer + "/address/alldistrict/:id", {}, {
+                    addressAllDistrict: defineResource(apiVer + "/address/district/alldistrict/:id", {}, {
                         get: { method: 'GET', params: {}, isArray: true }
                     }),
-                    addressAllProvince: defineResource(apiVer + "/address/allprovince/:id", {}, {
+                    addressAllProvince: defineResource(apiVer + "/address/province/allprovince/:id", {}, {
                         get: { method: 'GET', params: {}, isArray: true }
                     }),
                     //--------------

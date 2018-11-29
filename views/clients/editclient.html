@@ -286,15 +286,15 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2">{{ 'label.form.Country' | translate }}</label>
 			<div class="col-sm-3">
-				<select id="CountryID" ng-model="CountryData.Id" class="form-control" ng-options="c.Id as c.Des_In_Khmer for c in countrykh"
-				 value="{{c.Id}}" ng-change="changeCountry(CountryData.Id)">
+				<select id="CountryID" ng-model="tempAddress.tbl_country_id" class="form-control" ng-options="c.Id as c.Des_In_Khmer for c in countrykh"
+				 value="{{c.Id}}" ng-change="changeCountry(tempAddress.Id)">
 				</select>
 			</div>
 		
 			<label class="control-label col-sm-2">{{ 'label.form.Province' | translate }}</label>
 			<div class="col-sm-3">
-				<select id="ProvinceID" ng-model="ProvinceData.id" class="form-control" ng-options="pro.id as pro.Des_In_Khmer for pro in provincekh"
-				 value="{{pro.id}}" ng-change="changeProvince(ProvinceData.id)">
+				<select id="ProvinceID" ng-model="tempAddress.tbl_province_id" class="form-control" ng-options="pro.id as pro.Des_In_Khmer for pro in provincekh"
+				 value="{{pro.id}}" ng-change="changeProvince(tempAddress.tbl_province_id)">
 				</select>
 			</div>
 		</div>
@@ -302,15 +302,15 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2">{{ 'label.form.District' | translate }}</label>
 			<div class="col-sm-3">
-				<select id="DistrictID" ng-model="DistrictData.id" class="form-control" ng-options="dist.id as dist.Des_In_Khmer for dist in districtkh"
-				 value="{{dist.id}}" ng-change="changeDistrict(DistrictData.id)">
+				<select id="DistrictID" ng-model="tempAddress.tbl_district_id" class="form-control" ng-options="dist.id as dist.Des_In_Khmer for dist in districtkh"
+				 value="{{dist.id}}" ng-change="changeDistrict(tempAddress.tbl_district_id)">
 				</select>
 			</div>
 		
 			<label class="control-label col-sm-2">{{ 'label.form.Commune' | translate }}</label>
 			<div class="col-sm-3">
-				<select id="CommuneID" ng-model="CommuneData.id" class="form-control" ng-options="comm.id as comm.Des_In_Khmer for comm in communekh"
-				 value="{{comm.id}}" ng-change="changeCommune(CommuneData.id)">
+				<select id="CommuneID" ng-model="tempAddress.tbl_commune_id" class="form-control" ng-options="comm.id as comm.Des_In_Khmer for comm in communekh" value="{{comm.id}}" 
+				ng-change="changeCommune(tempAddress.tbl_commune_id)">
 				</select>
 			</div>
 		</div>
@@ -318,15 +318,12 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2">{{ 'label.form.Village' | translate }}</label>
 			<div class="col-sm-3">
-				<select id="tbl_village_id" ng-model="formData.tbl_village_id" class="form-control" ng-options="vill.id as vill.Des_In_Khmer for vill in villagekh"
-				 value="{{vill.id}}">
+				<select id="tbl_village_id" ng-model="formData.tbl_village_id" ng-selected="690"  class="form-control" ng-options="vill.id as vill.Des_In_Khmer for vill in villagekh" value="{{vill.id}}">
 				</select>
 			</div>
 		</div>
-<!-- end address -->
-
-
-
+		
+		
 	        <div class="col-md-offset-3">
 	            <a id="cancel" href="#/viewclient/{{clientId}}">
 	                <button type="reset" class="btn btn-default">{{'label.button.cancel' | translate}}</button>

@@ -4602,6 +4602,7 @@
             scope.districtkh = [];
             scope.provincekh = [];
             scope.countrykh = [];
+            scope.tempAddress={},
             scope.date = {};
             scope.restrictDate = new Date();
             scope.savingproducts = [];
@@ -4625,7 +4626,6 @@
                     firstname: data.firstname,
                     lastname: data.lastname,
                     khmername: data.khmername,
-                    // tbl_village_id : data.addressKhmer.id,
                     middlename: data.middlename,
                     active: data.active,
                     accountNo: data.accountNo,
@@ -4701,18 +4701,57 @@
                 })
 
                 resourceFactory.addressAllVillage.get({ id: data.addressKhmer.id },function(data_village){
-                    scope.villagekh = data_village;
-                    resourceFactory.addressAllCommune.get({id: data_village[0].tbl_commune_id },function(data_commune){
+                    scope.villagekh = data_village; 
+                    scope.formData.tbl_village_id = data.addressKhmer.id;
+               
+
+                    resourceFactory.addressAllCommune.get({id: data_village[0].tbl_commune_id},function(data_commune){
                         scope.communekh = data_commune;
+                        scope.tempAddress.tbl_commune_id = data_village[0].tbl_commune_id;
+                        
+
                         resourceFactory.addressAllDistrict.get({id: data_commune[0].tbl_district_id }, function(data_district){
                             scope.districtkh = data_district;
-                            resourceFactory.addressAllProvince.get({id: data_district[0].tbl_province_id}, function(adata_province){
-                                scope.provincekh = adata_province;
+                            scope.tempAddress.tbl_district_id = data_commune[0].tbl_district_id;
+
+
+
+                            resourceFactory.addressAllProvince.get({id: data_district[0].tbl_province_id}, function(data_province){
+                                scope.provincekh = data_province;
+                                scope.tempAddress.tbl_province_id = data_district[0].tbl_province_id;
+                                scope.tempAddress.tbl_country_id = data_province[0].tbl_country_id;
+
+                               
                             })
                         })
                     })
                 })
             });
+
+            //address
+            scope.changeCountry = function(Id){
+                resourceFactory.addressProvince.get({id: Id},function(data){
+                    scope.provincekh = data;
+                })
+            };
+
+            scope.changeProvince = function(ProvinceID){
+                resourceFactory.addressDistrict.get({id: ProvinceID},function(data){
+                    scope.districtkh = data;
+                })
+            };
+
+            scope.changeDistrict = function(DistrictID){
+                resourceFactory.addressCommune.get({id: DistrictID},function(data){
+                    scope.communekh = data;
+                })
+            }
+
+            scope.changeCommune=function(CommuneID){
+                resourceFactory.addressVillage.get({id: CommuneID}, function(data){
+                    scope.villagekh = data;
+                })
+            }
 
             scope.displayPersonOrNonPersonOptions = function (legalFormId) {
                 if (legalFormId == scope.clientPersonId || legalFormId == null) {
