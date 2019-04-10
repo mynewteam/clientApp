@@ -31,6 +31,26 @@
                             }}</a></li>
                     </ul>
                 </li>
+                <li class="" uib-dropdown is-open="li.termdeposit.status.isopen"
+                ng-mouseenter="li.termdeposit.status.isopen = true" ng-mouseleave="li.termdeposit.status.isopen = false">
+                    <a class="" uib-dropdown-toggle data-toggle="uib-dropdown"
+                       ng-class="{ activate: isActive('termdeposit') }" href >
+                       <i class="fa fa-large fa fa-briefcase"></i> {{
+                        'label.deposit.termdeposit' | translate }}<b class="caret"></b></a>
+                    <ul class="" uib-dropdown-menu id="swatch-menu">
+                        <li><a href="#/savingnews" >{{ 'label.savingnews.savingaccount' | translate
+                            }}</a></li>
+                        <li><a href="#/currentaccountnews" has-permission='READ_GROUP'>{{ 'label.currentaccountnews.currentaccountnews ' | translate }}</a></li>
+                        <li><a href="#/depositnews" has-permission='READ_CENTER'>{{ 'label.depositnews.Deposit' | translate
+                            }}</a></li>
+                    </ul>
+                </li>   
+                <li uib-dropdown is-open="li.loannew.status.isopen"
+                ng-mouseenter="li.loannew.status.isopen = true" ng-mouseleave="li.loannew.status.isopen = false">
+                    <a ng-class="{ activate: isActive('loannew') }" href="#/loannew">
+                        <i class="fa fa-tags fa fa-large"></i> {{ 'label.loansnew.loanmodule' | translate }}
+                    </a>
+                </li>             
                 <li uib-dropdown is-open="li.accounting.status.isopen"
                 ng-mouseenter="li.accounting.status.isopen = true" ng-mouseleave="li.accounting.status.isopen = false">
                     <a ng-class="{ activate: isActive('acc') }" href="#/accounting">

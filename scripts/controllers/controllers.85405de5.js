@@ -29,21 +29,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 (function (module) {
     mifosX.controllers = _.extend(module, {
         AccCoaController: function (scope, $rootScope, translate, resourceFactory, location) {
@@ -1563,8 +1548,6 @@
         $log.info("SearchTransactionController initialized");
     });
 }(mifosX.controllers || {}));;
-
-
 
 (function (module) {
     mifosX.controllers = _.extend(module, {
@@ -3963,7 +3946,6 @@
             scope.routeTo = function (id) {
                 location.path('/viewclient/' + id);
             };
-
             scope.clientsPerPage = 15;
 
             scope.getResultsPage = function (pageNumber) {
@@ -4040,12 +4022,136 @@
 
         }
     });
-
-
-
     mifosX.ng.application.controller('ClientController', ['$scope', 'ResourceFactory', '$location', mifosX.controllers.ClientController]).run(function ($log) {
         $log.info("ClientController initialized");
     });
+}(mifosX.controllers || {}));
+; (function (module) {
+    mifosX.controllers = _.extend(module, {
+        LoanController: function (scope, resourceFactory, location) {
+            scope.clients = [];
+            scope.actualClients = [];
+            scope.loanaccount=[];
+            scope.searchText = "";
+            scope.searchResults = [];
+            scope.showClosed = false;
+            scope.routeTo = function (id) {
+                location.path('/viewclient/' + id);
+            };
+
+            
+            resourceFactory.clientAllAccountResource.get( function (data) {
+                scope.clientAccounts = data;
+                if (data.savingsAccounts) {
+                    for (var i in data.savingsAccounts) {
+                        if (data.savingsAccounts[i].status.value == "Active") {
+                            scope.updateDefaultSavings = true;
+                            break;
+                        }
+                    }
+                    scope.totalAllSavingsAccountsBalanceBasedOnCurrency = [];
+                    for (var i in data.savingsAccounts) {
+                        if (!scope.isSavingClosed(data.savingsAccounts[i])) {
+                            var isNewEntryMap = true;
+                            for (var j in scope.totalAllSavingsAccountsBalanceBasedOnCurrency) {
+                                if (scope.totalAllSavingsAccountsBalanceBasedOnCurrency[j].code === data.savingsAccounts[i].currency.code) {
+                                    isNewEntryMap = false;
+                                    var totalSavings = scope.totalAllSavingsAccountsBalanceBasedOnCurrency[j].totalSavings + data.savingsAccounts[i].accountBalance;
+                                    scope.totalAllSavingsAccountsBalanceBasedOnCurrency[j].totalSavings = totalSavings;
+                                }
+                            }
+                            if (isNewEntryMap) {
+                                var map = {};
+                                map.code = data.savingsAccounts[i].currency.code;
+                                map.totalSavings = data.savingsAccounts[i].accountBalance;
+                                scope.totalAllSavingsAccountsBalanceBasedOnCurrency.push(map);
+                            }
+                        }
+                    }
+                }
+            });
+
+
+            scope.clientsPerPage = 15;
+
+            scope.getResultsPage = function (pageNumber) {
+                if (scope.searchText) {
+                    var startPosition = (pageNumber - 1) * scope.clientsPerPage;
+                    scope.clients = scope.actualClients.slice(startPosition, startPosition + scope.clientsPerPage);
+                    return;
+                }
+                var items = resourceFactory.clientResource.getAllClients({
+                    offset: ((pageNumber - 1) * scope.clientsPerPage),
+                    limit: scope.clientsPerPage
+                }, function (data) {
+                   scope.clients = data.pageItems;
+                });
+            }
+            scope.initPage = function () {
+
+                var items = resourceFactory.clientResource.getAllClients({
+                    offset: 0,
+                    limit: scope.clientsPerPage
+                }, function (data) {
+                    scope.totalClients = data.totalFilteredRecords;
+                    scope.clients = data.pageItems;
+                });
+            }
+            scope.initPage();
+
+            scope.search = function () {
+                scope.actualClients = [];
+                scope.searchResults = [];
+                scope.filterText = "";
+                var searchString = scope.searchText;
+                searchString = searchString.replace(/(^"|"$)/g, '');
+                var exactMatch = false;
+                var n = searchString.localeCompare(scope.searchText);
+                if (n != 0) {
+                    exactMatch = true;
+                }
+
+                if (!scope.searchText) {
+                    scope.initPage();
+                } else {
+                    resourceFactory.globalSearch.search({ query: searchString, resource: "clients,clientIdentifiers", exactMatch: exactMatch }, function (data) {
+                        var arrayLength = data.length;
+                        for (var i = 0; i < arrayLength; i++) {
+                            var result = data[i];
+                            var client = {};
+                            client.status = {};
+                            client.subStatus = {};
+                            client.status.value = result.entityStatus.value;
+                            client.status.code = result.entityStatus.code;
+                            if (result.entityType == 'CLIENT') {
+
+                                client.displayName = result.entityName;
+                                client.accountNo = result.entityAccountNo;
+                                client.id = result.entityId;
+                                client.externalId = result.entityExternalId;
+                                client.officeName = result.parentName;
+                            } else if (result.entityType == 'CLIENTIDENTIFIER') {
+                                numberOfClients = numberOfClients + 1;
+                                client.displayName = result.parentName;
+                                client.id = result.parentId;
+                                client.externalId = result.parentExternalId;
+
+                            }
+                            scope.actualClients.push(client);
+                        }
+                        var numberOfClients = scope.actualClients.length;
+                        scope.totalClients = numberOfClients;
+                        scope.clients = scope.actualClients.slice(0, scope.clientsPerPage);
+                    });
+                }
+            }
+
+        }
+    });
+    mifosX.ng.application.controller('LoanController', ['$scope', 'ResourceFactory', '$location', mifosX.controllers.LoanController]).run(function ($log) {
+        $log.info("LoanController initialized");
+    });
+
 }(mifosX.controllers || {}));; (function (module) {
     mifosX.controllers = _.extend(module, {
         ClientDocumentController: function (scope, location, http, routeParams, API_VERSION, Upload, $rootScope) {
@@ -13118,6 +13224,9 @@
                 scope.formData.loanOfficerId = data.loanOfficerId;
                 scope.formData.loanPurposeId = data.loanPurposeId;
                 scope.formData.externalId = data.externalId;
+                scope.formData.loanAccountid = data.loanAccountid;
+                scope.formData.referenceid =data.referenceid;
+                scope.formData.collateralid =data.collateralid;
 
                 //update collaterals
                 if (scope.loanaccountinfo.collateral) {
@@ -14888,7 +14997,7 @@
                 }
                 scope.multiDisburseLoan = scope.loanaccountinfo.multiDisburseLoan;
                 scope.formData.productId = scope.loanaccountinfo.loanProductId;
-                scope.formData.fundId = scope.loanaccountinfo.fundId;
+                scope.formData.fundId = scope.loanaccountinfo.fundId;                
                 scope.formData.principal = scope.loanaccountinfo.principal;
                 scope.formData.loanTermFrequency = scope.loanaccountinfo.termFrequency;
                 scope.formData.loanTermFrequencyType = scope.loanaccountinfo.termPeriodFrequencyType.id;
@@ -16393,7 +16502,7 @@
                 'create template', 'create loan product', 'create saving product', 'roles', 'add role', 'configure maker checker tasks',
                 'users', 'loan products', 'charges', 'saving products', 'offices', 'create office', 'currency configurations', 'user settings',
                 'create user', 'employees', 'create employee', 'manage funds', 'offices', 'chart of accounts', 'frequent postings', 'Journal entry',
-                'search transaction', 'account closure', 'accounting rules', 'add accounting rule', 'data tables', 'create data table', 'add code',
+                'search transaction', 'account closure','loannews', 'accounting rules', 'add accounting rule', 'data tables', 'create data table', 'add code',
                 'jobs', 'codes', 'reports', 'create report', 'holidays', 'create holiday', 'create charge', 'product mix', 'add member', 'add product mix',
                 'bulk loan reassignment', 'audit', 'create accounting closure', 'enter collection sheet', 'navigation', 'accounting', 'organization', 'system'];
             scope.search = function () {
@@ -16406,6 +16515,9 @@
                         break;
                     case 'create group':
                         location.path('/creategroup');
+                        break;
+                    case 'loannews':
+                        location.path('/loannew');
                         break;
                     case 'groups':
                         location.path('/groups');
@@ -16947,6 +17059,14 @@
                         }
                     }
                 }
+                 if (route == 'loannew') {
+                    var temp = ['/loannew', '/groups', '/centers'];
+                    for (var i in temp) {
+                        if (temp[i] == location.path()) {
+                            return true;
+                        }
+                    }
+                }
                 else if (route == 'rep') {
                     var temp2 = ['/reports/all', '/reports/clients', '/reports/loans', '/reports/funds', '/reports/accounting', 'reports/savings'];
                     for (var i in temp2) {
@@ -16995,6 +17115,9 @@
             });
             keyboardManager.bind('ctrl+shift+j', function () {
                 location.path('/journalentry');
+            });
+            keyboardManager.bind('ctrl+shift+j', function () {
+                location.path('/loannew');
             });
             keyboardManager.bind('ctrl+shift+a', function () {
                 location.path('/accounting');
@@ -17057,7 +17180,7 @@
                     "https://mifosforge.jira.com/wiki/pages/viewpage.action?pageId=67895308", "https://mifosforge.jira.com/wiki/display/docs/Accruals"];
                 // array is huge, but working good
                 // create second array with address models
-                var addrmodels = ['/users/', '/organization', '/system', '/products', '/templates', '', '/accounting',
+                var addrmodels = ['/users/', '/organization', '/system', '/products', '/templates', '', '/accounting','/loannew',
                     '/clients', '/groups', '/centers', '', '/offices', '/holidays', '/employees', '/managefunds/',
                     '/bulkloan', '/currconfig', '/standinginstructions/history', '/datatables', '/codes', '/admin/roles',
                     '/admin/viewmctasks', '/hooks', '/audit', '/reports', '/jobs', '/global', '/accountnumberpreferences', '/loanproducts',

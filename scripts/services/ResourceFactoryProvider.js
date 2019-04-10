@@ -68,9 +68,15 @@
                     clientDocumentsResource: defineResource(apiVer + "/clients/:clientId/documents/:documentId", { clientId: '@clientId', documentId: '@documentId' }, {
                         getAllClientDocuments: { method: 'GET', params: {}, isArray: true }
                     }),
+
                     clientAccountResource: defineResource(apiVer + "/clients/:clientId/accounts", { clientId: '@clientId' }, {
+                        getClients: { method: 'GET', params: {} }
+                    }),
+
+                    clientAllAccountResource: defineResource(apiVer + "/clients/all/accounts", {}, {
                         getAllClients: { method: 'GET', params: {} }
                     }),
+
                     clientNotesResource: defineResource(apiVer + "/clients/:clientId/notes/:noteId", { clientId: '@clientId', noteId: '@noteId' }, {
                         getAllNotes: { method: 'GET', params: {}, isArray: true },
                         delete: { method: 'DELETE', params: {} },

@@ -1,0 +1,134 @@
+<div class="content-container" ng-controller="LoanController">
+    <ul class="breadcrumb">
+        <li class="active">{{'label.anchor.clients' | translate}}</li>
+    </ul>
+    <api-validate></api-validate>
+
+    <div class="card">
+        <div class="toolbar">
+            <h4>{{'label.loansnew.loanwriteoff' | translate}}</h4>
+        </div>
+        <div class="content">
+            <br>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <form ng-submit="search()" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input ng-autofocus="true" ng-model="filterText" ng-keyup="onFilter()" type="text"
+                                    class="form-control unstyled" placeholder="{{'label.input.filterbynameaccno' | translate}}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input data-ng-model="searchText" type="text" placeholder="{{'label.input.searchByNameAccNo' | translate}}"
+                                        class="form-control unstyled" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary form-control">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </span>
+                                    <div class="checkbox form-control">
+                                        <label for="showAll">
+                                            <input type="checkbox" id="showAll" name="showAll" ng-model="showClosed">
+                                            {{'label.button.showall' | translate }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+            <hr />
+           <!-- <table class="table">
+                <thead>
+                    <tr>
+                        <th>{{'label.heading.name' | translate}}</th>
+                        <th>{{'label.heading.clientno' | translate}}</th>
+                        <th>{{'label.heading.externalid' | translate}}</th>
+                        <th>{{'label.heading.status' | translate}}</th>
+                        <th>{{'label.heading.office' | translate}}</th>
+                        <th>{{'label.heading.staff' | translate}}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr dir-paginate="client in clients | orderBy:'displayName':reverse  | filter:filterText | itemsPerPage: clientsPerPage"
+                        class="pointer-main" total-items="totalClients" ng-show="client.status.code != 'clientStatusType.closed' || showClosed">
+                        <td class="pointer" data-ng-click="routeTo(client.id)">{{client.displayName}}</td>
+                        <td class="pointer" data-ng-click="routeTo(client.id)">{{client.accountNo}}</td>
+                        <td class="pointer" data-ng-click="routeTo(client.id)">{{client.externalId}}</td>
+                        <td class="pointer" data-ng-click="routeTo(client.id)">
+                            <i class="fa fa-stop {{client.status.code | StatusLookup}}" uib-tooltip="{{client.status.value}}"
+                                uib-tooltip-placement="top"></i>
+                            <small ng-if="client.subStatus.description">[{{client.subStatus.description}}]</small>
+                        </td>
+                        <td class="pointer" data-ng-click="routeTo(client.id)">{{client.officeName}}</td>
+                        <td class="pointer" data-ng-click="routeTo(client.id)">{{client.staffName}}</td>
+                    </tr>
+                </tbody>
+            </table>!-->
+            <table class="table table-condensed" >
+                                        <span class="span gray-head">
+                                            <strong>{{ 'label.heading.loanaccoverview' | translate }}</strong>
+                                        </span>
+                                        <tr class="graybg">
+                                            <th>{{'label.heading.accnum' | translate}}</th>
+                                            <th>{{'label.heading.loanaccount' | translate}}</th>
+                                            <th>{{'label.heading.loanamount' | translate}}</th>
+                                            <th>{{'label.heading.outstandingamount' | translate}}</th>
+                                            <th>{{'label.heading.dueamount' | translate}}</th>
+                                            <th>{{'label.heading.type' | translate}}</th>
+                                            <th>{{'label.heading.actions' | translate}}</th>
+                                        </tr>
+                                        <tr class="pointer-main"
+                                            ng-repeat="loanaccount in clientAccounts.loanAccounts | orderBy:'id':true | filter:isLoanNotClosed">
+                                            <td class="pointer" data-ng-click="routeToLoan(loanaccount.id)">
+                                                <i ng-hide="loanaccount.inArrears" uib-tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}"
+                                                   class="fa fa-stop {{loanaccount.status.code | StatusLookup}}"></i>
+                                                <i ng-show="loanaccount.inArrears" uib-tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}"
+                                                   class="fa fa-stop {{loanaccount.status.code | StatusLookup}}overdue"></i>
+                                                {{loanaccount.accountNo}}
+                                            </td>
+                                            <td class="pointer" data-ng-click="routeToLoan(loanaccount.id)">{{loanaccount.productName}}</td>
+                                            <td class="pointer" data-ng-click="routeToLoan(loanaccount.id)">{{loanaccount.originalLoan|number}}</td>
+                                            <td class="pointer" data-ng-click="routeToLoan(loanaccount.id)">{{loanaccount.loanBalance|number}}</td>
+                                            <td class="pointer" data-ng-click="routeToLoan(loanaccount.id)">{{loanaccount.amountPaid|number}}</td>
+                                            <td class="pointer center" data-ng-click="routeToLoan(loanaccount.id)" ng-if="loanaccount.loanType.value == 'Individual'">
+                                                <i uib-tooltip="{{loanaccount.loanType.value}}" class="fa fa-user"></i>
+                                            </td>
+                                            <td class="pointer center" data-ng-click="routeToLoan(loanaccount.id)" ng-if="loanaccount.loanType.value != 'Individual'">
+                                                <i uib-tooltip="{{loanaccount.loanType.value}}" class="fa fa-group"></i>
+                                            </td>
+                                            <td class="pointer center" ng-if="loanaccount.status.active">
+                                                <a uib-tooltip="{{'label.button.makerepayment' | translate}}" ng-href="#/loanaccount/{{loanaccount.id}}/writeoff" class="btn btn-xs btn-primary ng-binding">
+                                                    <i class="fa fa-dollar"></i>
+                                                </a>
+                                            </td>
+                                            <td class="pointer center" ng-if="loanaccount.status.pendingApproval">
+                                                <a uib-tooltip="{{'label.button.approve' | translate}}" has-permission='APPROVE_LOAN' ng-href="#/loanaccount/{{loanaccount.id}}/approve" class="btn btn-xs btn-primary ng-binding">
+                                                    <i class="fa fa-check"></i>
+                                                </a>
+                                            </td>
+                                            <td class="pointer center" ng-if="!loanaccount.status.pendingApproval && !loanaccount.status.active && !loanaccount.status.overpaid">
+                                                <a uib-tooltip="{{'label.button.disburse' | translate}}" has-permission='DISBURSE_LOAN' ng-href="#/loanaccount/{{loanaccount.id}}/disburse" class="btn btn-xs btn-primary ng-binding">
+                                                    <i class="fa fa-flag"></i>
+                                                </a>
+                                            </td>
+                                            <td class="pointer center" ng-if="!loanaccount.status.pendingApproval && !loanaccount.status.active && loanaccount.status.overpaid">
+                                                <a uib-tooltip="{{'label.button.transferFunds' | translate}}" has-permission='DISBURSE_LOAN' ng-href="#/accounttransfers/fromloans/{{loanaccount.id}}" class="btn btn-xs btn-primary ng-binding">
+                                                    <i class="fa fa-exchange"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+            <dir-pagination-controls align="center" boundary-links="true" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"
+                on-page-change="getResultsPage(newPageNumber)">
+            </dir-pagination-controls>
+        </div>
+    </div>
+
+
+</div>

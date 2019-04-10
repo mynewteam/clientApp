@@ -103,8 +103,14 @@
                             <td class="paddedbottom20 width36">
                                 <input type="text" id="externalId" name="externalId" ng-model="formData.externalId" class="form-control" />
                             </td>
-                            <td></td>
-                            <td></td>
+                            <td><label>{{ 'label.input.loanAccountid' | translate }}</label></td>
+                            <td><input type="text" id="loanaccountId" name="loanaccountId" ng-model="formData.loanaccountId" class="form-control" /></td>
+                        </tr>
+                        <tr  ng-show="formData.productId">
+                            <td><label>{{ 'label.input.referenceid' | translate }}</label></td>
+                            <td><input type="text" id="referenceid" name="referenceid" ng-model="formData.referenceid" class="form-control" /></td>
+                            <td><label>{{ 'label.input.collateralnumid' | translate }}</label></td>
+                            <td><input type="text" id="collateralnumid" name="collateralnumid" ng-model="formData.collateralnumid" class="form-control" /></td>
                         </tr>
                     </table>
                     <div ng-hide="loanaccountinfo.calendarOptions == undefined">
@@ -1404,6 +1410,18 @@
                         <tr>
                             <td colspan="6">{{ 'label.input.externalid' | translate }}</td>
                             <td class="">{{loandetails.externalId}}</td>
+                        </tr>
+                         <tr>
+                            <td colspan="6">{{ 'label.input.loanAccountid' | translate }}</td>
+                            <td class="">{{loandetails.loanaccountId}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">{{ 'label.input.referenceid' | translate }}</td>
+                            <td class="">{{loandetails.referenceid}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">{{ 'label.input.collateralnumid' | translate }}</td>
+                            <td class="">{{loandetails.collateralnumid}}</td>
                         </tr>
                         <tr class="bottomborder toppadding">
                             <td colspan="7">

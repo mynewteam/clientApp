@@ -332,6 +332,18 @@
             .when('/accounting', {
                 templateUrl: 'views/accounting/accounting.html'
             })
+            .when('/loannew', {
+                templateUrl: 'views/loannew/view_loannew.html'
+            })
+            .when('/savingnews', {
+                templateUrl: 'views/savingnews/view_savingnews.html'
+            })
+            .when('/depositnews', {
+                templateUrl: 'views/depositnews/depositnews.html'
+            })
+            .when('/currentaccountnews', {
+                templateUrl: 'views/depositnews/view_currentaccountnews.html'
+            })
             .when('/accounting_coa', {
                 templateUrl: 'views/accounting/accounting_coa.html'
             })
@@ -1009,6 +1021,24 @@
             })
             .when('/areasetup', {
                 templateUrl: 'views/organization/areasetup/areasetup.html'
+            })
+            .when('/loannew', {
+                templateUrl: 'views/loannew/view_loannew.html'
+            })
+            .when('/clientrepayment', {
+                templateUrl: 'views/loannew/loan/clientrepayment.html'
+            })
+            .when('/loanpayoff', {
+                templateUrl: 'views/loannew/loan/view_payoffloan.html'
+            })
+            .when('/loanreschudel', {
+                templateUrl: 'views/loannew/loan/view_loanreschedule.html'
+            })
+            .when('/loanwriteoff', {
+                templateUrl: 'views/loannew/loan/view_loanwriteoff.html'
+            })
+            .when('/loanprepayment', {
+                templateUrl: 'views/loannew/loan/view_loanprepayment.html'
             })
             .otherwise({
                 templateUrl: "views/errors/404.html"
