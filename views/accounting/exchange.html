@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<div class="content-container" ng-controller="ExchangeController">
+    <ul class="breadcrumb">
+        <li ng-if="!groupid"><a href="#/accounting">{{'label.anchor.accounting' | translate}}</a></li>
+        <li class="active">{{'label.anchor.exchange' | translate}}</li>
+    </ul>
+    <wizard current-step="step" class="card well">
+        <wz-step icon="fa fa-circle-o" wz-title="{{'label.heading.exchange' | translate}}">
+            <div class="card-content">
+                <form name="exchangeForm" novalidate="" class="form-horizontal" rc-submit="submit()">
+                    <api-validate></api-validate>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                {{'label.input.exchange.buycurrency' | translate}} <span ng-show="buycurrency == null" class="required">*</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <select id="buycurrencyCode" name="buycurrency" ng-model="formData.buycurrencyCode" class="form-control"
+                                ng-options="buycurrency.code as (buycurrency.name+' ('+ buycurrency.displaySymbol +')') for buycurrency in currencyOptions"
+                                value="{{buycurrency.code}}" required>
+                                </select>
+                            </div>
+                            <label class="control-label col-sm-2">{{'label.input.exchange.buyamount' | translate}}</label>
+                            <div class="col-sm-3">
+                                <input type="text" id="buyamount" name="buyamount" ng-model="formData.buyamount" 
+                                ng-pattern="/^[0-9]/" class="form-control"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <span ng-show="exchangeForm.buyamount.$invalid && exchangeForm.buyamount.$dirty">
+                                    <small class="required" ng-show="exchangeForm.buyamount.$error.pattern">
+                                        {{'label.mustbenumeric' | translate}}
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                {{'label.input.exchange.sellcurrency' | translate}} <span ng-show="sellcurrency == null" class="required">*</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <select id="sellcurrencyCode" name="sellcurrency" ng-model="formData.sellcurrencyCode" class="form-control"
+                                ng-options="sellcurrency.code as (sellcurrency.name+' ('+ sellcurrency.displaySymbol +')') for sellcurrency in currencyOptions"
+                                value="{{sellcurrency.code}}" required>
+                                </select>
+                            </div>
+                            <label class="control-label col-sm-2" for="sellamount">{{'label.input.exchange.sellamount' | translate}}</label>
+                            <div class="col-sm-3">
+                                <input type="text" id="sellamount" name="sellamount" ng-model="formData.sellamount"
+                                ng-pattern="/^[0-9]/" class="form-control" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="spotRate">{{'label.input.exchange.exchange' |
+                                translate}}</label>
+                            <div class="col-sm-3">
+                                <input type="text" id="spotRate" name="spotRate" ng-model="formData.spotRate"
+                                    ng-pattern="/^[0-9]/" class="form-control"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <span ng-show="exchangeForm.spotRate.$invalid && exchangeForm.spotRate.$dirty">
+                                    <small class="required" ng-show="exchangeForm.spotRate.$error.pattern">
+                                        {{'label.mustbenumeric' | translate}}
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-5">
+                            <a id="cancel" href="#/accounting" class="btn btn-default">{{ 'label.button.cancel' | translate }}</a>
+                            <button id="save" type="submit" class="btn btn-primary">{{ 'label.button.save' | translate }}</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </wz-step>
+    </wizard>
+</div>

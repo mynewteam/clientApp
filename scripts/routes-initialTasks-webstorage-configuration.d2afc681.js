@@ -332,6 +332,12 @@
             .when('/accounting', {
                 templateUrl: 'views/accounting/accounting.html'
             })
+            .when('/spotrate', {
+                templateUrl: 'views/accounting/spotrate.html'
+            })
+            .when('/exchange', {
+                templateUrl: 'views/accounting/exchange.html'
+            })
             .when('/accounting_coa', {
                 templateUrl: 'views/accounting/accounting_coa.html'
             })

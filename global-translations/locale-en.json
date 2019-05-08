@@ -4322,8 +4322,24 @@
   "reportRunFrequency.monthly": "Monthly",
   "reportRunFrequency.yearly": "Yearly",
   "reportRunFrequency.custom": "Custom",
-
-
+  "label.spotrate": "Spot Rate",
+  "label.anchor.spotrate": "Spot Rate",
+  "label.exchange": "Exchange",
+  "label.anchor.exchange": "Exchange",
+	"label.spotrate.des": "set or update your spot rate",
+	"label.exchange.des": "exchange your money here",
+  "label.heading.spotrate": "Set SpotRate",
+  "label.heading.exchange": "Exchange",
+  "label.input.spotrate.currency": "Currency",
+  "label.input.spotrate.buyingrate": "Buying Rate",
+  "label.input.spotrate.sellingrate": "Selling Rate",
+  "label.input.spotrate.TranDate": "Transaction Date",
+  "label.input.spotrate.spotRate": "Spot Rate",
+  "label.input.exchange.buycurrency": "Buy Currency",
+  "label.input.exchange.sellcurrency": "Sell Currency",
+  "label.input.exchange.buyamount": "Buy Amount",
+  "label.input.exchange.sellamount": "Sell Amount",
+  "label.input.exchange.exchange": "Exchange",
   "----End---": "--End of file--- "     
  
 }

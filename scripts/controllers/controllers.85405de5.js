@@ -1,7 +1,7 @@
 // (function (module) {
 //     mifosX.controllers = _.extend(module, {
 //         AreaSetupController: function (scope, routeParams, resourceFactory, location, dateFilter, uiConfigService, WizardHandler) {
-            
+
 
 //         }
 //     });
@@ -18,14 +18,14 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
         AreaSetupController: function (scope, routeParams, resourceFactory, location, dateFilter, uiConfigService, WizardHandler) {
-           
+
         }
     });
     mifosX.ng.application.controller('AreaSetupController', ['$scope', '$routeParams', 'ResourceFactory', '$location', 'dateFilter', 'UIConfigService', 'WizardHandler', mifosX.controllers.NewLoanAccAppController]).run(function ($log) {
         $log.info("AreaSetupController initialized");
     });
 }(mifosX.controllers || {}));
-; 
+;
 
 
 
@@ -1564,6 +1564,37 @@
     });
 }(mifosX.controllers || {}));;
 
+(function (module) {
+    mifosX.controllers = _.extend(module, {
+        SpotRateController: function (scope, resourceFactory, location) {
+
+            resourceFactory.currencyConfigResource.get({ fields: 'selectedCurrencyOptions' }, function (data) {
+                scope.currencyOptions = data.selectedCurrencyOptions;
+            });
+            location.path('/spotrate');
+        }
+    });
+    mifosX.ng.application.controller('SpotRateController', ['$scope', 'ResourceFactory','$location', mifosX.controllers.SpotRateController]).run(function ($log) {
+        $log.info("SpotRateController initialized");
+    });
+}(mifosX.controllers || {}));;
+
+
+
+(function (module) {
+    mifosX.controllers = _.extend(module, {
+        ExchangeController: function (scope, resourceFactory, location) {
+
+            resourceFactory.currencyConfigResource.get({ fields: 'selectedCurrencyOptions' }, function (data) {
+                scope.currencyOptions = data.selectedCurrencyOptions;
+            });
+            location.path('/exchange');
+        }
+    });
+    mifosX.ng.application.controller('ExchangeController', ['$scope', 'ResourceFactory','$location', mifosX.controllers.ExchangeController]).run(function ($log) {
+        $log.info("ExchangeController initialized");
+    });
+}(mifosX.controllers || {}));;
 
 
 (function (module) {
@@ -4134,7 +4165,7 @@
         $log.info("ClientScreenReportController initialized");
     });
 }(mifosX.controllers || {}));
-; 
+;
 
 
 
@@ -4170,11 +4201,11 @@
             scope.formData.address = [];
 
             //address khmer
-            scope.countrykh=[];
-            scope.provincekh=[];
-            scope.districtkh=[];
-            scope.communekh=[];
-            scope.villagekh=[];
+            scope.countrykh = [];
+            scope.provincekh = [];
+            scope.districtkh = [];
+            scope.communekh = [];
+            scope.villagekh = [];
 
             //familymembers
             scope.formData.familyMembers = [];
@@ -4215,7 +4246,7 @@
                             if (_.isEmpty(scope.formDat.datatables[index])) {
                                 scope.formDat.datatables[index] = { data: {} };
                             }
-                        
+
 
                             if (_.isEmpty(scope.formData.datatables[index])) {
                                 scope.formData.datatables[index] = {
@@ -4266,7 +4297,7 @@
                         }
                     });
 
-                    resourceFactory.addressCountry.get(function(data){
+                    resourceFactory.addressCountry.get(function (data) {
                         scope.countrykh = data;
                     });
                 }
@@ -4277,26 +4308,26 @@
                 scope.professionIdOptions = data.familyMemberOptions.professionIdOptions;
             });
 
-            scope.changeCountry = function(Id){
-                resourceFactory.addressProvince.get({id: Id},function(data){
+            scope.changeCountry = function (Id) {
+                resourceFactory.addressProvince.get({ id: Id }, function (data) {
                     scope.provincekh = data;
                 })
             };
 
-            scope.changeProvince = function(ProvinceID){
-                resourceFactory.addressDistrict.get({id: ProvinceID},function(data){
+            scope.changeProvince = function (ProvinceID) {
+                resourceFactory.addressDistrict.get({ id: ProvinceID }, function (data) {
                     scope.districtkh = data;
                 })
             };
 
-            scope.changeDistrict = function(DistrictID){
-                resourceFactory.addressCommune.get({id: DistrictID},function(data){
+            scope.changeDistrict = function (DistrictID) {
+                resourceFactory.addressCommune.get({ id: DistrictID }, function (data) {
                     scope.communekh = data;
                 })
             }
 
-            scope.changeCommune=function(CommuneID){
-                resourceFactory.addressVillage.get({id: CommuneID}, function(data){
+            scope.changeCommune = function (CommuneID) {
+                resourceFactory.addressVillage.get({ id: CommuneID }, function (data) {
                     scope.villagekh = data;
                 })
             }
@@ -4343,11 +4374,6 @@
 
 
             // end of family members
-
-
-
-
-
 
 
             scope.displayPersonOrNonPersonOptions = function (legalFormId) {
@@ -4523,7 +4549,7 @@
                         if (scope.addressArray[i].isActive) {
                             temp.isActive = scope.addressArray[i].isActive;
                         }
-                        
+
                         scope.formData.address.push(temp);
                     }
                 }
@@ -4575,7 +4601,6 @@
                     temp.dateFormat = scope.df;
                     scope.formData.familyMembers.push(temp);
                 }
-
                 //
 
 
@@ -4597,13 +4622,13 @@
     mifosX.controllers = _.extend(module, {
         EditClientController: function (scope, routeParams, resourceFactory, location, http, dateFilter, API_VERSION, Upload, $rootScope) {
             scope.offices = [];
-            scope.villagekh=[];
-            scope.communekh=[];
+            scope.villagekh = [];
+            scope.communekh = [];
             scope.districtkh = [];
             scope.provincekh = [];
             scope.countrykh = [];
-            scope.tempAddress={},
-            scope.date = {};
+            scope.tempAddress = {},
+                scope.date = {};
             scope.restrictDate = new Date();
             scope.savingproducts = [];
             scope.clientId = routeParams.id;
@@ -4696,32 +4721,32 @@
                     var submittedOnDate = dateFilter(data.timeline.submittedOnDate, scope.df);
                     scope.date.submittedOnDate = new Date(submittedOnDate);
                 }
-                resourceFactory.addressCountry.get({}, function(data_country){
+                resourceFactory.addressCountry.get({}, function (data_country) {
                     scope.countrykh = data_country;
                 })
 
-                resourceFactory.addressAllVillage.get({ id: data.addressKhmer.id },function(data_village){
-                    scope.villagekh = data_village; 
+                resourceFactory.addressAllVillage.get({ id: data.addressKhmer.id }, function (data_village) {
+                    scope.villagekh = data_village;
                     scope.formData.tbl_village_id = data.addressKhmer.id;
-               
 
-                    resourceFactory.addressAllCommune.get({id: data_village[0].tbl_commune_id},function(data_commune){
+
+                    resourceFactory.addressAllCommune.get({ id: data_village[0].tbl_commune_id }, function (data_commune) {
                         scope.communekh = data_commune;
                         scope.tempAddress.tbl_commune_id = data_village[0].tbl_commune_id;
-                        
 
-                        resourceFactory.addressAllDistrict.get({id: data_commune[0].tbl_district_id }, function(data_district){
+
+                        resourceFactory.addressAllDistrict.get({ id: data_commune[0].tbl_district_id }, function (data_district) {
                             scope.districtkh = data_district;
                             scope.tempAddress.tbl_district_id = data_commune[0].tbl_district_id;
 
 
 
-                            resourceFactory.addressAllProvince.get({id: data_district[0].tbl_province_id}, function(data_province){
+                            resourceFactory.addressAllProvince.get({ id: data_district[0].tbl_province_id }, function (data_province) {
                                 scope.provincekh = data_province;
                                 scope.tempAddress.tbl_province_id = data_district[0].tbl_province_id;
                                 scope.tempAddress.tbl_country_id = data_province[0].tbl_country_id;
 
-                               
+
                             })
                         })
                     })
@@ -4729,26 +4754,26 @@
             });
 
             //address
-            scope.changeCountry = function(Id){
-                resourceFactory.addressProvince.get({id: Id},function(data){
+            scope.changeCountry = function (Id) {
+                resourceFactory.addressProvince.get({ id: Id }, function (data) {
                     scope.provincekh = data;
                 })
             };
 
-            scope.changeProvince = function(ProvinceID){
-                resourceFactory.addressDistrict.get({id: ProvinceID},function(data){
+            scope.changeProvince = function (ProvinceID) {
+                resourceFactory.addressDistrict.get({ id: ProvinceID }, function (data) {
                     scope.districtkh = data;
                 })
             };
 
-            scope.changeDistrict = function(DistrictID){
-                resourceFactory.addressCommune.get({id: DistrictID},function(data){
+            scope.changeDistrict = function (DistrictID) {
+                resourceFactory.addressCommune.get({ id: DistrictID }, function (data) {
                     scope.communekh = data;
                 })
             }
 
-            scope.changeCommune=function(CommuneID){
-                resourceFactory.addressVillage.get({id: CommuneID}, function(data){
+            scope.changeCommune = function (CommuneID) {
+                resourceFactory.addressVillage.get({ id: CommuneID }, function (data) {
                     scope.villagekh = data;
                 })
             }
@@ -6880,13 +6905,13 @@
         $log.info("ProductiveCollectionSheetController initialized");
     });
 }(mifosX.controllers || {}));
-; 
+;
 
 //create addresskhmer
 // (function(module){
 //     mifosX.controllers = _.extend(module, {
 //         AddressKhmerController: function(scope, resourceFactory, location, http, dateFilter, API_VERSION, Upload, $rootScope, routeParams, WizardHandler){
-           
+
 //         }
 //     });
 // }(mifosX.controllers || {}));
@@ -6912,7 +6937,7 @@
             }
             )
 
-            resourceFactory.clientaddresskhmerFields.get(function(data){
+            resourceFactory.clientaddresskhmerFields.get(function (data) {
 
             })
 
@@ -7003,8 +7028,8 @@
                     $scope.stateOptions = data.stateProvinceIdOptions;
                 })
 
-                resourceFactory.clientaddresskhmerFields.get(function(data){
-                    
+                resourceFactory.clientaddresskhmerFields.get(function (data) {
+
                 });
 
 
@@ -12433,7 +12458,6 @@
                     location.path('/loan/' + data.loanId + '/viewcollateral/' + data.resourceId);
                 });
             };
-
         }
     });
     mifosX.ng.application.controller('AddLoanCollateralController', ['$scope', 'ResourceFactory', '$routeParams', '$location', mifosX.controllers.AddLoanCollateralController]).run(function ($log) {
@@ -14800,6 +14824,7 @@
             scope.loandetails = {};
             scope.chargeFormData = {}; //For charges
             scope.collateralFormData = {}; //For collaterals
+            scope.landCollateralFormData = []; //For land collateral
             scope.inparams = { resourceType: 'template', activeOnly: 'true' };
             scope.date = {};
             scope.formDat = {};
@@ -14820,7 +14845,6 @@
                 scope.inparams.clientId = scope.clientId;
                 scope.formData.clientId = scope.clientId;
             }
-
 
             if (scope.groupId) {
                 scope.inparams.groupId = scope.groupId;
@@ -14920,6 +14944,7 @@
                 scope.charges = scope.loanaccountinfo.charges || [];
                 scope.formData.disbursementData = scope.loanaccountinfo.disbursementDetails || [];
                 scope.collaterals = [];
+                scope.landCollateral = [];
 
                 if (scope.loanaccountinfo.calendarOptions) {
                     scope.formData.syncRepaymentsWithMeeting = true;
@@ -15020,7 +15045,12 @@
 
             scope.addCollateral = function () {
                 if (scope.collateralFormData.collateralIdTemplate && scope.collateralFormData.collateralValueTemplate) {
-                    scope.collaterals.push({ type: scope.collateralFormData.collateralIdTemplate.id, name: scope.collateralFormData.collateralIdTemplate.name, value: scope.collateralFormData.collateralValueTemplate, description: scope.collateralFormData.collateralDescriptionTemplate });
+                    scope.collaterals.push({
+                        type: scope.collateralFormData.collateralIdTemplate.id,
+                        name: scope.collateralFormData.collateralIdTemplate.name,
+                        value: scope.collateralFormData.collateralValueTemplate,
+                        description: scope.collateralFormData.collateralDescriptionTemplate
+                    });
                     scope.collateralFormData.collateralIdTemplate = undefined;
                     scope.collateralFormData.collateralValueTemplate = undefined;
                     scope.collateralFormData.collateralDescriptionTemplate = undefined;
@@ -15031,10 +15061,63 @@
                 scope.collaterals.splice(index, 1);
             };
 
+            //land collateral
+            scope.addLandCollateral = function () {
+                if(scope.landCollateralFormData.collateralNameId 
+                    && scope.landCollateralFormData.collateralNatureId 
+                    && scope.landCollateralFormData.provinceId
+                    // && scope.landCollateralFormData.status
+                    // && scope.dateIssue
+                    ){
+               
+                scope.landCollateral.push({
+                    dateFormat : scope.df,
+                    locale :  scope.optlang.code,
+                    dateIssue: dateFilter(scope.landCollateralFormData.dateIssue, scope.df),
+                    size: scope.landCollateralFormData.size,
+                    oldPrice: scope.landCollateralFormData.oldPrice,
+                    NumberOfCopy: scope.landCollateralFormData.NumberOfCopy,
+                    status: scope.landCollateralFormData.status,
+                    detailLocation: scope.landCollateralFormData.detailLocation,
+                    ownerName1: scope.landCollateralFormData.ownerName1,
+                    gender1: scope.landCollateralFormData.gender1,
+                    passportId1: scope.landCollateralFormData.passportId1,
+                    ownerName2: scope.landCollateralFormData.ownerName2,
+                    gender2: scope.landCollateralFormData.gender2,
+                    passportId2: scope.landCollateralFormData.passportId2,
+                    // collateralId: scope.landCollateralFormData.collateralId,
+                    provinceId: scope.landCollateralFormData.provinceId,
+                    collateralNameId: scope.landCollateralFormData.collateralNameId,
+                    collateralNatureId: scope.landCollateralFormData.collateralNatureId,
+                });
+
+                scope.landCollateralFormData.dateIssue = undefined;
+                scope.landCollateralFormData.size = undefined;
+                scope.landCollateralFormData.oldPrice = undefined;
+                scope.landCollateralFormData.NumberOfCopy = undefined;
+                scope.landCollateralFormData.status = undefined;
+                scope.landCollateralFormData.detailLocation = undefined;
+                scope.landCollateralFormData.ownerName1 = undefined;
+                scope.landCollateralFormData.gender1 = undefined;
+                scope.landCollateralFormData.passportId1 = undefined;
+                scope.landCollateralFormData.ownerName2 = undefined;
+                scope.landCollateralFormData.gender2 = undefined;
+                scope.landCollateralFormData.passportId2 = undefined;
+                scope.landCollateralFormData.provinceId = undefined;
+                scope.landCollateralFormData.collateralNameId = undefined;
+                scope.landCollateralFormData.collateralNatureId = undefined;
+            }
+            }
+
+            scope.deleteLandCollateral = function (index) {
+                scope.landCollateralFormData.splice(index, 1);
+            }
+
             scope.previewRepayments = function () {
                 // Make sure charges and collaterals are empty before initializing.
                 delete scope.formData.charges;
                 delete scope.formData.collateral;
+                delete scope.formData.landCollateral;
                 if (_.isUndefined(scope.formData.datatables) || (!_.isUndefined(scope.formData.datatables) && scope.formData.datatables.length == 0)) {
                     delete scope.formData.datatables;
                 }
@@ -15062,6 +15145,15 @@
                         scope.formData.collateral.push({ type: scope.collaterals[i].type, value: scope.collaterals[i].value, description: scope.collaterals[i].description });
                     }
                     ;
+                }
+
+                if(scope.landCollateral.length > 0){
+                    scope.formData.landCollateral=[];
+                    for(var i in scope.landCollateral){
+                        scope.formData.landCollateral.push({
+                           
+                        });
+                    }
                 }
 
                 if (this.formData.syncRepaymentsWithMeeting) {
@@ -15117,6 +15209,7 @@
                 // Make sure charges and collaterals are empty before initializing.
                 delete scope.formData.charges;
                 delete scope.formData.collateral;
+                delete scope.formData.landCollateral;
                 var reqFirstDate = dateFilter(scope.date.first, scope.df);
                 var reqSecondDate = dateFilter(scope.date.second, scope.df);
                 var reqThirdDate = dateFilter(scope.date.third, scope.df);
@@ -15126,7 +15219,12 @@
                 if (scope.charges.length > 0) {
                     scope.formData.charges = [];
                     for (var i in scope.charges) {
-                        scope.formData.charges.push({ chargeId: scope.charges[i].chargeId, amount: scope.charges[i].amount, dueDate: dateFilter(scope.charges[i].dueDate, scope.df) });
+                        scope.formData.charges.push({ 
+                            chargeId: scope.charges[i].chargeId, 
+                            amount: scope.charges[i].amount, 
+                            dueDate: dateFilter(scope.charges[i].dueDate, 
+                            scope.df) 
+                            });
                     }
                 }
 
@@ -15135,12 +15233,42 @@
                         scope.formData.disbursementData[i].expectedDisbursementDate = dateFilter(scope.formData.disbursementData[i].expectedDisbursementDate, scope.df);
                     }
                 }
+
                 if (scope.collaterals.length > 0) {
                     scope.formData.collateral = [];
                     for (var i in scope.collaterals) {
-                        scope.formData.collateral.push({ type: scope.collaterals[i].type, value: scope.collaterals[i].value, description: scope.collaterals[i].description });
+                        scope.formData.collateral.push({ 
+                            type: scope.collaterals[i].type, 
+                            value: scope.collaterals[i].value, 
+                            description: scope.collaterals[i].description 
+                        });
+                    };
+                }
+
+                if (scope.landCollateral.length > 0) {
+                    scope.formData.landCollateral = [];
+                    for (var i in scope.landCollateral) {
+                        scope.formData.landCollateral.push({
+                            dateFormat : scope.df,
+                            locale :  scope.optlang.code,
+                            dateIssue: scope.landCollateral[i].dateIssue,
+                            size: scope.landCollateral[i].size,
+                            oldPrice: scope.landCollateral[i].oldPrice,
+                            NumberOfCopy: scope.landCollateral[i].NumberOfCopy,
+                            status: scope.landCollateral[i].status,
+                            detailLocation: scope.landCollateral[i].detailLocation, 
+                            ownerName1: scope.landCollateral[i].ownerName1,
+                            gender1: scope.landCollateral[i].gender1,
+                            passportId1: scope.landCollateral[i].passportId1,
+                            ownerName2: scope.landCollateral[i].ownerName2,
+                            gender2: scope.landCollateral[i].gender2,
+                            passportId2: scope.landCollateral[i].passportId2,
+                            // collateralId: scope.landCollateral[i].collateralId,
+                            provinceId: scope.landCollateral[i].provinceId,
+                            collateralNameId: scope.landCollateral[i].collateralNameId,
+                            collateralNatureId: scope.landCollateral[i].collateralNatureId,
+                        });
                     }
-                    ;
                 }
 
                 if (this.formData.syncRepaymentsWithMeeting) {
@@ -15166,6 +15294,7 @@
                 if (this.formData.interestCalculationPeriodType == 0) {
                     this.formData.allowPartialPeriodInterestCalcualtion = false;
                 }
+                 
                 if (!_.isUndefined(scope.datatables) && scope.datatables.length > 0) {
                     angular.forEach(scope.datatables, function (datatable, index) {
                         scope.columnHeaders = datatable.columnHeaderData;
@@ -15173,8 +15302,7 @@
                             scope.dateFormat = scope.df + " " + scope.tf
                             if (scope.columnHeaders[i].columnDisplayType == 'DATE') {
                                 if (!_.isUndefined(scope.formDat.datatables[index].data[scope.columnHeaders[i].columnName])) {
-                                    scope.formData.datatables[index].data[scope.columnHeaders[i].columnName] = dateFilter(scope.formDat.datatables[index].data[scope.columnHeaders[i].columnName],
-                                        scope.dateFormat);
+                                    scope.formData.datatables[index].data[scope.columnHeaders[i].columnName] = dateFilter(scope.formDat.datatables[index].data[scope.columnHeaders[i].columnName],scope.dateFormat);
                                     scope.formData.datatables[index].data.dateFormat = scope.dateFormat;
                                 }
                             } else if (scope.columnHeaders[i].columnDisplayType == 'DATETIME') {
@@ -15207,7 +15335,7 @@
         $log.info("NewLoanAccAppController initialized");
     });
 }(mifosX.controllers || {}));
-; 
+;
 
 
 (function (module) {

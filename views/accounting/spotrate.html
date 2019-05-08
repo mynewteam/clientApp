@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<div class="content-container" ng-controller="SpotRateController">
+    <ul class="breadcrumb">
+        <li ng-if="!groupid"><a href="#/accounting">{{'label.anchor.accounting' | translate}}</a></li>
+        <li class="active">{{'label.anchor.spotrate' | translate}}</li>
+    </ul>
+    <wizard current-step="step" class="card well">
+        <wz-step icon="fa fa-circle-o" wz-title="{{'label.heading.spotrate' | translate}}">
+            <div class="card-content">
+                <form name="spotrateForm" novalidate="" class="form-horizontal" rc-submit="submit()">
+                    <api-validate></api-validate>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                {{'label.input.spotrate.currency' | translate}} <span ng-show="currency == null" class="required">*</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <select id="currencyCode" name="currency" ng-model="formData.currencyCode" class="form-control"
+                                ng-options="currency.code as (currency.name+' ('+ currency.displaySymbol +')') for currency in currencyOptions"
+                                value="{{currency.code}}" required>
+                                </select>
+                            </div>
+                            <label class="control-label col-sm-2">{{'label.input.spotrate.buyingrate' | translate}}</label>
+                            <div class="col-sm-3">
+                                <input type="text" id="buyingRate" name="buyingRate" ng-model="formData.buyingRate"
+                                    ng-pattern="/^[0-9]/" class="form-control"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <span ng-show="spotrateForm.buyingRate.$invalid && spotrateForm.buyingRate.$dirty">
+                                    <small class="required" ng-show="spotrateForm.buyingRate.$error.pattern">
+                                        {{'label.mustbenumeric' | translate}}
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">{{'label.input.spotrate.TranDate' | translate}}</label>
+                            <div class="col-sm-3">
+                                <input type="text" id="TranDate" name="TranDate" ng-model="formData.TranDate" 
+                                datepicker-pop="dd MMMM yyyy" class="form-control"/>
+                            </div>
+                            <label class="control-label col-sm-2" for="sellingRate">{{'label.input.spotrate.sellingrate' |
+                                translate}}</label>
+                            <div class="col-sm-3">
+                                <input type="text" id="sellingRate" name="sellingRate" ng-model="formData.sellingRate"
+                                    ng-pattern="/^[0-9]/" class="form-control"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <span ng-show="spotrateForm.sellingRate.$invalid && spotrateForm.sellingRate.$dirty">
+                                    <small class="required" ng-show="spotrateForm.sellingRate.$error.pattern">
+                                        {{'label.mustbenumeric' | translate}}
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="spotRate">{{'label.input.spotrate.spotRate' |
+                                translate}}</label>
+                            <div class="col-sm-3">
+                                <input type="text" id="spotRate" name="spotRate" ng-model="formData.spotRate"
+                                    ng-pattern="/^[0-9]/" class="form-control"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <span ng-show="spotrateForm.spotRate.$invalid && spotrateForm.spotRate.$dirty">
+                                    <small class="required" ng-show="spotrateForm.spotRate.$error.pattern">
+                                        {{'label.mustbenumeric' | translate}}
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-5">
+                            <a id="cancel" href="#/accounting" class="btn btn-default">{{ 'label.button.cancel' | translate }}</a>
+                            <button id="save" type="submit" class="btn btn-primary">{{ 'label.button.save' | translate }}</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </wz-step>
+    </wizard>
+</div>
