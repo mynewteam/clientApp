@@ -86,7 +86,7 @@
                                             <th>{{'label.heading.actions' | translate}}</th>
                                         </tr>
                                         <tr class="pointer-main"
-                                            ng-repeat="loanaccount in clientAccounts.loanAccounts | orderBy:'id':true | filter:isLoanNotClosed">
+                                            ng-repeat="loanaccount in clientAccounts.loanAccounts | orderBy:'id':true | filter:isLoanNotClosed | filter:{loanaccount:filterText}">
                                             <td class="pointer" data-ng-click="routeToLoan(loanaccount.id)">
                                                 <i ng-hide="loanaccount.inArrears" uib-tooltip-placement="right" uib-tooltip="{{loanaccount.status.value}}"
                                                    class="fa fa-stop {{loanaccount.status.code | StatusLookup}}"></i>
@@ -105,7 +105,7 @@
                                                 <i uib-tooltip="{{loanaccount.loanType.value}}" class="fa fa-group"></i>
                                             </td>
                                             <td class="pointer center" ng-if="loanaccount.status.active">
-                                                <a uib-tooltip="{{'label.button.makerepayment' | translate}}" ng-href="#/loanaccount/{{loanaccount.id}}/close-rescheduled" class="btn btn-xs btn-primary ng-binding">
+                                                <a uib-tooltip="{{'label.button.makerepayment' | translate}}" ng-href="#/loanforeclosure/{{loanaccount.id}}" class="btn btn-xs btn-primary ng-binding">
                                                     <i class="fa fa-dollar"></i>
                                                 </a>
                                             </td>

@@ -4035,10 +4035,36 @@
             scope.searchText = "";
             scope.searchResults = [];
             scope.showClosed = false;
+
+
+            scope.identitydocuments = [];
+            scope.buttons = [];
+            scope.clientdocuments = [];
+            scope.staffData = {};
+            scope.formData = {};
+            scope.openLoan = true;
+            scope.openSaving = true;
+            scope.openShares = true;
+            scope.updateDefaultSavings = false;
+            scope.charges = [];
             scope.routeTo = function (id) {
                 location.path('/viewclient/' + id);
             };
 
+            scope.routeToSaving = function (id, depositTypeCode) {
+                if (depositTypeCode === "depositAccountType.savingsDeposit") {
+                    location.path('/viewsavingaccount/' + id);
+                } else if (depositTypeCode === "depositAccountType.fixedDeposit") {
+                    location.path('/viewfixeddepositaccount/' + id);
+                } else if (depositTypeCode === "depositAccountType.recurringDeposit") {
+                    location.path('/viewrecurringdepositaccount/' + id);
+                }
+            };
+
+            
+
+        
+               
             
             resourceFactory.clientAllAccountResource.get( function (data) {
                 scope.clientAccounts = data;
@@ -4070,6 +4096,8 @@
                     }
                 }
             });
+
+
 
 
             scope.clientsPerPage = 15;

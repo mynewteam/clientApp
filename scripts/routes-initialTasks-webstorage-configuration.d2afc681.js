@@ -1040,6 +1040,21 @@
             .when('/loanprepayment', {
                 templateUrl: 'views/loannew/loan/view_loanprepayment.html'
             })
+            .when('/savingdeposit', {
+                templateUrl: 'views/savingnews/savingaccount/view_depositsaving.html'
+            })
+            .when('/savingwithdrawal', {
+                templateUrl: 'views/savingnews/savingaccount/view_withdrawalsaving.html'
+            })
+            .when('/savingaddcharge', {
+                templateUrl: 'views/savingnews/savingaccount/view_addcharge.html'
+            })
+            .when('/savingtransferfun', {
+                templateUrl: 'views/savingnews/savingaccount/view_transferfun.html'
+            })
+            .when('/savingclose', {
+                templateUrl: 'views/savingnews/savingaccount/savingclose.html'
+            })
             .otherwise({
                 templateUrl: "views/errors/404.html"
             })

@@ -1,0 +1,90 @@
+<div class="content-container" ng-controller="LoanController">
+    <ul class="breadcrumb">
+        <li class="active">{{'label.anchor.clients' | translate}}</li>
+    </ul>
+    <api-validate></api-validate>
+    
+    <div class="card">
+        <div class="toolbar">
+            <h4>{{'label.loansnew.loanpayments' | translate}}</h4>
+        </div>
+        <div class="content">
+            <br>
+
+             <div class="row">
+                <div class="col-sm-8">
+                    <form ng-submit="search()" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input ng-autofocus="true" ng-model="filterText" ng-keyup="onFilter()" type="text"
+                                    class="form-control unstyled" placeholder="{{'label.input.filterbynameaccno' | translate}}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input data-ng-model="searchText" type="text" placeholder="{{'label.input.searchByNameAccNo' | translate}}"
+                                        class="form-control unstyled" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary form-control">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </span>
+                                    <div class="checkbox form-control">
+                                        <label for="showAll">
+                                            <input type="checkbox" id="showAll" name="showAll" ng-model="showClosed">
+                                            {{'label.button.showall' | translate }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+            <hr />
+          
+                                    <table class="table table-condensed" >
+                                        <tr class="graybg">
+                                            <th>{{'label.heading.accnum' | translate}}</th>
+                                            <th>{{'label.heading.savingaccount' | translate}}</th>
+                                            <th>{{'label.heading.lastActive' | translate}}</th>
+                                            <th class="center">{{'label.heading.balance' | translate}}</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        <tr class="pointer-main" 
+                                            ng-repeat="savingaccount in clientAccounts.savingsAccounts | orderBy:'id':true | filter:isSavingNotClosed | filter:{productId:'1'} | filter:{loanaccount:filterText}">
+                                            <td class="pointer" data-ng-click="routeToSaving(savingaccount.id, savingaccount.depositType.code)">
+                                                <i uib-tooltip-placement="right" ng-show="savingaccount.subStatus.id==0" uib-tooltip="{{savingaccount.status.value}}" class="fa fa-stop {{savingaccount.status.code | StatusLookup}}"></i>
+                                                <i uib-tooltip-placement="right" ng-hide="savingaccount.subStatus.id==0"  uib-tooltip="{{savingaccount.status.value+':'+savingaccount.subStatus.value}}" class="fa fa-stop {{savingaccount.status.code+savingaccount.subStatus.value | StatusLookup}}"></i>
+                                                {{savingaccount.accountNo}}
+                                            </td>
+                                            <td class="pointer" data-ng-click="routeToSaving(savingaccount.id, savingaccount.depositType.code)">{{savingaccount.productName}}</td>
+                                            <td class="pointer" data-ng-click="routeToSaving(savingaccount.id, savingaccount.depositType.code)">{{savingaccount.lastActiveTransactionDate|DateFormat}}</td>
+                                            <td class="pointer center" data-ng-click="routeToSaving(savingaccount.id, savingaccount.depositType.code)">{{savingaccount.accountBalance|number}}</td>
+                                            <td n ng-repeat="button in savingsActionbuttons">
+                                              <a uib-tooltip="{{'label.'+button.name | translate}}" ng-show="button.name" has-permission='{{button.taskPermissionName}}'
+                                                 ng-click="navigateToSavingsOrDepositAccount(button.name.replace('button.',''), savingaccount.id, savingaccount.depositType.id)"
+                                                 class="btn btn-xs btn-primary ng-binding" ng-if="savingaccount.depositType.id==button.type"><i class="{{button.icon}} "></i>
+                                              </a>
+                                            </span>
+                                            </td>
+                                            <td class="pointer" ng-if="savingaccount.status.submittedAndPendingApproval">
+                                                <a uib-tooltip="{{'label.button.approve' | translate}}" has-permission='APPROVE_SAVINGSACCOUNT' ng-href="#/savingaccount/{{savingaccount.id}}/approve" class="btn btn-xs btn-primary ng-binding">
+                                                    <i class="fa fa-check "></i>
+                                                </a>
+                                            </td>
+                                            
+                                            <td class="pointer center">
+                                                <a uib-tooltip="{{'label.button.withdraw' | translate}}" has-permission='APPROVE_SAVINGSACCOUNT'  ng-href="#/savingaccount/{{savingaccount.id}}/withdrawal" class="btn btn-xs btn-primary ng-binding">
+                                                    <i class="fa fa-arrow-down"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+            <dir-pagination-controls align="center" boundary-links="true" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"
+                on-page-change="getResultsPage(newPageNumber)">
+            </dir-pagination-controls>
+        </div>
+    </div>
+
+</div>
