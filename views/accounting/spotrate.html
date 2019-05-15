@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <div class="content-container" ng-controller="SpotRateController">
     <ul class="breadcrumb">
         <li ng-if="!groupid"><a href="#/accounting">{{'label.anchor.accounting' | translate}}</a></li>
@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">{{'label.input.spotrate.TranDate' | translate}}</label>
                             <div class="col-sm-3">
-                                <input type="text" id="TranDate" name="TranDate" ng-model="formData.TranDate" 
+                                <input type="text" id="TranDate" name="TranDate" ng-model="formData.TranDate"
                                 datepicker-pop="dd MMMM yyyy" class="form-control"/>
                             </div>
                             <label class="control-label col-sm-2" for="sellingRate">{{'label.input.spotrate.sellingrate' |
@@ -69,8 +69,9 @@
                             </div>
                         </div>
                         <div class="col-md-offset-5">
+                                <!-- href="#/accounting" -->
                             <a id="cancel" href="#/accounting" class="btn btn-default">{{ 'label.button.cancel' | translate }}</a>
-                            <button id="save" type="submit" class="btn btn-primary">{{ 'label.button.save' | translate }}</button>
+                            <button id="save" type="submit" class="btn btn-primary" has-permission='CREATE_SPOTRATE'>{{ 'label.button.save' | translate }}</button>
                         </div>
                     </fieldset>
                 </form>

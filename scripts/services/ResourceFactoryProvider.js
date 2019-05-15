@@ -724,7 +724,9 @@
                     adHocQueryTemplateResource: defineResource(apiVer + "/adhocquery/template", {}, {
                         get: { method: 'GET', params: {} }
                     }),
-
+                    spotRateResource: defineResource(apiVer + "/spotrate", {}, {
+                        save: { method: 'POST' }
+                    }),
                     twoFactorResource: defineResource(apiVer + "/twofactor", { deliveryMethod: "@deliveryMethod", extendedToken: "@extendedToken" }, {
                         getDeliveryMethods: { method: 'GET', params: {}, isArray: true },
                         requestOTP: { method: 'POST', params: { deliveryMethod: "@deliveryMethod", extendedToken: "@extendedToken" } }

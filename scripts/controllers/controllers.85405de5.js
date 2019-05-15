@@ -1566,15 +1566,32 @@
 
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        SpotRateController: function (scope, resourceFactory, location) {
+        SpotRateController: function (scope, resourceFactory, location, dateFilter) {
 
+            scope.formData = {};
+            scope.spotrate = new Date();
             resourceFactory.currencyConfigResource.get({ fields: 'selectedCurrencyOptions' }, function (data) {
                 scope.currencyOptions = data.selectedCurrencyOptions;
             });
             location.path('/spotrate');
+
+
+                
+
+            scope.submit = function (data) {
+                // this.formData.TranDate = filter('date')(this.formData.TranDate, "dd/MM/yyyy");
+                this.formData.locale = scope.optlang.code;
+                this.formData.dateFormat = scope.df;
+                if (scope.spotrate) {
+                    this.formData.TranDate = dateFilter(scope.spotrate, scope.df);
+                }
+                resourceFactory.spotRateResource.save(this.formData, function (data) {
+                    
+                });
+            };
         }
     });
-    mifosX.ng.application.controller('SpotRateController', ['$scope', 'ResourceFactory','$location', mifosX.controllers.SpotRateController]).run(function ($log) {
+    mifosX.ng.application.controller('SpotRateController', ['$scope', 'ResourceFactory','$location','dateFilter', mifosX.controllers.SpotRateController]).run(function ($log) {
         $log.info("SpotRateController initialized");
     });
 }(mifosX.controllers || {}));;
