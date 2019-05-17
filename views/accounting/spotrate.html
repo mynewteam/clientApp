@@ -10,6 +10,9 @@
                 <form name="spotrateForm" novalidate="" class="form-horizontal" rc-submit="submit()">
                     <api-validate></api-validate>
                     <fieldset>
+                        <a href="#/viewspotrate/{{spotrate | date:'dd-MMM-yyyy'}}" class="btn btn-primary pull-right" has-permission='READ_SPOTRATE'><i class="fa fa-eye "></i>{{'label.button.viewspotrate'| translate}}</a>
+                        <br>
+                        <hr/>
                         <div class="form-group">
                             <label class="control-label col-sm-2">
                                 {{'label.input.spotrate.currency' | translate}} <span ng-show="currency == null" class="required">*</span>
@@ -36,7 +39,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">{{'label.input.spotrate.TranDate' | translate}}</label>
                             <div class="col-sm-3">
-                                <input type="text" id="TranDate" name="TranDate" ng-model="formData.TranDate"
+                                <input type="text" id="TransactionDate" name="TransactionDate" ng-model="formData.TransactionDate"
                                 datepicker-pop="dd MMMM yyyy" class="form-control"/>
                             </div>
                             <label class="control-label col-sm-2" for="sellingRate">{{'label.input.spotrate.sellingrate' |

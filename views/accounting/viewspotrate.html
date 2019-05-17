@@ -1,0 +1,38 @@
+
+<div class="content-container" ng-controller="ViewSpotRateController">
+    <ul class="breadcrumb">
+        <li ng-if="!groupid"><a href="#/accounting">{{'label.anchor.accounting' | translate}}</a></li>
+        <li><a href="#/spotrate">{{'label.anchor.spotrate' | translate}}</a></li>
+        <li class="active">{{'label.anchor.viewspotrate' | translate}}</li>
+    </ul>
+    <wizard current-step="step" class="card well">
+        <wz-step icon="fa fa-circle-o" wz-title="{{'label.heading.viewspotrate' | translate}}">
+            <div class="card-content">
+                <form name="spotrateForm" novalidate="" class="form-horizontal" rc-submit="submit()">
+                    <api-validate></api-validate>
+                    <fieldset>
+                        <table class="table">
+                            <thead>
+                                <tr class="graybg">
+                                <th>{{'label.input.spotrate.currency' | translate}}</th>
+                                <th>{{'label.input.spotrate.buyingrate' | translate}}</th>
+                                <th>{{'label.input.spotrate.sellingrate' | translate}}</th>
+                                <th>{{'label.input.spotrate.spotRate' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="item in viewdata">
+                                <tr class="pointer-main">
+                                        <!-- <tr class="pointer-main" dir-paginate="coadata in coadatas | orderBy:['type.value','glCode']| SearchFilter:filterText |  itemsPerPage: ChartsPerPage"> -->
+                                    <td class="pointer">{{item.currencyCode}}</td>
+                                    <td class="pointer">{{item.buyingRate}}</td>
+                                    <td class="pointer">{{item.sellingRate}}</td>
+                                    <td class="pointer">{{item.spotRate}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </wz-step>
+    </wizard>
+</div>

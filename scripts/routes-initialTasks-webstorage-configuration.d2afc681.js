@@ -335,6 +335,9 @@
             .when('/spotrate', {
                 templateUrl: 'views/accounting/spotrate.html'
             })
+            .when('/viewspotrate/:transactionDate', {
+                templateUrl: 'views/accounting/viewspotrate.html'
+            })
             .when('/exchange', {
                 templateUrl: 'views/accounting/exchange.html'
             })

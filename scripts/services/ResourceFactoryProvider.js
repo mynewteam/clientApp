@@ -725,7 +725,8 @@
                         get: { method: 'GET', params: {} }
                     }),
                     spotRateResource: defineResource(apiVer + "/spotrate", {}, {
-                        save: { method: 'POST' }
+                        save: { method: 'POST' },
+                        get: {method: 'GET', isArray: true} 
                     }),
                     twoFactorResource: defineResource(apiVer + "/twofactor", { deliveryMethod: "@deliveryMethod", extendedToken: "@extendedToken" }, {
                         getDeliveryMethods: { method: 'GET', params: {}, isArray: true },

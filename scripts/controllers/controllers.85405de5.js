@@ -15,6 +15,7 @@
 
 
 
+
 (function (module) {
     mifosX.controllers = _.extend(module, {
         AreaSetupController: function (scope, routeParams, resourceFactory, location, dateFilter, uiConfigService, WizardHandler) {
@@ -1568,23 +1569,32 @@
     mifosX.controllers = _.extend(module, {
         SpotRateController: function (scope, resourceFactory, location, dateFilter) {
 
-            scope.formData = {};
+            scope.formData = [];
+            scope.getdata = [];
             scope.spotrate = new Date();
             resourceFactory.currencyConfigResource.get({ fields: 'selectedCurrencyOptions' }, function (data) {
                 scope.currencyOptions = data.selectedCurrencyOptions;
             });
             location.path('/spotrate');
-
-
                 
 
             scope.submit = function (data) {
-                // this.formData.TranDate = filter('date')(this.formData.TranDate, "dd/MM/yyyy");
+
+                
                 this.formData.locale = scope.optlang.code;
                 this.formData.dateFormat = scope.df;
+
+
                 if (scope.spotrate) {
-                    this.formData.TranDate = dateFilter(scope.spotrate, scope.df);
+                    this.formData.TransactionDate = dateFilter(scope.spotrate, scope.df);
                 }
+
+                resourceFactory.spotRateResource.get(function (data) {
+                    scope.getdata = data;
+                    scope.getdata.forEach(function (n) {
+                        console.log(n.currencyCode);
+                    });
+                });
                 resourceFactory.spotRateResource.save(this.formData, function (data) {
                     
                 });
@@ -1596,7 +1606,25 @@
     });
 }(mifosX.controllers || {}));;
 
+(function (module) {
+    mifosX.controllers = _.extend(module, {
+        ViewSpotRateController: function (scope, resourceFactory, location, dateFilter) {
 
+            scope.viewdata = [];
+
+            scope.routeTo = function (transactionDate) {
+                location.path('/viewspotrate/' + transactionDate);
+            };
+
+            resourceFactory.spotRateResource.get(function (data) {
+                scope.viewdata = data;
+            });
+        }
+    });
+    mifosX.ng.application.controller('ViewSpotRateController', ['$scope', 'ResourceFactory','$location','dateFilter', mifosX.controllers.ViewSpotRateController]).run(function ($log) {
+        $log.info("ViewSpotRateController initialized");
+    });
+}(mifosX.controllers || {}));;
 
 (function (module) {
     mifosX.controllers = _.extend(module, {
