@@ -326,6 +326,7 @@
 	"error.msg.loan.withdraw.cannot.be.before.client.transfer.date": "កាលបរិច្ឆេទដែលឥណទានត្រូវបានដកចេញមិនអាចធ្វើមុនកាលបរិច្ឆេទផ្ទេរអតិថិជន ({{params[0].value}})  ឡើយ",
 	"error.msg.loan.writeoff.cannot.be.undone.before.client.transfer.date": "កាលបរិច្ឆេទដែលឥណទានត្រូវបានលុបចោលមិនអាចធ្វើមុនកាលបរិច្ឆេទផ្ទេរអតិថិជន ({{params[0].value}})  ឡើយ",
 	"error.msg.loan.close.cannot.be.undone.before.client.transfer.date": "កាលបរិច្ឆេទដែលឥណទានត្រូវបានសងផ្តាច់មិនអាចធ្វើមុនកាលបរិច្ឆេទផ្ទេរអតិថិជន ({{params[0].value}})  ឡើយ",
+	"error.msg.spotrate.existed": "អត្រាការប្រាក់ថ្ងៃនេះសម្រាប់រូបិយប័ណ្ណនេះមានរួចហើយសូមពិនិត្យម្ដងទៀត",
 	"label.heading.waiveloancharge": "លើកលែងកម្រៃសេវាឥណទាន",
 	"label.heading.payloancharge": "បង់កម្រៃសេវាឥណទាន",
 	"label.anchor.paycharge": "បង់សេវា",
