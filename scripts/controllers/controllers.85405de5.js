@@ -1591,38 +1591,8 @@
                 if (scope.spotrate) {
                     this.formData.TransactionDate = dateFilter(scope.spotrate, scope.df);
                 }
-
-                // scope.getdata.forEach(function(n)
-                // {
-                //     frmDate = Date.parse(myfrmData.TransactionDate);
-                //     frmDate = new Date(frmDate);
-                //     frmTranDate = frmDate.getFullYear() + " " + (frmDate.getMonth() + 1) + " " + frmDate.getDate();
-                //     tranDate = n.transactionDate[0] + " " + n.transactionDate[1] + " " + n.transactionDate[2];
-
-                //     if(tranDate == frmTranDate && n.currencyCode == myfrmData.currencyCode)
-                //     {
-                //         alert('Hi');
-                //         return;
-                //     }
-                //     else
-                //     {
-                //         istrue = true;
-                        
-                //     }
-                // });
-                
-                // if(istrue || scope.getdata == "")
-                // {
-                    // resourceFactory.spotRateResource.save(this.formData, function (data) {
-                    //     scope.routeTo = function (transactionDate) {
-                    //         location.path('/viewspotrate/' + transactionDate);
-                    //     };
-                    // });
-                // }
                 resourceFactory.spotRateResource.save(this.formData, function (data) {
-                    scope.routeTo = function (transactionDate) {
-                        location.path('/viewspotrate/' + transactionDate);
-                    };
+                    location.path('/accounting');
                 });
                 
 
