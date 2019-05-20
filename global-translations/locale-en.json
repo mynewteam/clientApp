@@ -4343,7 +4343,7 @@
   "label.input.exchange.sellcurrency": "Sell Currency",
   "label.input.exchange.buyamount": "Buy Amount",
   "label.input.exchange.sellamount": "Sell Amount",
-  "label.input.exchange.exchange": "Exchange",
+  "label.input.exchange.rate": "Rate",
   "----End---": "--End of file--- "     
  
 }

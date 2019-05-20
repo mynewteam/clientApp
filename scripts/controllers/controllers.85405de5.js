@@ -1569,21 +1569,12 @@
     mifosX.controllers = _.extend(module, {
         SpotRateController: function (scope, resourceFactory, location, dateFilter) {
 
-            scope.getdata = [];
             scope.spotrate = new Date();
             resourceFactory.currencyConfigResource.get({ fields: 'selectedCurrencyOptions' }, function (data) {
                 scope.currencyOptions = data.selectedCurrencyOptions;
             });
             location.path('/spotrate');
-                
-            resourceFactory.spotRateResource.get(function (data) {
-                scope.getdata = data;
-            });
-            let istrue = false;
-            let myfrmData = [];
-            let tranDate;
-            let frmDate;
-            let frmTranDate;
+            
             scope.submit = function (data) {
                 this.formData.locale = scope.optlang.code;
                 this.formData.dateFormat = scope.df;
