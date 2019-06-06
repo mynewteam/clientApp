@@ -1569,20 +1569,26 @@
     mifosX.controllers = _.extend(module, {
         SpotRateController: function (scope, resourceFactory, location, dateFilter) {
 
+            scope.formData = {};
             scope.spotrate = new Date();
             resourceFactory.currencyConfigResource.get({ fields: 'selectedCurrencyOptions' }, function (data) {
                 scope.currencyOptions = data.selectedCurrencyOptions;
+                scope.formData.currencyCode = scope.currencyOptions[0].code;
             });
+            resourceFactory.officeResource.getAllOffices(function (data) {
+                scope.offices = data;
+                scope.formData.officeId = scope.offices[0].id;
+            });
+            
             location.path('/spotrate');
             
             scope.submit = function (data) {
-                this.formData.locale = scope.optlang.code;
-                this.formData.dateFormat = scope.df;
-                myfrmData = this.formData;
+                scope.formData.locale = scope.optlang.code;
+                scope.formData.dateFormat = scope.df;
                 if (scope.spotrate) {
-                    this.formData.TransactionDate = dateFilter(scope.spotrate, scope.df);
+                    scope.formData.TransactionDate = dateFilter(scope.spotrate, scope.df);
                 }
-                resourceFactory.spotRateResource.save(this.formData, function (data) {
+                resourceFactory.spotRateResource.save(scope.formData, function (data) {
                     location.path('/accounting');
                 });
                 
@@ -1607,6 +1613,7 @@
 
             resourceFactory.spotRateResource.get(function (data) {
                 scope.viewdata = data;
+                console.log(data);
             });
         }
     });
@@ -1617,15 +1624,71 @@
 
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        ExchangeController: function (scope, resourceFactory, location) {
+        ExchangeController: function (scope, resourceFactory, location, dateFilter) {
 
+            scope.formData = {};
+            let buyingrateKHR;
+            let sellingrateKHR;
+            let code;
+            let sellamount;
+            scope.exchangeDate = new Date();
             resourceFactory.currencyConfigResource.get({ fields: 'selectedCurrencyOptions' }, function (data) {
                 scope.currencyOptions = data.selectedCurrencyOptions;
             });
+            resourceFactory.officeResource.getAllOffices(function (data) {
+                scope.offices = data;
+                scope.formData.officeId = scope.offices[0].id;
+            });
             location.path('/exchange');
+            
+            resourceFactory.spotRateResource.get(function (data) {
+                data.forEach(function(n){
+                    if(n.currencyCode == "KHR")
+                    {
+                        buyingrateKHR = n.buyingRate;
+                        sellingrateKHR = n.sellingRate;
+                    }
+                });
+            });
+
+            scope.buyingcurrencyChange = function(value)
+            {
+                if(value == "KHR")
+                {
+                    scope.formData.spotRate = buyingrateKHR;
+                }
+                else
+                {
+                    scope.formData.spotRate = sellingrateKHR;
+                }
+            }
+
+            scope.spotrateChange = function()
+            {
+                code = scope.formData.buycurrencyCode;
+                if(code == "KHR")
+                {
+                    sellamount = scope.formData.buyamount / scope.formData.spotRate;
+                }
+                else
+                {
+                    sellamount = scope.formData.buyamount * scope.formData.spotRate;
+                }
+                scope.formData.sellamount = sellamount.toFixed(2);
+            }
+            scope.submit = function (data) {
+                scope.formData.locale = scope.optlang.code;
+                scope.formData.dateFormat = scope.df;
+                if (scope.exchangeDate) {
+                    scope.formData.TransactionDate = dateFilter(scope.exchangeDate, scope.df);
+                }
+                resourceFactory.exchangeResource.save(scope.formData, function (data) {
+                    // location.path('/accounting');
+                });
+            };
         }
     });
-    mifosX.ng.application.controller('ExchangeController', ['$scope', 'ResourceFactory','$location', mifosX.controllers.ExchangeController]).run(function ($log) {
+    mifosX.ng.application.controller('ExchangeController', ['$scope', 'ResourceFactory','$location', 'dateFilter', mifosX.controllers.ExchangeController]).run(function ($log) {
         $log.info("ExchangeController initialized");
     });
 }(mifosX.controllers || {}));;

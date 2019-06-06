@@ -4324,6 +4324,8 @@
   "reportRunFrequency.yearly": "Yearly",
   "reportRunFrequency.custom": "Custom",
   "label.spotrate": "Spotrate",
+  "label.input.spotrate.office": "Office",
+  "label.input.exchange.office": "Office",
   "label.anchor.spotrate": "Spotrate",
   "label.exchange": "Exchange",
   "label.anchor.exchange": "Exchange",

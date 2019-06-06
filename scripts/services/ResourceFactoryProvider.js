@@ -728,6 +728,9 @@
                         save: { method: 'POST' },
                         get: {method: 'GET', isArray: true}
                     }),
+                    exchangeResource: defineResource(apiVer + "/exchange", {}, {
+                        save: { method: 'POST' }
+                    }),
                     twoFactorResource: defineResource(apiVer + "/twofactor", { deliveryMethod: "@deliveryMethod", extendedToken: "@extendedToken" }, {
                         getDeliveryMethods: { method: 'GET', params: {}, isArray: true },
                         requestOTP: { method: 'POST', params: { deliveryMethod: "@deliveryMethod", extendedToken: "@extendedToken" } }
