@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<div class="content-container" ng-controller="inwardController">
+    <ul class="breadcrumb">
+         <li><a href="#/chequeclearance">{{'label.anchor.chequeclearance' | translate}}</a></li>
+        <li class="active">{{ 'label.anchor.inward' | translate }}</li>
+    </ul>
+    <div class="card">
+    <div class="content">
+         <div class="toolbar">
+               <h4>Inward Clearance Workspace</h4>
+            </div>
+        <div class="row">
+           <div class="col-sm-2" id="left-side">
+              <nav class="navbar navbar-inverse" style="background-color: white; border: none; margin-top: 10px;">
+                 <div class="container-fluid">
+                   <div class="navbar-header">
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>                        
+                     </button>
+                   </div>
+                   <div class="collapse navbar-collapse" id="menu">
+                    <div class="row">
+                       <div class="col-sm-16">
+                          <label  class="btn btn-primary" ng-model="btnApply" id="btn-menu">
+                          <span class="fa fa-print"></span> Print
+                          </label>
+                       </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-sm-16">
+                          <label  class="btn btn-primary" ng-model="btnPrint" id="btn-menu">
+                          <span class="fa fa-pencil"></span> Correction
+                          </label>
+                       </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-sm-16">
+                          <label  class="btn btn-primary" ng-model="btnCorrection" id="btn-menu">
+                          <span class="fa fa-file-code-o"></span> SDR File
+                          </label>
+                       </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-sm-16">
+                          <label  class="btn btn-primary" ng-model="btnCharges" id="btn-menu">
+                          <span class="fa fa-trash-o"></span> Clear
+                          </label>
+                       </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-sm-16">
+                          <label  class="btn btn-primary" ng-model="btnExit" id="btn-menu">
+                          <span class="fa fa-times-circle-o"></span> Exit
+                          </label>
+                       </div>
+                    </div>
+                   </div>
+                 </div>
+               </nav>
+             
+           </div>
+           <div class="col-sm-10">
+              <div class="row" id="datetime">
+                 <div class="col-sm-12">
+                    <!-- <button type="button" ng-model="btnCal" class="btn btn-default" ng-click="openCal()"  style="width: 10%; float: right;">
+                    <span class="fa fa-calendar"></span>
+                    </button> -->
+                    <!-- <input type="text" class="form-control" uib-datepicker-popup ng-model="txtTime" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"  style="width: 20%; float: right;"> -->
+                    <input id="dateofbirth" type="text" name="dateofbirth" datepicker-pop="dd MMMM yyyy"
+                                    ng-model="first.dateOfBirth" is-open="opened1" min="minDate" max="restrictDate"
+                                    class="form-control" style="width: 20%; float: right;" placeholder="Select Date and Time!!!"/>
+                    <p style="float: right; margin-top: 7px;">Value&nbspDate:&nbsp</p>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-sm-6" >
+                    <div  id="from-acc" class="panel panel-primary" >
+                       <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
+                          <p style="font-size: 16pt;">&nbsp&nbspNostro</p>
+                       </div>
+                       <div class="panel-body">
+                          <div class="row">
+                             <p>&nbsp&nbspNostro&nbspAccount:</p>
+                             <div class="col-sm-10" id="width-txt">
+                                <div>
+                                   <select ng-model="nostroAcc" class="form-control" ng-options="n for n in Nacc" style="margin-left: 1%; width: 98%;"></select> 
+                                </div>
+                             </div>
+                          </div>
+                          <div class="row">
+                             <p>&nbsp&nbspAmount:</p>
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="txtAmount" class="form-control" style="margin-left: 1%; width: 98%;">
+                             </div>
+                          </div>
+                          <div class="row">
+                             <p>&nbsp&nbspNostro&nbspBalance:</p>
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="txtnostroBal" class="form-control" style="margin-left: 1%; width: 98%;">
+                             </div>
+                          </div>
+                          <div class="row">
+                             <p>&nbsp&nbspCurrency:</p>
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="txtCurrency" class="form-control" style="margin-left: 1%; width: 98%;">
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="col-sm-6">
+                    <div id="deposit-to" class="panel panel-primary" >
+                       <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
+                          <p style="font-size: 16pt;">&nbsp&nbspFrom&nbspAccount</p>
+                       </div>
+                       <div class="panel-body">
+                          <div class="row">
+                             &nbsp&nbspAccount&nbspNo:
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="textFromAccNo1" class="form-control" style="width: 98%; margin-left: 1%;">
+                             </div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="textFromAccNo2" class="form-control" style="width: 98%; margin-left: 1%;">
+                             </div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="textFromAccNo3" class="form-control" style="width: 98%; margin-left: 1%;">
+                             </div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="textFromAccNo4" class="form-control" style="width: 98%; margin-left: 1%;">
+                             </div>
+                          </div>
+                          <div class="row">
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="textFromAccNo5" class="form-control" style="width: 98%; margin-left: 1%;">
+                             </div>
+                          </div>
+                          <div class="row">
+                             <p>&nbsp&nbspCheque&nbspNumber:</p>
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="txtChequeNum" class="form-control" style="margin-left: 1%; width: 98%;">
+                             </div>
+                          </div>
+                          <div class="row">
+                             <p>&nbsp&nbspAvailable&nbspBalance:</p>
+                             <div class="col-sm-10" id="width-txt">
+                                <input type="text" ng-model="txtAvailableBal" class="form-control" style="margin-left: 1%; width: 98%;">
+                             </div>
+                          </div>
+                          <div class="row">
+                             <p>&nbsp&nbspName:</p>
+                             <div class="col-sm-10" id="width-txt">
+                                <textarea ng-model="name" class="form-control" style="width: 98%; margin-left: 1%;"></textarea>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-sm-12">
+                    <p style="font-size: 16pt;">Data&nbspRecorded</p>
+                    <div class="data-grid">
+                       <table st-table="rowCollection" class="table table-striped">
+                          <thead style=" background-color: rgba(6, 71, 113, 1); color: rgb(0, 0, 0);">
+                             <tr>
+                                <th>No</th>
+                                <th>Acc&nbspNo</th>
+                                <th>Name</th>
+                                <th>Cheque&nbspNo</th>
+                                <th>From&nbspAccount</th>
+                                <th>Amount</th>
+                             </tr>
+                          </thead>
+                          <tbody>
+                             <tr ng-repeat="row in rowCollection">
+                                <td>{{row.no}}</td>
+                                <td>{{row.accNo}}</td>
+                                <td>{{row.name}}</td>
+                                <td>{{row.chequeNo}}</td>
+                                <td>{{row.fromAccount}}</td>
+                                <td>{{row.amount}}</td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+   </div>
+</div>

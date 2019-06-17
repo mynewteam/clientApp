@@ -1055,6 +1055,30 @@
             .when('/savingclose', {
                 templateUrl: 'views/savingnews/savingaccount/savingclose.html'
             })
+            .when('/depositclose', {
+                templateUrl: 'views/depositnews/Depositaccount/depositclose.html'
+            })
+            .when('/addchargedeposit', {
+                templateUrl: 'views/depositnews/Depositaccount/view_addchargedeposit.html'
+            })
+            .when('/depositform', {
+                templateUrl: 'views/depositnews/Depositaccount/view_depositform.html'
+            })
+            .when('/withdrawaldeposit', {
+                templateUrl: 'views/depositnews/Depositaccount/view_withdrawaldeposit.html'
+            })
+            .when('/chequedeposit', {
+                templateUrl: 'views/chequeclearance/chequedeposit/chequedeposit.html'
+            })
+            .when('/inward', {
+                templateUrl: 'views/chequeclearance/inwardclearance/inward.html'
+            })
+            .when('/outward', {
+                templateUrl: 'views/chequeclearance/outwardclearance/outward.html'
+            })
+            .when('/chequeclearance', {
+                templateUrl: 'views/chequeclearance/chequeclearance.html'
+            })
             .otherwise({
                 templateUrl: "views/errors/404.html"
             })

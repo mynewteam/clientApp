@@ -223,12 +223,13 @@
 											<a data-ng-click="createstandinginstruction()" has-permission='READ_STANDINGINSTRUCTION' ng-show="client.status.value!='Transfer on hold'">{{'label.button.createstandinginstruction'
 												| translate}}</a>
 										</li>
-                                        <li data-ng-show="client.status.value=='Active'">
+										<!-- hid fixdeposit and share deposit-->
+                                        <!-- <li data-ng-show="client.status.value=='Active'">
 											<a href="#/createshareaccount/{{client.id}}" has-permission='CREATE_SHAREACCOUNT'>{{'label.button.newshareaccount' | translate}}</a>
 										</li>
 										<li data-ng-show="client.status.value=='Active'">
 											<a href="#/newclientfixeddepositaccount/{{client.id}}" has-permission='CREATE_FIXEDDEPOSITACCOUNT'>{{'label.newfixeddepositaccount' | translate}}</a>
-										</li>
+										</li> -->
 										<li data-ng-show="client.status.value=='Active'">
 											<a href="#/newclientrecurringdepositaccount/{{client.id}}" has-permission='CREATE_RECURRINGDEPOSITACCOUNT'>{{'label.newrecurringdepositaccount' | translate}}</a>
 										</li>

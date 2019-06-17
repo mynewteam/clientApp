@@ -76,6 +76,15 @@
                     clientAllAccountResource: defineResource(apiVer + "/clients/all/accounts", {}, {
                         getAllClients: { method: 'GET', params: {} }
                     }),
+                    ChequeDepositAccountResource: defineResource(apiVer + "/chepuedeposit/Head Offic000000041/chepuefromaccout", {}, {
+                        getchequeAccount: { method: 'GET', params: {} }
+                    }),
+                    
+
+                    ChequeDepositToAccountResource: defineResource(apiVer + "/chepuedeposit/Head Offic000000041/chepuedepositto", {}, {
+                        getchequeAccount: { method: 'GET', params: {} }
+                    }),
+
 
                     clientNotesResource: defineResource(apiVer + "/clients/:clientId/notes/:noteId", { clientId: '@clientId', noteId: '@noteId' }, {
                         getAllNotes: { method: 'GET', params: {}, isArray: true },

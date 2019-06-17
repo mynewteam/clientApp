@@ -4035,7 +4035,8 @@
             scope.searchText = "";
             scope.searchResults = [];
             scope.showClosed = false;
-
+            scope.ChequeDepositToAccount=[];
+            scope.ChequeDepositAccount=[];
 
             scope.identitydocuments = [];
             scope.buttons = [];
@@ -4061,11 +4062,6 @@
                 }
             };
 
-            
-
-        
-               
-            
             resourceFactory.clientAllAccountResource.get( function (data) {
                 scope.clientAccounts = data;
                 if (data.savingsAccounts) {
@@ -4098,6 +4094,12 @@
             });
 
 
+            resourceFactory.ChequeDepositAccountResource.get(function(data){
+                scope.ChequeDepositAccount=data;
+            });
+             resourceFactory.ChequeDepositToAccountResource.get(function(data){
+                scope.ChequeDepositToAccount=data;
+            });
 
 
             scope.clientsPerPage = 15;
