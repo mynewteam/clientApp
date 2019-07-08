@@ -1020,6 +1020,12 @@
   "label.savingnews.freeze":"freeze A/C",
   "label.savingnews.jointaccountholder":"Joint Account holder",
   "label.savingnews.resident":"Resident And Non-Resident",
+  "label.currentaccount.currentaccounts":"Current Account",
+  "label.currentaccount.current":"Current",
+  "label.currentaccount.createcurrent":"Create Current Products",
+  "label.currentaccount.Newcreatecurrent":"New Current",
+  "label.currentaccount.currentapplication":"Current Application",
+  "label.currentaccount.selectcurrent":"select Current Products",
   "label.depositnews.Deposit":"Fix Deposit",
   "label.depositnews.deposit":"Deposit by cash, transfer from account, Nostro",
   "label.depositnews.Depositwithdrawal":"Withdrawals by cash, transfer from account, Nostro",
@@ -4350,6 +4356,23 @@
   "reportRunFrequency.monthly": "Monthly",
   "reportRunFrequency.yearly": "Yearly",
   "reportRunFrequency.custom": "Custom",
+
+
+  "#Admin-chequeclearance": "....",
+  "#Heading": "..",
+  "label.heading.chequedeposit": "Cheque Deposit",
+  "label.heading.inward": "Inward Clearance",
+  "label.heading.outward": "Outward Clearance",
+
+  "#Anchors": "..",
+  "label.anchor.chequeclearance": "Cheque Clearance",
+  "label.anchor.chequedeposit": "Cheque Deposit",
+  "label.anchor.inward": "Inward Clearance",
+  "label.anchor.outward": "Outward Clearance",
+
+  "label.thisworkspaceformakechequedeposit": "This Workspace For Make Cheque Deposit",
+  "label.thisworkspaceformakeinwardclearance": "This Workspace For Make Inward Clearance",
+  "label.thisworkspaceformakeoutwardclearance": "This Workspace For Make Outward Clearance",
 
 
   "----End---": "--End of file--- "     

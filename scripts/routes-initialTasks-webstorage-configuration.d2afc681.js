@@ -1079,8 +1079,47 @@
             .when('/chequeclearance', {
                 templateUrl: 'views/chequeclearance/chequeclearance.html'
             })
+            .when('/currentaccountaddcharge', {
+                templateUrl: 'views/currentaccount/currentaccounts/view_currentaccountaddcharge.html'
+            })
+            .when('/currentaccountclose', {
+                templateUrl: 'views/currentaccount/currentaccounts/view_currentaccountclose.html'
+            })
+            .when('/currentaccountdeposit', {
+                templateUrl: 'views/currentaccount/currentaccounts/view_depositcurrentaccount.html'
+            })
+            .when('/currentaccounttransfer', {
+                templateUrl: 'views/currentaccount/currentaccounts/view_transfercurrentaccountfun.html'
+            })
+            .when('/currentaccountwithdrawal', {
+                templateUrl: 'views/currentaccount/currentaccounts/view_withdrawalcurrentaccount.html'
+            })
+            .when('/currentaccount', {
+                templateUrl: 'views/currentaccount/view_currentaccount.html'
+            })
+            .when('/currentaccountproduct', {
+                templateUrl: 'views/products/currentaccountproducts.html'
+            })
+            .when('/createcurrentaccountproduct', {
+                templateUrl: 'views/products/createcurrentproduct.html'
+            })
+            .when('/new_current_account_application/:clientId', {
+                templateUrl: 'views/currentaccount/current/new_current_account_application.html'
+            })
             .otherwise({
                 templateUrl: "views/errors/404.html"
+            })
+            .when('/chequedeposit', {
+                templateUrl: 'views/chequeclearance/chequedeposit/chequedeposit.html'
+            })
+            .when('/inward', {
+                templateUrl: 'views/chequeclearance/inwardclearance/inward.html'
+            })
+            .when('/outward', {
+                templateUrl: 'views/chequeclearance/outwardclearance/outward.html'
+            })
+            .when('/chequeclearance', {
+                templateUrl: 'views/chequeclearance/chequeclearance.html'
             })
             ;
         $locationProvider.html5Mode(false);

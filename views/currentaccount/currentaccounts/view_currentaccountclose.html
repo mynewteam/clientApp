@@ -6,7 +6,7 @@
     
     <div class="card">
         <div class="toolbar">
-            <h4>{{'label.button.addcharge' | translate}} Deposit</h4>
+            <h4>{{'label.currentaccount.current' | translate}} {{'label.button.close' | translate}}</h4>
         </div>
         <div class="content">
             <br>
@@ -52,7 +52,7 @@
                                             <th>Actions</th>
                                         </tr>
                                         <tr class="pointer-main" 
-                                            ng-repeat="savingaccount in clientAccounts.savingsAccounts | orderBy:'id':true | filter:isSavingNotClosed | filter:{productId:'81'} | filter:{loanaccount:filterText}">
+                                            ng-repeat="savingaccount in clientAccounts.savingsAccounts | orderBy:'id':true | filter:isSavingNotClosed | filter:{productId:'121'}| filter:{loanaccount:filterText}">
                                             <td class="pointer" data-ng-click="routeToSaving(savingaccount.id, savingaccount.depositType.code)">
                                                 <i uib-tooltip-placement="right" ng-show="savingaccount.subStatus.id==0" uib-tooltip="{{savingaccount.status.value}}" class="fa fa-stop {{savingaccount.status.code | StatusLookup}}"></i>
                                                 <i uib-tooltip-placement="right" ng-hide="savingaccount.subStatus.id==0"  uib-tooltip="{{savingaccount.status.value+':'+savingaccount.subStatus.value}}" class="fa fa-stop {{savingaccount.status.code+savingaccount.subStatus.value | StatusLookup}}"></i>
@@ -72,9 +72,10 @@
                                                 <a uib-tooltip="{{'label.button.approve' | translate}}" has-permission='CREATE_SAVINGSACCOUNTCHARGE' ng-href="#/savingaccount/{{savingaccount.id}}/approve" class="btn btn-xs btn-primary ng-binding">
                                                     <i class="fa fa-check "></i>
                                                 </a>
-                                            </td>                                            
+                                            </td>
+                                            
                                             <td class="pointer center">
-                                                <a uib-tooltip="{{'label.button.deposit' | translate}}" has-permission='CREATE_SAVINGSACCOUNTCHARGE'  ng-href="#/recurringdepositaccount/{{savingaccount.id}}/charges" class="btn btn-xs btn-primary ng-binding">
+                                                <a uib-tooltip="{{'label.button.deposit' | translate}}" has-permission='CREATE_SAVINGSACCOUNTCHARGE'  ng-href="#/savingaccount/{{savingaccount.id}}/close" class="btn btn-xs btn-primary ng-binding">
                                                     <i class="fa fa-arrow-up"></i>
                                                 </a>
                                             </td>

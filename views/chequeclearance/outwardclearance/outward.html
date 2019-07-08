@@ -11,7 +11,7 @@
             <h4>Outward Clearance Workspace</h4>
          </div>
         <div class="row">
-           <div class="col-sm-2" id="left-side">
+          <!--  <div class="col-sm-2" id="left-side">
               <div class="navbar navbar-inverse" role="navigation" style="background-color: white; border: none; margin-top: 5px;">
                  <div class="container-fluid">
                     <div class="navbar-header">
@@ -68,8 +68,8 @@
                     </div>
                  </div>
               </div>
-           </div>
-           <div class="col-sm-10">
+           </div> -->
+           <div class="col-sm-12">
               <div class="row">
                  <div class="col-sm-6">
                     <div class="panel panel-primary" id="radio-button-left">
@@ -79,30 +79,20 @@
                           <p style="font-size: 12pt; text-align: center; color: black;">View&nbspOption</p>
                        </div>
                        <!-- Start Modal Cleared Popup -->
-                       <script type="text/ng-template" id="clearedModal.html">
-                          <div class="modal-header">
-                                  <h3>Option</h3>
-                                </div>
-                                <div class="modal-body" ng ng-controller="modalClearedCtrl">
-                                  <h4 style="text-align: center;">Please&nbspSelect&nbspLedger</h4>
-                                  <div ng-controller="ledgerCtrl">
-                                          <select ng-model="ledgerCollection" class="form-control" ng-options="n for n in Ledger" style="margin-left: 1%; width: 98%;"></select> 
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary" ng-click="ok()" id="btn-approve">Approve</button>
-                                    <button class="btn btn-warning" ng-click="cancel()" id="btn-cancel">Cancel</button>
-                          </div>
-                       </script>
+                        
+                       
+
                        <!-- End Modal Cleared Popup -->
                        <div class="panel-body" style="padding: 10px 10px;">
                           <div class="btn-group">
-                             <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Uncleared'" uib-uncheckable="uncheckable">Uncleared</label>
+                             <button class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Uncleared'" uib-uncheckable="uncheckable" ng-click="chequeOperation('unclear')">Uncleared</button>
                              <!-- <div ng-controller="popUpCleared">
                                 <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Cleared'" uib-uncheckable="uncheckable"  ng-click="mdPopup()">Cleared</label>
-                                </div> -->
-                             <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Cleared'" uib-uncheckable="uncheckable"  ng-click="mdPopup()">Cleared</label>
-                             <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Returned'" uib-uncheckable="uncheckable">Returned</label>
+                                 </div> -->
+                                 <!-- s -->
+                             
+                             <button class="btn btn-success" ng-model="radioModel"  uib-btn-radio="Cleared" uib-uncheckable="uncheckable" ng-click="chequeOperation('clear')">Clear</button>
+                             <button class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Returned'" uib-uncheckable="uncheckable" ng-click="chequeOperation('return')">Returned</button>
                           </div>
                        </div>
                     </div>
@@ -119,7 +109,7 @@
                              <!-- <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Returned'" uib-uncheckable="uncheckable">Returned</label> -->
                           </div>
                           <button type="button" ng-model="btnSDRGenerated" class="btn btn-default" style="float: right;">
-                          <span class="glyphicon glyphicon-paperclip"></span>&nbspGenerate&nbspSDR&nbspFile
+                          <span class="fa fa-paperclip"></span>&nbspGenerate&nbspSDR&nbspFile
                           </button>
                        </div>
                     </div>
@@ -142,6 +132,7 @@
                                 <th>From&nbspAccount&nbspNo</th>
                                 <th>Currency</th>
                                 <th>Amount</th>
+                                <th>Debitor&nbspName</th>
                                 <th>Status</th>
                              </tr>
                           </thead>
@@ -157,6 +148,7 @@
                                 <td>{{row.fromAccountNo}}</td>
                                 <td>{{row.currency}}</td>
                                 <td>{{row.amount}}</td>
+                                <td>{{row.debitorName}}</td>
                                 <td>{{row.status}}</td>
                              </tr>
                           </tbody>

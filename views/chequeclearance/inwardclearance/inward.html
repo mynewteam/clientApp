@@ -10,7 +10,7 @@
                <h4>Inward Clearance Workspace</h4>
             </div>
         <div class="row">
-           <div class="col-sm-2" id="left-side">
+          <!--  <div class="col-sm-2" id="left-side">
               <nav class="navbar navbar-inverse" style="background-color: white; border: none; margin-top: 10px;">
                  <div class="container-fluid">
                    <div class="navbar-header">
@@ -24,7 +24,7 @@
                     <div class="row">
                        <div class="col-sm-16">
                           <label  class="btn btn-primary" ng-model="btnApply" id="btn-menu">
-                          <span class="fa fa-print"></span> Print
+                          <span class="fa fa-print"></span> Apply
                           </label>
                        </div>
                     </div>
@@ -60,8 +60,8 @@
                  </div>
                </nav>
              
-           </div>
-           <div class="col-sm-10">
+           </div> -->
+           <div class="col-sm-12">
               <div class="row" id="datetime">
                  <div class="col-sm-12">
                     <!-- <button type="button" ng-model="btnCal" class="btn btn-default" ng-click="openCal()"  style="width: 10%; float: right;">
@@ -77,20 +77,18 @@
               <div class="row">
                  <div class="col-sm-6" >
                     <div  id="from-acc" class="panel panel-primary" >
-                       <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
-                          <p style="font-size: 16pt;">&nbsp&nbspNostro</p>
-                       </div>
+                       
                        <div class="panel-body">
                           <div class="row">
                              <p>&nbsp&nbspNostro&nbspAccount:</p>
                              <div class="col-sm-10" id="width-txt">
                                 <div>
-                                   <select ng-model="nostroAcc" class="form-control" ng-options="n for n in Nacc" style="margin-left: 1%; width: 98%;"></select> 
+                                   <select ng-model="formData.nostroAcc" class="form-control" ng-options="nostro.id as nostro.name for nostro in nostroAcc" style="margin-left: 1%; width: 98%;" ng-change="nostroAccountChange()"></select> 
                                 </div>
                              </div>
                           </div>
                           <div class="row">
-                             <p>&nbsp&nbspAmount:</p>
+                             <p>&nbsp&nbspAmount</p>
                              <div class="col-sm-10" id="width-txt">
                                 <input type="text" ng-model="txtAmount" class="form-control" style="margin-left: 1%; width: 98%;">
                              </div>
@@ -112,36 +110,16 @@
                  </div>
                  <div class="col-sm-6">
                     <div id="deposit-to" class="panel panel-primary" >
-                       <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
-                          <p style="font-size: 16pt;">&nbsp&nbspFrom&nbspAccount</p>
-                       </div>
+                       
+                       
                        <div class="panel-body">
                           <div class="row">
                              &nbsp&nbspAccount&nbspNo:
                              <div class="col-sm-10" id="width-txt">
-                                <input type="text" ng-model="textFromAccNo1" class="form-control" style="width: 98%; margin-left: 1%;">
+                                <input type="text" ng-model="textFromAccNo1" class="form-control" style="width: 98%; margin-left: 1%;" ng-keypress="enterKey($event)">
                              </div>
                           </div>
-                          <div class="row">
-                             <div class="col-sm-10" id="width-txt">
-                                <input type="text" ng-model="textFromAccNo2" class="form-control" style="width: 98%; margin-left: 1%;">
-                             </div>
-                          </div>
-                          <div class="row">
-                             <div class="col-sm-10" id="width-txt">
-                                <input type="text" ng-model="textFromAccNo3" class="form-control" style="width: 98%; margin-left: 1%;">
-                             </div>
-                          </div>
-                          <div class="row">
-                             <div class="col-sm-10" id="width-txt">
-                                <input type="text" ng-model="textFromAccNo4" class="form-control" style="width: 98%; margin-left: 1%;">
-                             </div>
-                          </div>
-                          <div class="row">
-                             <div class="col-sm-10" id="width-txt">
-                                <input type="text" ng-model="textFromAccNo5" class="form-control" style="width: 98%; margin-left: 1%;">
-                             </div>
-                          </div>
+                          
                           <div class="row">
                              <p>&nbsp&nbspCheque&nbspNumber:</p>
                              <div class="col-sm-10" id="width-txt">
@@ -165,35 +143,60 @@
                  </div>
               </div>
               <div class="row">
+               <div class="col-sm-4">
+                  <button type="button"  id="btn-ctrl" class="btn btn-primary" ng-model="btnAddThis" style="width: 100%; font-size: 16pt; margin-bottom: 10px;" ng-click="addThis()">Add this</button>
+               </div>
+               <div class="col-sm-4">
+                  <button type="button"  id="btn-ctrl" class="btn btn-success" ng-model="btnModify" style="width: 100%; font-size: 16pt; margin-bottom: 10px;" ng-click="modify()">Modify</button>
+               </div>
+               <div class="col-sm-4">
+                  <button type="button"  id="btn-ctrl" class="btn btn-danger" ng-model="btnRemove" style="width: 100%; font-size: 16pt;" ng-click="remove()">Remove</button>
+               </div>
+            </div>
+              <div class="row">
                  <div class="col-sm-12">
                     <p style="font-size: 16pt;">Data&nbspRecorded</p>
                     <div class="data-grid">
-                       <table st-table="rowCollection" class="table table-striped">
+                       <table st-table="rowCollection" class="table">
                           <thead style=" background-color: rgba(6, 71, 113, 1); color: rgb(0, 0, 0);">
                              <tr>
-                                <th>No</th>
-                                <th>Acc&nbspNo</th>
-                                <th>Name</th>
-                                <th>Cheque&nbspNo</th>
-                                <th>From&nbspAccount</th>
+                                <th>Date&nbspTime</th>
+                                <th>Nostro&nbspAccount</th>
                                 <th>Amount</th>
+                                <th>Nostro&nbspBalance</th>
+                                <th>Currency</th>
+                                <th>Account&nbspNo</th>
+                                <th>Cheque&nbspNo</th>
+                                <th>Avalaible&nbspBalance</th>
+                                <th>Name</th>
                              </tr>
                           </thead>
                           <tbody>
-                             <tr ng-repeat="row in rowCollection">
-                                <td>{{row.no}}</td>
-                                <td>{{row.accNo}}</td>
-                                <td>{{row.name}}</td>
-                                <td>{{row.chequeNo}}</td>
-                                <td>{{row.fromAccount}}</td>
+                             <tr  st-select-row="row" st-select-mode="multiple" ng-repeat="row in rowCollection" ng-click="doSomeStuffToSelected(row)" ng-class="{'selected':row == selectedRow}">
+                                <td>{{row.dateTime}}</td>
+                                <td>{{row.nostroAccount}}</td>
                                 <td>{{row.amount}}</td>
+                                <td>{{row.nostroBalance}}</td>
+                                <td>{{row.currency}}</td>
+                                <td>{{row.fromAccountNo}}</td>
+                                <td>{{row.chequeNo}}</td>
+                                <td>{{row.availableBalance}}</td>
+                                <td>{{row.name}}</td>
                              </tr>
                           </tbody>
                        </table>
+                       
                     </div>
                  </div>
               </div>
            </div>
+        </div>
+        <div class="row">
+           <div class="col-sm-2" style="float: right;">
+              <label  class="btn btn-default" ng-model="btnApply" id="btn-menu" ng-click="apply()">
+                  <!-- <span class="fa fa-print"></span> --> Apply
+              </label>
+            </div>
         </div>
      </div>
    </div>

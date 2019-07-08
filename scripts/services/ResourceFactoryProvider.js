@@ -76,7 +76,7 @@
                     clientAllAccountResource: defineResource(apiVer + "/clients/all/accounts", {}, {
                         getAllClients: { method: 'GET', params: {} }
                     }),
-                    ChequeDepositAccountResource: defineResource(apiVer + "/chepuedeposit/Head Offic000000041/chepuefromaccout", {}, {
+                    ChequeDepositAccountResource: defineResource(apiVer + "/chepuedeposit/:accountsaving/chepuefromaccout", {accountsaving:'@accountsaving'}, {}, {
                         getchequeAccount: { method: 'GET', params: {} }
                     }),
                     
@@ -747,7 +747,39 @@
                     twoFactorConfigResource: defineResource(apiVer + "/twofactor/configure", {}, {
                         getAllConfigs: { method: 'GET', params: {} },
                         put: { method: 'PUT', params: {} }
-                    })
+                    }),
+                    chequeTypeResource: defineResource(apiVer + "/outward/template", {}, {
+                        getAllChequeType: {method: 'GET', params: {}, isArray: true}
+                    }),
+                    outwardPutDelete: defineResource(apiVer + "/outward/:outwardId", {outwardId: "@outwardId"}, {
+                        
+                        updateOutward: {method: 'PUT', params: {}},
+                        deleteOutward: {method: 'DELETE'}
+                    }),
+
+                    outwardPost: defineResource(apiVer + "/outward", {}, {
+                        post: { method: 'POST', params: {} }
+                    }),
+                    outwardResource: defineResource(apiVer + "/outward/:chequeNo", {chequeNo: "@chequeNo"},{
+                        getAllOutward: {method: 'GET', params: {}, isArray: true},
+                        getOneOutward: {method: 'GET'}
+                    }),
+                    inwardPost: defineResource(apiVer + "/inward", {}, {
+                        post: { method: 'POST', params: {} }
+                    }),
+                    inwardConfigResource: defineResource(apiVer + "inward/:inwardId", {inwardId: "@inwardId"}, {
+                        updateInward: {method: 'PUT'},
+                        daleteInward: {method: 'DELETE'}
+                    }),
+                    debitorName: defineResource(apiVer + "/outward/debitor_name", {}, {
+                        getAllDebitorName: {method: 'GET', params: {}, isArray: true}
+                    }),
+                    nostroResource: defineResource(apiVer + "/inward/nostro", {}, {
+                        getNostro: {method: 'GET', params: {}, isArray: true}
+                    }),
+                    nostroConfigResource: defineResource(apiVer + "/inward/:nostroId", {nostroId: "@nostroId"}, {
+                        getOneNostro: {method: 'GET', params: {}, isArray: true}
+                    }),
                 };
             }];
         }

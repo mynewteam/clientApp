@@ -230,6 +230,10 @@
 										<li data-ng-show="client.status.value=='Active'">
 											<a href="#/newclientfixeddepositaccount/{{client.id}}" has-permission='CREATE_FIXEDDEPOSITACCOUNT'>{{'label.newfixeddepositaccount' | translate}}</a>
 										</li> -->
+
+										<li data-ng-show="client.status.value=='Active'">
+											<a href="#/new_current_account_application/{{client.id}}" has-permission='CREATE_FIXEDDEPOSITACCOUNT'>{{'label.currentaccount.Newcreatecurrent' | translate}}</a>
+										</li>
 										<li data-ng-show="client.status.value=='Active'">
 											<a href="#/newclientrecurringdepositaccount/{{client.id}}" has-permission='CREATE_RECURRINGDEPOSITACCOUNT'>{{'label.newrecurringdepositaccount' | translate}}</a>
 										</li>

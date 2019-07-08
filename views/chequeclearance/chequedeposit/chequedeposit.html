@@ -12,8 +12,9 @@
             <div class="toolbar">
                   <h4>Cheque Deposit Workspace</h4>
             </div>
+           
             <div class="row">
-                <div class="col-sm-2" id="left-side">
+               <!--  <div class="col-sm-2" id="left-side">
                    
                     <div class="navbar navbar-inverse" role="navigation"  id="nav-bar" style="background-color: white; border: none; margin-top: 10px;">
                             <div class="container-fluid">
@@ -63,73 +64,52 @@
                                     </div>
                                   </div>  
                     </div>
-                </div>
-                <div class="col-sm-10">
+                </div> -->
+                <div class="col-sm-12">
                         <div class="row">
                            <div class="col-sm-6">
                               <div  id="from-acc" class="panel panel-primary"  ng-style="fromAccStyle" >
-                                 <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
+                                 <!-- <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
                                     <p style="font-size: 16pt;">&nbsp&nbspFrom&nbspAccount</p>
-                                 </div>
+                                 </div> -->
                                  <div class="panel-body">
                                     <div class="row">
                                        &nbsp&nbspAccount&nbspNo:
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textFromAccNo1" class="form-control"  style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="textFromAccNo1" class="form-control"  style="width: 98%; margin-left: 1%;" ng-keypress="enterKey($event)" ng-required="true" placeholder="null">
                                        </div>
                                     </div>
-                                    <div class="row">
-                                       <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textFromAccNo2" class="form-control" style="width: 98%; margin-left: 1%;">
-                                       </div>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textFromAccNo3" class="form-control" style="width: 98%; margin-left: 1%;">
-                                       </div>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textFromAccNo4" class="form-control" style="width: 98%; margin-left: 1%;">
-                                       </div>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textFromAccNo5" class="form-control" style="width: 98%; margin-left: 1%;">
-                                       </div>
-                                    </div>
-                                    
                                     <div class="row">
                                        <p>&nbsp&nbspAvailable&nbspBalance:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="avaiBalInFromAcc" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="avaiBalInFromAcc" class="form-control" style="width: 98%; margin-left: 1%;" ng-required="true" placeholder="null">
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspCheque&nbspNumber: </p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="chequeNumber" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="chequeNumber" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null"> 
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspCheque&nbspType:</p>
                                        <div class="col-sm-10" id="width-txt">
                                           <div>
-                                             <select class="form-control" ng-model="formData.chequeType" ng-options="cheque.id as cheque.type for cheque in chequeType" style="margin-left: 2%; width: 200px;" ng-click="selected()"></select>
+                                             <select class="form-control" ng-model="formData.chequeType" ng-options="cheque.id as cheque.type for cheque in chequeType" style="margin-left: 2%; width: 200px;"><option value="">--Select Value--</option></select>
                                           </div>
                                        </div>
                                     </div>
-                                    <div class="row" ng-model="modelPayerName" ng-hide="modelPayerName">
+                                    <div class="row" ng-model="modelPayerName" ng-show="formData.chequeType == 2">
                                        <p>&nbsp&nbspPayer&nbspName: </p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="payerName" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="payerName" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
-                                    <div class="row" ng-model="modelDebitorName" ng-hide="modelDebitorName">
+                                    <div class="row" ng-model="modelDebitorName" ng-show="formData.chequeType == 2">
                                        <p>&nbsp&nbspDebitor&nbspName:</p>
                                        <div class="col-sm-10" id="width-txt">
                                           <div>
-                                             <select class="form-control" ng-model="debitorName" ng-options="d for d in debitor" style="margin-left: 2%; width: 200px;"></select>
+                                             <select class="form-control" ng-model="formData.debitorName" ng-options="debitor.id as debitor.name for debitor in debitorName" style="margin-left: 2%; width: 200px;"></select>
                                           </div>
                                        </div>
                                     </div>
@@ -138,46 +118,28 @@
                            </div>
                            <div class="col-sm-6" >
                               <div id="deposit-to" class="panel panel-primary" ng-style="depositToStyle" >
-                                 <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
+                                 <!-- <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
                                     <p style="font-size: 16pt;">&nbsp&nbspDeposit&nbspTo</p>
-                                 </div>
+                                 </div> -->
                                  <div class="panel-body">
                                     <div class="row">
                                        &nbsp&nbspAccount&nbspNo:
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textDepositAccNo1" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="textDepositAccNo1" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
-                                    <div class="row">
-                                       <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textDepositAccNo2" class="form-control" style="width: 98%; margin-left: 1%;">
-                                       </div>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textDepositAccNo3" class="form-control" style="width: 98%; margin-left: 1%;">
-                                       </div>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textDepositAccNo4" class="form-control" style="width: 98%; margin-left: 1%;">
-                                       </div>
-                                    </div>
-                                    <div class="row">
-                                       <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="textDepositAccNo5" class="form-control" style="width: 98%; margin-left: 1%;">
-                                       </div>
-                                    </div>
+                                   
                                     <div class="row">
                                        <p>&nbsp&nbspCurrency:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="currency" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="currency" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
+
                                     <div class="row">
                                        <p>&nbsp&nbspAmount:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="amount" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="amount" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                  </div>
@@ -186,13 +148,54 @@
                         </div>
                         <div class="row">
                            <div class="col-sm-4">
-                              <button type="button"  id="btn-ctrl" class="btn btn-primary" ng-model="btnAddThis" style="width: 100%; font-size: 16pt; margin-bottom: 10px;">Add this</button>
+                              <button type="button"  id="btn-ctrl" class="btn btn-primary" ng-model="btnAddThis" style="width: 100%; font-size: 16pt; margin-bottom: 10px;" ng-click="addThis()">Add this</button>
                            </div>
                            <div class="col-sm-4">
-                              <button type="button"  id="btn-ctrl" class="btn btn-success" ng-model="btnModify" style="width: 100%; font-size: 16pt; margin-bottom: 10px;">Modify</button>
+                              <button type="button"  id="btn-ctrl" class="btn btn-success" ng-model="btnModify" style="width: 100%; font-size: 16pt; margin-bottom: 10px;" ng-click="modify()">Modify</button>
                            </div>
                            <div class="col-sm-4">
-                              <button type="button"  id="btn-ctrl" class="btn btn-danger" ng-model="btnRemove" style="width: 100%; font-size: 16pt; ">Remove</button>
+                              <button type="button"  id="btn-ctrl" class="btn btn-danger" ng-model="btnRemove" style="width: 100%; font-size: 16pt;" ng-click="remove()">Remove</button>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <p style="font-size: 16pt; float: left;">&nbsp&nbspData&nbspRecorded</p>
+                              <div  class="data-grid-outward">
+                                 <table st-table="rowCollection" class="table">
+                                    <thead style="background-color: rgb(166, 173, 177); color: rgb(0, 0, 0);">
+                                       <tr>
+                                          <th></th>
+                                          <th>ID</th>
+                                          <th>Date</th>
+                                          <th>Deposit&nbspAccount&nbspNo</th>
+                                          <th>Name</th>
+                                          <th>Cheque&nbspNo</th>
+                                          <th>Cheque&nbspType</th>
+                                          <th>From&nbspAccount&nbspNo</th>
+                                          <th>Currency</th>
+                                          <th>Amount</th>
+                                          <th>Debitor&nbspName</th>
+                                          <th>Status</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in chequeDepositList" ng-click="doSomeStuffToSelected(row)" ng-class="{'selected':row == selectedRow}">
+                                          <td></td>
+                                          <td>{{row.id}}</td>
+                                          <td>{{row.dateTime}}</td>
+                                          <td>{{row.depositAccountNo}}</td>
+                                          <td>{{row.name}}</td>
+                                          <td>{{row.chequeNo}}</td>
+                                          <td>{{row.chequeType}}</td>
+                                          <td>{{row.fromAccountNo}}</td>
+                                          <td>{{row.currency}}</td>
+                                          <td>{{row.amount}}</td>
+                                          <td>{{row.debitorName}}</td>
+                                          <td>{{row.status}}</td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
                            </div>
                         </div>
                         <div class="row">
@@ -202,38 +205,38 @@
                                  Name Textbox, ID / Pass NO. Textbox, Account Status textbox
                                  and Account Type Textbox-->
                               <div id="cus-info" class="panel panel-primary" >
-                                 <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
+                                 <!-- <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
                                     <p style="font-size: 16pt;">&nbsp&nbspCustomer&nbspInfomation:</p>
-                                 </div>
+                                 </div> -->
                                  <div class="panel-body">
                                     <div class="row">
                                        <p>&nbsp&nbspCustomer&nbspKey:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="customerKey" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="customerKey" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspName:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <textarea ng-model="name" class="form-control" style="width: 98%; margin-left: 1%;"></textarea>
+                                          <textarea ng-model="name" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null"></textarea>
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspID&nbsp/&nbspPass&nbspNo.:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="idPass"class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="idPass"class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspAccount&nbspStatus:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="accStatus" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="accStatus" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspAccount&nbspType:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <td><input type="text" ng-model="accType" class="form-control" style="width: 98%; margin-left: 1%;"></td>
+                                          <td><input type="text" ng-model="accType" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null"></td>
                                        </div>
                                     </div>
                                  </div>
@@ -241,51 +244,58 @@
                            </div>
                            <div class="col-sm-6">
                               <div id="bal" class="panel panel-primary" >
-                                 <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
+                                 <!-- <div class="panel-heading" style="background-color: rgba(245, 245, 245, 1); color: black;">
                                     <p style="font-size: 16pt;">&nbsp&nbspBalances</p>
-                                 </div>
+                                 </div> -->
                                  <div class="panel-body">
                                     <div class="row">
                                        <p>&nbsp&nbspLedger&nbspBalance:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="ledBalance" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="avaiBalInFromAcc" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspAvailable&nbspBalance:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="avaiBalInBalance" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="avaiBalInFromAcc" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspUncleared&nbspBalance:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="unclearBal" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="amount" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspFreeze&nbspAmount:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="freezeAcc" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="freezeAcc" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspOD&nbspLimit:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="odLimit" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="odLimit" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                     <div class="row">
                                        <p>&nbsp&nbspOD&nbspUsed:</p>
                                        <div class="col-sm-10" id="width-txt">
-                                          <input type="text" ng-model="odUsed" class="form-control" style="width: 98%; margin-left: 1%;">
+                                          <input type="text" ng-model="odUsed" class="form-control" style="width: 98%; margin-left: 1%;" placeholder="null">
                                        </div>
                                     </div>
                                  </div>
                               </div>
                            </div>
                         </div>
-                     </div>
+                </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-2" style="float: right;">
+                  <label  class="btn btn-default" ng-model="btnApply" ng-click="apply()" id="btn-menu">
+                    <!-- <span class="fa fa-check-circle"></span> --> Apply
+                  </label>
+                </div>
             </div>
        </div>
    </div>

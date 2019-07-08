@@ -720,7 +720,303 @@
 
 
 
-; (function (module) {
+; 
+
+//Cheque Clearance
+//
+//
+(function (module) {
+    mifosX.controllers = _.extend(module, {
+        chequeDepositController: function (scope, resourceFactory, http, location, dateFilter, API_VERSION, Upload, $rootScope, routeParams, WizardHandler) {
+            scope.chequeType = [];
+            // $scope.get = function(){
+
+            var jSonData = [];
+            var accountNumber;
+            scope.enterKey = function ($event) {
+                var keyCode = $event.keyCode;
+                if (keyCode === 13) {
+                    // Do that thing you finally wanted to do
+                    window.alert(scope.textFromAccNo1);
+                    accountNumber = scope.textFromAccNo1;
+                    httpMethod();
+                }
+
+
+            };
+
+            var httpMethod = function () {
+                http({
+                    method: 'GET',
+                    url: 'https://192.168.0.132:8443/fineract-provider/api/v1/chepuedeposit/' + scope.textFromAccNo1 + '/chepuedepositto?tenantIdentifier=default',
+                }).then(function successCallback(response) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+
+                    jSonData = response.data;
+                    scope.name = jSonData.clientinfo.displayName;
+                    scope.customerKey = jSonData.deposittoaccount[0].clientid;
+                    scope.accStatus = jSonData.deposittoaccount[0].status.value;
+                    scope.accType = jSonData.deposittoaccount[0].productName;
+                    scope.avaiBalInFromAcc = jSonData.deposittoaccount[0].accountBalance;
+                    scope.currency = jSonData.deposittoaccount[0].currency.code;
+
+                    console.log(jSonData.deposittoaccount[0].accountBalance);
+
+
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status
+                    window.alert("Error");
+
+                });
+
+            };
+
+            var httpMethodForModify = function (accountNumber) {
+                http({
+                    method: 'GET',
+                    url: 'https://192.168.0.132:8443/fineract-provider/api/v1/chepuedeposit/' + accountNumber + '/chepuedepositto?tenantIdentifier=default',
+                }).then(function successCallback(response) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+
+                    jSonData = response.data;
+                    scope.name = jSonData.clientinfo.displayName;
+                    scope.customerKey = jSonData.deposittoaccount[0].clientid;
+                    scope.accStatus = jSonData.deposittoaccount[0].status.value;
+                    scope.accType = jSonData.deposittoaccount[0].productName;
+                    scope.avaiBalInFromAcc = jSonData.deposittoaccount[0].accountBalance;
+                    scope.currency = jSonData.deposittoaccount[0].currency.code;
+
+                    console.log(jSonData.deposittoaccount[0].accountBalance);
+
+
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status
+                    window.alert("Error");
+
+                });
+            }
+
+
+
+            resourceFactory.chequeTypeResource.getAllChequeType(function (data) {
+
+                scope.chequeType = data;
+
+            });
+
+
+
+
+
+            scope.apply = function () {
+
+                var dateTime = scope.dataTable[0].dateTime;
+                var depositAccountNo = scope.dataTable[0].depositAccountNo;
+                var name = scope.dataTable[0].name;
+                var chequeNo = scope.dataTable[0].chequeNo;
+                var chequeType = scope.dataTable[0].chequeType;
+                var fromAccountNo = scope.dataTable[0].fromAccountNo;
+
+                var currency = scope.dataTable[0].currency;
+                var amount = scope.dataTable[0].amount;
+                var status = scope.dataTable[0].status;
+
+
+
+                var data = {
+                    dateTime, depositAccountNo,
+                    name, chequeNo,
+                    chequeType, fromAccountNo,
+                    currency, amount, status
+                };
+                console.log(JSON.stringify(data));
+                resourceFactory.outwardPost.post(JSON.stringify(data), function (data) {
+
+                });
+
+
+
+
+
+            };
+
+            scope.addThis = function () {
+                scope.dataTable = [
+                    //{dateTime: "a", depositAccountNo: "a", name: "a", chequeNo: "a", chequeType: "a", fromAccountNo: "a", currency: "a", amount: "a", status: 'pending'}
+                    { dateTime: new Date(), depositAccountNo: scope.textDepositAccNo1, name: scope.name, chequeNo: scope.chequeNumber, chequeType: scope.formData.chequeType, fromAccountNo: scope.textFromAccNo1, currency: scope.currency, amount: scope.amount, status: 'pending' }
+                ];
+                makeTextBoxNull();
+
+            };
+
+            scope.modify = function () {
+                scope.textFromAccNo1 = scope.dataTable[0].fromAccountNo;
+                scope.amount = scope.dataTable[0].amount;
+                scope.chequeNumber = scope.dataTable[0].chequeNo;
+                scope.textDepositAccNo1 = scope.dataTable[0].depositAccountNo;
+                scope.formData.chequeType = scope.dataTable[0].chequeType;
+
+                httpMethodForModify(scope.textFromAccNo1);
+            };
+
+            scope.remove = function () {
+                scope.dataTable = null;
+                makeTextBoxNull();
+
+            }
+
+            var makeTextBoxNull = function () {
+                scope.textFromAccNo1 = null;
+                scope.avaiBalInFromAcc = null;
+                scope.chequeNumber = null;
+                scope.formData.chequeType = null;
+                scope.payerName = null;
+                scope.debitorName = null;
+                scope.textDepositAccNo1 = null;
+                scope.currency = null;
+                scope.amount = null;
+                scope.customerKey = null;
+                scope.name = null;
+                scope.idPass = null;
+                scope.accStatus = null;
+                scope.accType = null;
+                scope.avaiBalInFromAcc = null;
+                scope.freezeAcc = null;
+                scope.odLimit = null;
+                scope.odUsedc = null;
+            };
+
+        }
+    });
+    mifosX.ng.application.controller('chequeDepositController', ['$scope', 'ResourceFactory', '$http', mifosX.controllers.chequeDepositController]).run(function ($log) {
+        $log.info("chequeDepositController initialized");
+    });
+}(mifosX.controllers || {}));;
+
+
+
+(function (module) {
+    mifosX.controller = _.extend(module, {
+        outwardController: function (scope, resourceFactory, location, http, dateFilter, API_VERSION, Upload, $rootScope, routeParams, WizardHandler, $uibModal) {
+            var idTable;
+            var status;
+            //scope.radioModel = "Uncleared";
+
+
+
+            resourceFactory.outwardResource.getAllOutward(function (data) {
+                //console.log(data[0].amount);
+                scope.rowCollection = data;
+                var total = 0;
+                for(var i = 0; i <= data.length; i++){
+                    total += data[i].amount;
+                    scope.txtTotal = total;
+                }
+            });
+
+            scope.selectedRow = null;
+            scope.doSomeStuffToSelected = function (val) {
+                scope.selectedRow = val;
+                console.log(JSON.stringify(val.id));
+                idTable = val.id;
+                status = val.status;
+
+            };
+            
+
+            scope.chequeOperation = function(pnamebutton){
+                if (pnamebutton === 'unclear'){
+                    window.alert("The Cheque Will Be Unclear Now.");
+                    status = "Pending";
+                    var dataUpdated = {status};
+                }
+                else if (pnamebutton === 'clear'){
+                    window.alert("The Cheque Will Be Clear Now.");
+                    status = "Cleared";
+                    var dataUpdated = {status};
+                }
+                else if (pnamebutton === 'return'){
+                    window.alert("The Cheque Will Be Clear Now.");
+                    status = "Cancel";
+                    var dataUpdated = {status};
+                }
+                resourceFactory.outwardPutDelete.updateOutward({ outwardId: idTable}, JSON.stringify(dataUpdated) ,function(data){
+            
+                });
+
+                scope.rowCollection[idTable-1].status = status;
+                refreshTable();
+                
+
+            };
+            
+           
+            var refreshTable = function(){
+                for (var i = 0; i <= 2; i++){
+                    resourceFactory.outwardResource.getAllOutward(function (data) {
+                        //console.log(data[0].amount);
+                        scope.rowCollection = data;
+                        var total = 0;
+                        for(var i = 0; i <= data.length; i++){
+                            total += data[i].amount;
+                            scope.txtTotal = total;
+                        }
+                    });
+                }
+            }
+            
+            scope.mdPopup = function () {
+                console.log('lol');
+                // var modalInstance = $uibModal.open({
+                //     templateUrl: 'clearedModal.html',
+                //     controller: 'ModalInstanceCtrl',
+                    // controllerAs: '$ctrl',
+                    // size: size,
+                    // appendTo: parentElem,
+                    // resolve: {
+                    //   items: function () {
+                    //     return $ctrl.items;
+                    //   }
+                    // }
+                //   });
+            };
+
+        }
+
+    });
+    mifosX.ng.application.controller('outwardController', ['$scope', 'ResourceFactory', '$uibModal', mifosX.controllers.outwardController]).run(function ($log) {
+        $log.info("outwardController initialized");
+    });
+}(mifosX.controllers || {}));;
+
+(function (module) {
+    mifosX.controller = _.extend(module, {
+
+        ModalInstanceCtrl: function (scope, uibModalInstance) {
+            var $ctrl = this;
+
+            $ctrl.ok = function () {
+                $uibModalInstance.close($ctrl.selected.item);
+            };
+
+            $ctrl.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        }
+
+    });
+    mifosX.ng.application.controller('ModalInstanceCtrl', ['$scope', 'ResourceFactory', '$uibModalInstance', mifosX.controllers.ModalInstanceCtrl]).run(function ($log) {
+        $log.info("ModalInstanceCtrl initialized");
+    });
+}(mifosX.controllers || {}));;
+
+
+
+(function (module) {
     mifosX.controllers = _.extend(module, {
         AccOGMController: function (scope, resourceFactory, paginatorService, routeParams, location, $uibModal) {
             scope.routeTo = function (id) {
@@ -4094,12 +4390,7 @@
             });
 
 
-            resourceFactory.ChequeDepositAccountResource.get(function(data){
-                scope.ChequeDepositAccount=data;
-            });
-             resourceFactory.ChequeDepositToAccountResource.get(function(data){
-                scope.ChequeDepositToAccount=data;
-            });
+        
 
 
             scope.clientsPerPage = 15;
@@ -33951,4 +34242,468 @@
         $log.info("ViewUserController initialized");
     });
 }(mifosX.controllers || {}));
+
+//Cheque Clearance
+//
+//
+(function (module) {
+    mifosX.controllers = _.extend(module, {
+        chequeDepositController: function (scope, resourceFactory, http, location, dateFilter, API_VERSION, Upload, $rootScope, routeParams, WizardHandler) {
+            scope.chequeType = [];
+            var selectedVal; 
+            var row;
+            //ChequeDepositAccount = [];
+            // $scope.get = function(){
+
+            var jSonData = [];
+            var accountNumber;
+            scope.chequeDepositList = [];
+            scope.selectedRow = null;
+            scope.doSomeStuffToSelected = function (val) {
+                selectedVal = val;
+                scope.selectedRow = val;
+                row = val;
+                console.log(row);
+
+            };
+
+            
+            scope.enterKey = function ($event) {
+                var keyCode = $event.keyCode;
+                if (keyCode === 13) {
+                    // Do that thing you finally wanted to do
+                    window.alert(scope.textFromAccNo1);
+                    accountNumber = scope.textFromAccNo1;
+                    httpMethod();
+                }
+
+
+            };
+
+            var httpMethod = function () {
+                    resourceFactory.ChequeDepositAccountResource.get({accountsaving: scope.textFromAccNo1}, function(data){
+                        //console.log(data);
+                        jSonData = data;
+                        console.log(jSonData);
+                        console.log(jSonData.savingaccount[0].accountBalance);
+                        scope.name = jSonData.clientinfo.displayName;
+                        scope.customerKey = jSonData.savingaccount[0].clientid;
+                        scope.accStatus = jSonData.savingaccount[0].status.value;
+                        scope.accType = jSonData.savingaccount[0].productName;
+                        scope.avaiBalInFromAcc = jSonData.savingaccount[0].accountBalance;
+                        scope.currency = jSonData.savingaccount[0].currency.code;
+
+                    });
+                     resourceFactory.ChequeDepositToAccountResource.get(function(data){
+                        scope.ChequeDepositToAccount=data;
+                    });
+
+            };
+
+            var httpMethodForModify = function (accountNumber) {
+                resourceFactory.ChequeDepositAccountResource.get({accountsaving: accountNumber}, function(data){
+                    //console.log(data);
+                    jSonData = data;
+                    console.log(jSonData);
+                    console.log(jSonData.savingaccount[0].accountBalance);
+                    scope.name = jSonData.clientinfo.displayName;
+                    scope.customerKey = jSonData.savingaccount[0].clientid;
+                    scope.accStatus = jSonData.savingaccount[0].status.value;
+                    scope.accType = jSonData.savingaccount[0].productName;
+                    scope.avaiBalInFromAcc = jSonData.savingaccount[0].accountBalance;
+                    scope.currency = jSonData.savingaccount[0].currency.code;
+
+                });
+                 resourceFactory.ChequeDepositToAccountResource.get(function(data){
+                    scope.ChequeDepositToAccount=data;
+                });
+                resourceFactory.debitorName.getAllDebitorName(function (data) {
+
+                    //console.log(data);
+                    scope.debitorName = data;
+    
+                });
+            }
+
+
+
+            resourceFactory.chequeTypeResource.getAllChequeType(function (data) {
+
+                scope.chequeType = data;
+
+            });
+
+            resourceFactory.debitorName.getAllDebitorName(function (data) {
+
+                //console.log(data);
+                scope.debitorName = data;
+
+            });
+
+
+
+
+
+
+            scope.apply = function () {
+
+                var dateTime = selectedVal.dateTime;
+                var depositAccountNo = selectedVal.depositAccountNo;
+                var name = selectedVal.name;
+                var chequeNo = selectedVal.chequeNo;
+                var chequeType = selectedVal.chequeType;
+                var fromAccountNo = selectedVal.fromAccountNo;
+
+                var currency = selectedVal.currency;
+                var amount = selectedVal.amount;
+                var debitorName = selectedVal.debitorName;
+                var status = selectedVal.status;
+
+
+
+                var data = {
+                    dateTime, depositAccountNo,
+                    name, chequeNo,
+                    chequeType, fromAccountNo,
+                    currency, amount, debitorName, status
+                };
+                console.log(JSON.stringify(data));
+                resourceFactory.outwardPost.post(JSON.stringify(data), function (data) {
+                    window.alert("Data has been recorded.");
+                });
+
+
+
+
+
+            };
+
+            scope.addThis = function () {
+                scope.chequeDepositList.push(
+                    //{dateTime: "a", depositAccountNo: "a", name: "a", chequeNo: "a", chequeType: "a", fromAccountNo: "a", currency: "a", amount: "a", status: 'pending'}
+                    { dateTime: new Date(), depositAccountNo: scope.textDepositAccNo1, name: scope.name, chequeNo: scope.chequeNumber, chequeType: scope.formData.chequeType, fromAccountNo: scope.textFromAccNo1, currency: scope.currency, amount: scope.amount, debitorName: scope.formData.debitorName, status: 'pending' }
+                );
+                resourceFactory.debitorName.getAllDebitorName(function (data) {
+
+                    //console.log(data);
+                    scope.debitorName = data;
+    
+                });
+                makeTextBoxNull();
+
+            };
+
+            scope.modify = function () {
+                scope.textFromAccNo1 = selectedVal.fromAccountNo;
+                scope.amount = selectedVal.amount;
+                scope.chequeNumber = selectedVal.chequeNo;
+                scope.textDepositAccNo1 = selectedVal.depositAccountNo;
+                scope.formData.chequeType = selectedVal.chequeType;
+                scope.formData.debitorName = selectedVal.debitorName;
+                var index = scope.chequeDepositList.indexOf(row);
+                if (index !== -1) {
+                    scope.chequeDepositList.splice(index, 1);
+                }
+                httpMethodForModify(accountNumber);
+            };
+
+            scope.remove = function () {
+                scope.chequeDepositList = null;
+                makeTextBoxNull();
+
+            }
+
+            var makeTextBoxNull = function () {
+                scope.textFromAccNo1 = null;
+                scope.avaiBalInFromAcc = null;
+                scope.chequeNumber = null;
+                scope.formData.chequeType = null;
+                scope.payerName = null;
+                scope.debitorName = null;
+                scope.textDepositAccNo1 = null;
+                scope.currency = null;
+                scope.amount = null;
+                scope.customerKey = null;
+                scope.name = null;
+                scope.idPass = null;
+                scope.accStatus = null;
+                scope.accType = null;
+                scope.avaiBalInFromAcc = null;
+                scope.freezeAcc = null;
+                scope.odLimit = null;
+                scope.odUsedc = null;
+            };
+
+        }
+    });
+    mifosX.ng.application.controller('chequeDepositController', ['$scope', 'ResourceFactory', '$http', mifosX.controllers.chequeDepositController]).run(function ($log) {
+        $log.info("chequeDepositController initialized");
+    });
+}(mifosX.controllers || {}));;
+
+(function (module) {
+    mifosX.controller = _.extend(module, {
+        inwardController: function (scope, resourceFactory, location, http, dateFilter, API_VERSION, Upload, $rootScope, routeParams, WizardHandler) {
+            var selectedVal;
+            jsonData = [];
+            scope.rowCollection = [];
+            scope.selectedRow = null;
+            var row;
+
+            scope.doSomeStuffToSelected = function (val) {
+                selectedVal = val;
+                scope.selectedRow = val;
+                row = val;
+                console.log(val);
+
+            };
+            resourceFactory.nostroResource.getNostro(function (data) {
+
+                scope.nostroAcc = data;
+                console.log(data);
+                
+
+            });
+            scope.nostroAccountChange = function(){
+                resourceFactory.nostroConfigResource.getOneNostro({nostroId: scope.formData.nostroAcc} ,function (data) {
+
+                    //refresh Textbox
+                    scope.txtCurrency = "null";
+                    scope.txtnostroBal = "null";
+                    console.log(data);
+                    scope.txtCurrency = data[0].currency;
+                    scope.txtnostroBal = data[0].nostroBalance;
+                    
+                    
+    
+                });  
+            };
+
+            scope.enterKey = function ($event) {
+                var keyCode = $event.keyCode;
+                if (keyCode === 13) {
+                    // Do that thing you finally wanted to do
+                    window.alert(scope.textFromAccNo1);
+                    accountNumber = scope.textFromAccNo1;
+                    httpMethod();
+                }
+
+
+            };
+
+            var httpMethod = function () {
+
+
+                    resourceFactory.ChequeDepositAccountResource.get({accountsaving:scope.textFromAccNo1}, function(data){
+                        //console.log(data);
+                        jSonData = data;
+                        console.log(jSonData);
+                        scope.name = jSonData.clientinfo.displayName;
+                        scope.txtAvailableBal = jSonData.savingaccount[0].accountBalance;
+
+                    });
+                     resourceFactory.ChequeDepositToAccountResource.get(function(data){
+                        scope.ChequeDepositToAccount=data;
+                    });
+
+            };
+
+            scope.addThis = function () {
+
+                // scope.rowCollection = [
+                //     //{dateTime: "a", depositAccountNo: "a", name: "a", chequeNo: "a", chequeType: "a", fromAccountNo: "a", currency: "a", amount: "a", status: 'pending'}
+                //     { dateTime: scope.first.dateOfBirth, nostroAccount: scope.formData.nostroAcc, amount: scope.txtAmount, nostroBalance: scope.txtnostroBal, currency: scope.txtCurrency, fromAccountNo: scope.textFromAccNo1, chequeNo: scope.txtChequeNum, availableBalance: scope.txtAvailableBal, name: scope.name }
+                // ];
+                scope.rowCollection.push({ dateTime: scope.first.dateOfBirth, nostroAccount: scope.formData.nostroAcc, amount: scope.txtAmount, nostroBalance: scope.txtnostroBal, currency: scope.txtCurrency, fromAccountNo: scope.textFromAccNo1, chequeNo: scope.txtChequeNum, availableBalance: scope.txtAvailableBal, name: scope.name });
+                //scope.rowCollection.push(chequeDepositList);
+                //console.log(chequeDepositList);
+                makeTextBoxNull();
+
+            };
+
+            scope.modify = function () {
+                scope.first.dateOfBirth = selectedVal.dateTime;
+                scope.formData.nostroAcc = selectedVal.nostroAccount;
+                scope.txtAmount = selectedVal.amount;
+                scope.txtnostroBal = selectedVal.nostroBalance;
+                scope.txtCurrency = selectedVal.currency;
+                scope.textFromAccNo1 = selectedVal.fromAccountNo;
+                scope.txtChequeNum = selectedVal.chequeNo;
+                scope.txtAvailableBal = selectedVal.availableBalance;
+                scope.name = selectedVal.name;
+
+                var index = scope.chequeDepositList.indexOf(row);
+                if (index !== -1) {
+                    scope.chequeDepositList.splice(index, 1);
+                }
+            };
+
+            scope.remove = function () {
+                scope.rowCollection = null;
+                makeTextBoxNull();
+
+            }
+
+            var makeTextBoxNull = function () {
+                scope.first.dateOfBirth = null;
+                scope.formData.nostroAcc = null;
+                scope.txtAmount = null;
+                scope.txtnostroBal = null;
+                scope.txtCurrency = null;
+                scope.textFromAccNo1 = null;
+                scope.txtChequeNum = null;
+                scope.txtAvailableBal = null;
+                scope.name = null;
+              
+            };
+
+            scope.apply = function(){
+
+                var dateTime = selectedVal.dateTime;
+                var nostroAccount = selectedVal.nostroAccount;
+                var amount = selectedVal.amount;
+                var nostroBalance = selectedVal.nostroBalance;
+                var currency = selectedVal.currency;
+                var fromAccountNo = selectedVal.fromAccountNo;
+                var chequeNo = selectedVal.chequeNo;
+                var availableBalance = selectedVal.availableBalance;
+                var name = selectedVal.name;
+
+                var data = {
+                    dateTime, nostroAccount,
+                    amount, nostroBalance,
+                    currency, fromAccountNo,
+                    chequeNo, availableBalance, name
+                };
+                console.log(JSON.stringify(data));
+
+                resourceFactory.inwardPost.post(JSON.stringify(data), function(data){
+                    window.alert("Data Has Been Recorded.");
+                });
+            };
+
+           
+
+        }
+    });
+    mifosX.ng.application.controller('inwardController', ['$scope', 'ResourceFactory', mifosX.controllers.inwardController]).run(function ($log) {
+        $log.info("inwardController initialized");
+    });
+}(mifosX.controllers || {}));
+
+(function (module) {
+    mifosX.controller = _.extend(module, {
+        outwardController: function (scope, resourceFactory, location, http, dateFilter, API_VERSION, Upload, $rootScope, routeParams, WizardHandler, $uibModal) {
+            var idTable;
+            var status;
+            //scope.radioModel = "Uncleared";
+
+
+
+            resourceFactory.outwardResource.getAllOutward(function (data) {
+                //console.log(data[0].amount);
+                scope.rowCollection = data;
+                var total = 0;
+                for(var i = 0; i <= data.length; i++){
+                    total += data[i].amount;
+                    scope.txtTotal = total;
+                }
+            });
+
+            scope.selectedRow = null;
+            scope.doSomeStuffToSelected = function (val) {
+                scope.selectedRow = val;
+                console.log(JSON.stringify(val.status));
+                idTable = val.id;
+                status = val.status;
+
+            };
+            
+
+            scope.chequeOperation = function(pnamebutton){
+                if (pnamebutton === 'unclear'){
+                    window.alert("The Cheque Will Be Unclear Now.");
+                    status = "Pending";
+                    var dataUpdated = {status};
+                }
+                else if (pnamebutton === 'clear'){
+                    window.alert("The Cheque Will Be Clear Now.");
+                    status = "Cleared";
+                    var dataUpdated = {status};
+                }
+                else if (pnamebutton === 'return'){
+                    window.alert("The Cheque Will Be Clear Now.");
+                    status = "Cancel";
+                    var dataUpdated = {status};
+                }
+                resourceFactory.outwardPutDelete.updateOutward({ outwardId: idTable}, JSON.stringify(dataUpdated) ,function(data){
+            
+                });
+
+                //scope.rowCollection[idTable-1].status = status;
+                refreshTable();
+                
+
+            };
+            
+           
+            var refreshTable = function(){
+                for (var i = 0; i <= 2; i++){
+                    resourceFactory.outwardResource.getAllOutward(function (data) {
+                        //console.log(data[0].amount);
+                        scope.rowCollection = data;
+                        var total = 0;
+                        for(var i = 0; i <= data.length; i++){
+                            total += data[i].amount;
+                            scope.txtTotal = total;
+                        }
+                    });
+                }
+            }
+            
+            scope.mdPopup = function () {
+                console.log('lol');
+                // var modalInstance = $uibModal.open({
+                //     templateUrl: 'clearedModal.html',
+                //     controller: 'ModalInstanceCtrl',
+                    // controllerAs: '$ctrl',
+                    // size: size,
+                    // appendTo: parentElem,
+                    // resolve: {
+                    //   items: function () {
+                    //     return $ctrl.items;
+                    //   }
+                    // }
+                //   });
+            };
+
+        }
+
+    });
+    mifosX.ng.application.controller('outwardController', ['$scope', 'ResourceFactory', '$uibModal', mifosX.controllers.outwardController]).run(function ($log) {
+        $log.info("outwardController initialized");
+    });
+}(mifosX.controllers || {}));;
+
+(function (module) {
+    mifosX.controller = _.extend(module, {
+
+        ModalInstanceCtrl: function (scope, uibModalInstance) {
+            var $ctrl = this;
+
+            $ctrl.ok = function () {
+                $uibModalInstance.close($ctrl.selected.item);
+            };
+
+            $ctrl.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        }
+
+    });
+    mifosX.ng.application.controller('ModalInstanceCtrl', ['$scope', 'ResourceFactory', '$uibModalInstance', mifosX.controllers.ModalInstanceCtrl]).run(function ($log) {
+        $log.info("ModalInstanceCtrl initialized");
+    });
+}(mifosX.controllers || {}));;
+
 //Edite

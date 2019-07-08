@@ -8311,3 +8311,239 @@ accordion > div > div > div > a:hover, accordion > div > div > div a:focus {
   border-radius: 0.25em 0.25em 0.25em 0.25em;
   font-weight: bold;
   padding: 0.3em 0.6em 0.4em; }
+
+
+
+
+.container{min-width: 346px; background-color: white;}
+
+#from-acc, #cus-info, #account{
+    /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+    margin-top: 16px;
+    height: 420px;
+    border: solid 1px rgb(229, 229, 229);
+}
+
+#deposit-to, #bal, #nostro{
+    /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+    margin-top: 16px;
+    height: 420px;
+    border: solid 1px rgb(229, 229, 229);
+}
+/* 
+#left-side{
+    background-color: rgba(6, 71, 113, 1);
+} */
+
+#btn-menu{
+    width: 200%;
+    height: 60px;
+    text-align: left;
+    font-size: 12pt;
+}
+/* 
+#menu-h3{
+    font: bold;
+    color: white;
+    text-align: center;
+} */
+
+.data-grid, .data-grid-outward{
+    /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+    border-radius: 5px;
+    margin-top: 10px;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 100%;
+}
+
+#datetime{
+    margin-top: 20px;
+    
+}
+#radio-button-left{
+    /* border: solid 1px rgba(2, 2, 2, .2); */
+    /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+    margin-top: 15px;
+    border: 1px solid rgb(229, 229, 229);
+}
+
+#radio-button-right{
+    /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+    margin-top: 15px;
+    border: 1px solid rgb(229, 229, 229);
+}
+
+#total-textbox{
+    margin-top: 20px;
+}
+
+.modal-header {
+    text-align: center;
+}
+
+#btn-approve{
+    float: left;
+}
+
+#btn-cancel{
+    float: right;
+}
+
+@media only screen and (min-width: 151px){
+
+    
+    #from-acc, #cus-info, #account{
+        /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+        margin-top: 16px;
+        height: auto;
+        border: solid 1px rgb(229, 229, 229);
+    }
+    #deposit-to, #bal, #nostro{
+        /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+        margin-top: 16px;
+        height: auto;
+        border: solid 1px rgb(229, 229, 229);
+        margin-bottom: 0px;
+    }
+    #cus-info, #bal{
+        height: 550px;
+    }
+
+    #width-txt{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #btn-menu{
+        width: 100%;
+        font-size: 12pt;
+    }
+    #btn-ctrl{
+        margin-top: 30px;
+        /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .8); */
+    }
+
+    /* #left-side{
+        background-color: rgba(6, 71, 113, 1);
+    } */
+
+    /* #nav-bar{
+        background-color: rgba(6, 71, 113, 1);
+    } */
+    /* #menu-h3{
+        font: bold;
+        color: white;
+        text-align: center;
+    } */
+
+  
+
+}
+
+@media only screen and (min-width: 770px){
+
+    
+    #from-acc, #cus-info, #account{
+        /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+        margin-top: 16px;
+        height: 450px;
+        border: solid 1px rgb(229, 229, 229);
+    }
+    #deposit-to, #bal, #nostro{
+        /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+        margin-top: 16px;
+        height: 450px;
+        border: solid 1px rgb(229, 229, 229);
+        margin-bottom: 0px;
+    }
+    #cus-info, #bal{
+        height: 450px;
+    }
+
+    #width-txt{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #btn-menu{
+        width: 100%;
+        font-size: 9.5pt;
+    }
+    #btn-ctrl{
+        margin-top: 0px;
+        /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .8); */
+    }
+    /* #left-side{
+        background-color: rgba(6, 71, 113, 1);
+    } */
+    /* #nav-bar{
+        background-color: rgba(6, 71, 113, 1);
+    } */
+    /* #menu-h3{
+        font: bold;
+        color: rgba(6, 71, 113, 1);
+        text-align: center;
+    } */
+
+    
+
+
+}
+@media only screen and (min-width: 991px){
+
+    
+    #from-acc, #cus-info, #account{
+        /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+        margin-top: 16px;
+        height: 450px;
+        border: solid 1px rgb(167, 162, 162);
+    }
+    #deposit-to, #bal, #nostro{
+        /* box-shadow: 0 2px 4px 0 rgba(6, 71, 113, 1); */
+        margin-top: 16px;
+        height: 450px;
+        border: solid 1px rgb(143, 138, 138);
+        margin-bottom: 0px;
+    }
+    #cus-info, #bal{
+        height: 450px;
+    }
+
+    #btn-ctrl{
+        margin-top: 0px;
+        /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .8); */
+    }
+
+    #width-txt{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #btn-menu{
+        width:100%;
+        font-size: 16pt;
+        text-align: center;
+    }
+
+
+    /* #left-side{
+        background-color: rgba(6, 71, 113, 1);
+    } */
+    /* #nav-bar{
+        background-color: rgba(6, 71, 113, 1);
+    } */
+
+    /* #menu-h3{
+        font: bold;
+        color: rgba(6, 71, 113, 1);
+        text-align: center;
+    } */
+
+    .selected{
+        background-color: rgba(6, 71, 113, 1);
+        color: white;
+    }
+}
+

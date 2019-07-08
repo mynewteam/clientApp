@@ -52,7 +52,7 @@
                                             <th>Actions</th>
                                         </tr>
                                         <tr class="pointer-main" 
-                                            ng-repeat="savingaccount in clientAccounts.savingsAccounts | orderBy:'id':true | filter:isSavingNotClosed | filter:{productId:'1'} | filter:{loanaccount:filterText}">
+                                            ng-repeat="savingaccount in clientAccounts.savingsAccounts | orderBy:'id':true | filter:isSavingNotClosed | filter:{productId:'121'} | filter:{loanaccount:filterText}">
                                             <td class="pointer" data-ng-click="routeToSaving(savingaccount.id, savingaccount.depositType.code)">
                                                 <i uib-tooltip-placement="right" ng-show="savingaccount.subStatus.id==0" uib-tooltip="{{savingaccount.status.value}}" class="fa fa-stop {{savingaccount.status.code | StatusLookup}}"></i>
                                                 <i uib-tooltip-placement="right" ng-hide="savingaccount.subStatus.id==0"  uib-tooltip="{{savingaccount.status.value+':'+savingaccount.subStatus.value}}" class="fa fa-stop {{savingaccount.status.code+savingaccount.subStatus.value | StatusLookup}}"></i>
