@@ -9,36 +9,39 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="list-group">
                         <a class="list-group-item" href="#/loanproducts" has-permission='READ_LOANPRODUCT'>
-                            <h4 class="list-group-item-heading"><i class="fa fa-tags fa fa-large"></i>&nbsp;&nbsp;{{
-                                'label.anchor.loanproducts' | translate }}</h4>
+                            <h4 class="list-group-item-heading"><i class="fa fa-tags fa fa-large"></i>&nbsp;&nbsp;{{ 'label.anchor.loanproducts' | translate }}</h4>
 
                             <p class="list-group-item-text">{{'label.addnewloanproductor' | translate}}</p>
                         </a>
                         <a class="list-group-item" href="#/savingproducts" has-permission='READ_SAVINGSPRODUCT'>
-                            <h4 class="list-group-item-heading"><i class="fa fa-large fa fa-briefcase"></i>&nbsp;&nbsp;{{
-                                'label.anchor.savingproducts' | translate }}</h4>
+                            <h4 class="list-group-item-heading"><i class="fa fa-large fa fa-briefcase"></i>&nbsp;&nbsp;{{ 'label.anchor.savingproducts' | translate }}</h4>
 
                             <p class="list-group-item-text">{{'label.addnewsavingproductor' | translate}}</p>
                         </a>
-                        <a class="list-group-item" href="#/shareproducts" has-permission='READ_SHAREPRODUCT'>
+                        <!-- <a class="list-group-item" href="#/shareproducts" has-permission='READ_SHAREPRODUCT'>
                             <h4 class="list-group-item-heading"><i class="fa fa-large fa fa-briefcase"></i>&nbsp;&nbsp;{{
                                 'label.anchor.shareproducts' | translate }}</h4>
 
                             <p class="list-group-item-text">{{'label.addnewshareproductor' | translate}}</p>
-                        </a>
+                        </a> -->
 
-                        <a class="list-group-item" href="#/charges" has-permission='READ_CHARGE'>
+                        <!-- <a class="list-group-item" href="#/charges" has-permission='READ_CHARGE'>
                             <h4 class="list-group-item-heading"><i class="fa fa-money fa fa-large"></i>&nbsp;&nbsp;{{
                                 'label.anchor.charges' | translate }}</h4>
 
                             <p class="list-group-item-text">{{'label.definecharges' | translate}}</p>
-                        </a>
+                        </a> -->
 
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="list-group">
-                        <a class="list-group-item" href="#/productmix" has-permission='READ_PRODUCTMIX'>
+                        <a class="list-group-item" href="#/charges" has-permission='READ_CHARGE'>
+                            <h4 class="list-group-item-heading"><i class="fa fa-money fa fa-large"></i>&nbsp;&nbsp;{{ 'label.anchor.charges' | translate }}</h4>
+
+                            <p class="list-group-item-text">{{'label.definecharges' | translate}}</p>
+                        </a>
+                        <!-- <a class="list-group-item" href="#/productmix" has-permission='READ_PRODUCTMIX'>
                             <h4 class="list-group-item-heading"><i class="fa fa-large fa fa-random"></i>&nbsp;&nbsp;{{
                                 'label.anchor.productsmix' | translate }}</h4>
 
@@ -69,7 +72,7 @@
                                 'label.anchor.floatingrates' | translate }}</h4>
 
                             <p class="list-group-item-text">{{'label.definefloatingrates' | translate}}</p>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>

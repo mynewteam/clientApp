@@ -4306,7 +4306,7 @@
             scope.addressTypeId = {};
             entityname = "ADDRESS";
             scope.addressArray = [];
-            scope.formData.address = [];
+            scope.formData.address = "";
 
             //address khmer
             scope.countrykh = [];
@@ -4461,6 +4461,12 @@
                 });
             }
 
+            scope.changeVillage = function(VillageID) {
+                resourceFactory.getOneVillage.get({ id: VillageID }, function(data) {
+                    scope.village = data.Des_In_Khmer;
+                });
+            }
+
 
 
 
@@ -4578,10 +4584,7 @@
                 this.formData.dateFormat = scope.df;
                 this.formData.activationDate = reqDate;
 
-                resourceFactory.getOneVilalge.get({ id: this.formData.tbl_village_id }, function(data) {
-                    scope.village = data.Des_In_Khmer;
-                });
-
+                scope.formData.address = scope.village + ", " + scope.commune + ", " + scope.district + ", " + scope.province + ", " + scope.country;
                 if (!_.isUndefined(scope.datatables) && scope.datatables.length > 0) {
                     angular.forEach(scope.datatables, function(datatable, index) {
                         scope.columnHeaders = datatable.columnHeaderData;
@@ -4641,55 +4644,55 @@
                     this.formData.savingsProductId = null;
                 }
 
-                if (scope.enableAddress === true) {
-                    for (var i = 0; i < scope.addressArray.length; i++) {
-                        var temp = new Object();
+                // if (scope.enableAddress === true) {
+                //     for (var i = 0; i < scope.addressArray.length; i++) {
+                //         var temp = new Object();
 
-                        if (scope.addressArray[i].addressTypeId) {
-                            temp.addressTypeId = scope.addressArray[i].addressTypeId;
-                        }
-                        if (scope.addressArray[i].street) {
-                            temp.street = scope.addressArray[i].street;
-                        }
-                        if (scope.addressArray[i].addressLine1) {
-                            temp.addressLine1 = scope.addressArray[i].addressLine1;
-                        }
-                        if (scope.addressArray[i].addressLine2) {
-                            temp.addressLine2 = scope.addressArray[i].addressLine2;
-                        }
-                        if (scope.addressArray[i].addressLine3) {
-                            temp.addressLine3 = scope.addressArray[i].addressLine3;
-                        }
-                        if (scope.addressArray[i].townVillage) {
-                            temp.townVlage = scope.addressArray[i].townVillage;
-                        }
-                        if (scope.addressArray[i].city) {
-                            temp.city = scope.addressArray[i].city;
-                        }
-                        if (scope.addressArray[i].countyDistrict) {
-                            temp.countyDistrict = scope.addressArray[i].countyDistrict;
-                        }
-                        if (scope.addressArray[i].countryId) {
-                            temp.countryId = scope.addressArray[i].countryId;
-                        }
-                        if (scope.addressArray[i].stateProvinceId) {
-                            temp.stateProvinceId = scope.addressArray[i].stateProvinceId;
-                        }
-                        if (scope.addressArray[i].postalCode) {
-                            temp.postalCode = scope.addressArray[i].postalCode;
-                        }
-                        if (scope.addressArray[i].latitude) {
-                            temp.latitude = scope.addressArray[i].latitude;
-                        }
-                        if (scope.addressArray[i].longitude) {
-                            temp.longitude = scope.addressArray[i].longitude;
-                        }
-                        if (scope.addressArray[i].isActive) {
-                            temp.isActive = scope.addressArray[i].isActive;
-                        }
-                        scope.formData.address.push(temp);
-                    }
-                }
+                //         if (scope.addressArray[i].addressTypeId) {
+                //             temp.addressTypeId = scope.addressArray[i].addressTypeId;
+                //         }
+                //         if (scope.addressArray[i].street) {
+                //             temp.street = scope.addressArray[i].street;
+                //         }
+                //         if (scope.addressArray[i].addressLine1) {
+                //             temp.addressLine1 = scope.addressArray[i].addressLine1;
+                //         }
+                //         if (scope.addressArray[i].addressLine2) {
+                //             temp.addressLine2 = scope.addressArray[i].addressLine2;
+                //         }
+                //         if (scope.addressArray[i].addressLine3) {
+                //             temp.addressLine3 = scope.addressArray[i].addressLine3;
+                //         }
+                //         if (scope.addressArray[i].townVillage) {
+                //             temp.townVlage = scope.addressArray[i].townVillage;
+                //         }
+                //         if (scope.addressArray[i].city) {
+                //             temp.city = scope.addressArray[i].city;
+                //         }
+                //         if (scope.addressArray[i].countyDistrict) {
+                //             temp.countyDistrict = scope.addressArray[i].countyDistrict;
+                //         }
+                //         if (scope.addressArray[i].countryId) {
+                //             temp.countryId = scope.addressArray[i].countryId;
+                //         }
+                //         if (scope.addressArray[i].stateProvinceId) {
+                //             temp.stateProvinceId = scope.addressArray[i].stateProvinceId;
+                //         }
+                //         if (scope.addressArray[i].postalCode) {
+                //             temp.postalCode = scope.addressArray[i].postalCode;
+                //         }
+                //         if (scope.addressArray[i].latitude) {
+                //             temp.latitude = scope.addressArray[i].latitude;
+                //         }
+                //         if (scope.addressArray[i].longitude) {
+                //             temp.longitude = scope.addressArray[i].longitude;
+                //         }
+                //         if (scope.addressArray[i].isActive) {
+                //             temp.isActive = scope.addressArray[i].isActive;
+                //         }
+                //         scope.formData.address.push(temp);
+                //     }
+                // }
 
 
                 // family array

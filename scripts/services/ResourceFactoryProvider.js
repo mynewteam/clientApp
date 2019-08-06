@@ -572,7 +572,7 @@
                         get: { method: 'GET', params: {}, isArray: true }
                     }),
                     //khmer address
-                    getOneCountry: defineResource(apiVer + "/address/country", {}, {
+                    getOneCountry: defineResource(apiVer + "/address/country/:id", {}, {
                         get: { method: 'GET', params: {} }
                     }),
                     getOneProvince: defineResource(apiVer + "/address/province/:id", {}, {

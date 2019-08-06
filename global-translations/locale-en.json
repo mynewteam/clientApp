@@ -4347,6 +4347,7 @@
     "label.input.exchange.buyamount": "Buy Amount",
     "label.input.exchange.sellamount": "Sell Amount",
     "label.input.exchange.rate": "Rate",
+    "label.anchor.teller": "Teller",
     "----End---": "--End of file--- "
 
 }
