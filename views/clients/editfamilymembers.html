@@ -85,9 +85,10 @@
                 <div class="control-label col-sm-2">
                     <label>{{ 'label.input.relationship' | translate }}</label>
                 </div>
+
                 <div class="col-sm-3">
-                    <select chosen="relationshipIdOptions" id="relationshipIdOption" ng-model="formData.relationshipId" class="form-control" ng-options="relationshipIdOption.id as relationshipIdOption.name for relationshipIdOption in relationshipIdOptions track by relationshipIdOption.id"
-                        value="formData.relationshipId"></select>
+                    <select id="relationshipIdOption" ng-model="formData.relationshipId" class="form-control" ng-options="relationshipIdOption.id as relationshipIdOption.name for relationshipIdOption in relationshipIdOptions" value="{{formData.relationshipId}}">
+                    </select>
                 </div>
             </div>
             <div>
@@ -98,8 +99,10 @@
                 <div class="control-label col-sm-2">
                     <label>{{ 'label.input.gender' | translate }}</label>
                 </div>
+
                 <div class="col-sm-3">
-                    <select chosen="genderIdOptions" id="genderIdOption" ng-model="formData.genderId" class="form-control" ng-options="genderIdOption.id as genderIdOption.name for genderIdOption in genderIdOptions track by genderIdOption.id" value="formData.genderId"></select>
+                    <select id="genderId" ng-model="formData.genderId" class="form-control" ng-options="gender.id as gender.name for gender in genderIdOptions" value="{{formData.genderId}}">
+                    </select>
                 </div>
             </div>
 
@@ -108,9 +111,10 @@
                 <div class="control-label col-sm-2">
                     <label>{{ 'label.input.profession' | translate }}</label>
                 </div>
+
                 <div class="col-sm-3">
-                    <select chosen="professionIdOptions" id="professionIdOption" ng-model="formData.professionId" class="form-control" ng-options="professionIdOption.id as professionIdOption.name for professionIdOption in professionIdOptions track by professionIdOption.id"
-                        value="formData.professionId"></select>
+                    <select id="professionIdOption" ng-model="formData.professionId" class="form-control" ng-options="professionIdOption.id as professionIdOption.name for professionIdOption in professionIdOptions" value="{{formData.professionId}}">
+                    </select>
                 </div>
             </div>
 
@@ -119,9 +123,10 @@
                 <div class="control-label col-sm-2">
                     <label>{{ 'label.input.maritalstatus' | translate }}</label>
                 </div>
+
                 <div class="col-sm-3">
-                    <select chosen="maritalStatusIdOptions" id="maritalStatusId" ng-model="formData.maritalStatusId" class="form-control" ng-options="maritalStatusIdOption.id as maritalStatusIdOption.name for maritalStatusIdOption in maritalStatusIdOptions track by maritalStatusIdOption.id"
-                        value="formData.maritalStatusId"></select>
+                    <select id="maritalStatusId" ng-model="formData.maritalStatusId" class="form-control" ng-options="maritalStatusIdOption.id as maritalStatusIdOption.name for maritalStatusIdOption in maritalStatusIdOptions" value="{{formData.maritalStatusId}}">
+                    </select>
                 </div>
             </div>
 

@@ -1,17 +1,19 @@
-(function (module) {
+(function(module) {
     mifosX.services = _.extend(module, {
-        ResourceFactoryProvider: function () {
-            var baseUrl = "", apiVer = "/fineract-provider/api/v1", tenantIdentifier = "";
-            this.setBaseUrl = function (url) {
+        ResourceFactoryProvider: function() {
+            var baseUrl = "",
+                apiVer = "/fineract-provider/api/v1",
+                tenantIdentifier = "";
+            this.setBaseUrl = function(url) {
                 baseUrl = url;
                 console.log(baseUrl);
             };
 
-            this.setTenantIdenetifier = function (tenant) {
+            this.setTenantIdenetifier = function(tenant) {
                 tenantIdentifier = tenant;
             }
-            this.$get = ['$resource', '$rootScope', function (resource, $rootScope) {
-                var defineResource = function (url, paramDefaults, actions) {
+            this.$get = ['$resource', '$rootScope', function(resource, $rootScope) {
+                var defineResource = function(url, paramDefaults, actions) {
                     var tempUrl = baseUrl;
                     $rootScope.hostUrl = tempUrl;
                     $rootScope.tenantIdentifier = tenantIdentifier;
@@ -119,11 +121,12 @@
                         getMeetingInfo: { method: 'GET', params: {} }
                     }),
                     attachMeetingResource: defineResource(apiVer + "/:groupOrCenter/:groupOrCenterId/calendars/:templateSource", {
-                        groupOrCenter: '@groupOrCenter', groupOrCenterId: '@groupOrCenterId',
+                        groupOrCenter: '@groupOrCenter',
+                        groupOrCenterId: '@groupOrCenterId',
                         templateSource: '@templateSource'
                     }, {
-                            update: { method: 'PUT' }
-                        }),
+                        update: { method: 'PUT' }
+                    }),
                     runReportsResource: defineResource(apiVer + "/runreports/:reportSource", { reportSource: '@reportSource' }, {
                         get: { method: 'GET', params: {}, isArray: true },
                         getReport: { method: 'GET', params: {} }
@@ -189,8 +192,7 @@
                     loanChargeTemplateResource: defineResource(apiVer + "/loans/:loanId/charges/template", { loanId: '@loanId' }, {
                         get: { method: 'GET', params: {} }
                     }),
-                    loanChargesResource: defineResource(apiVer + "/loans/:loanId/charges/:chargeId", { loanId: '@loanId', chargeId: '@chargeId' }, {
-                    }),
+                    loanChargesResource: defineResource(apiVer + "/loans/:loanId/charges/:chargeId", { loanId: '@loanId', chargeId: '@chargeId' }, {}),
                     loanCollateralTemplateResource: defineResource(apiVer + "/loans/:loanId/collaterals/template", { loanId: '@loanId' }, {
                         get: { method: 'GET', params: {} }
                     }),
@@ -514,8 +516,7 @@
                     cashierTxnTemplateResource: defineResource(apiVer + "/tellers/:tellerId/cashiers/:cashierId/transactions/template", { tellerId: "@tellerId", cashierId: "@cashierId" }, {
                         get: { method: 'GET', params: { tellerId: "@tellerId", cashierId: "@cashierId" }, isArray: false }
                     }),
-                    collectionSheetResource: defineResource(apiVer + "/collectionsheet", {}, {
-                    }),
+                    collectionSheetResource: defineResource(apiVer + "/collectionsheet", {}, {}),
                     workingDaysResource: defineResource(apiVer + "/workingdays", {}, {
                         get: { method: 'GET', params: {} },
                         put: { method: 'PUT', params: {} }
@@ -553,13 +554,11 @@
                     }),
                     clientaddressFields: defineResource(apiVer + "/client/addresses/template", {}, {
                         get: { method: 'GET', params: {} }
-                    }
-                    ),
+                    }),
                     //khmer address
                     addressCountry: defineResource(apiVer + "/address/country", {}, {
                         get: { method: 'GET', params: {}, isArray: true }
-                    }
-                    ),
+                    }),
                     addressProvince: defineResource(apiVer + "/address/province/country/:id", {}, {
                         get: { method: 'GET', params: {}, isArray: true }
                     }),
@@ -571,6 +570,22 @@
                     }),
                     addressVillage: defineResource(apiVer + "/address/village/commune/:id", {}, {
                         get: { method: 'GET', params: {}, isArray: true }
+                    }),
+                    //khmer address
+                    getOneCountry: defineResource(apiVer + "/address/country", {}, {
+                        get: { method: 'GET', params: {} }
+                    }),
+                    getOneProvince: defineResource(apiVer + "/address/province/:id", {}, {
+                        get: { method: 'GET', params: {} }
+                    }),
+                    getOneDistrict: defineResource(apiVer + "/address/district/:id", {}, {
+                        get: { method: 'GET', params: {} }
+                    }),
+                    getOneCommune: defineResource(apiVer + "/address/commune/:id", {}, {
+                        get: { method: 'GET', params: {} }
+                    }),
+                    getOneVillage: defineResource(apiVer + "/address/village/:id", {}, {
+                        get: { method: 'GET', params: {} }
                     }),
                     //edit client
                     addressAllVillage: defineResource(apiVer + "/address/village/allvillage/:id", {}, {
@@ -655,14 +670,12 @@
                         getAll: { method: 'GET', params: {}, isArray: true },
                         put: { method: 'PUT', params: {} }
                     }),
-                    taxcomponenttemplate: defineResource(apiVer + "/taxes/component/template", {}, {
-                    }),
+                    taxcomponenttemplate: defineResource(apiVer + "/taxes/component/template", {}, {}),
                     taxgroup: defineResource(apiVer + "/taxes/group/:taxGroupId", { taxGroupId: '@taxGroupId' }, {
                         getAll: { method: 'GET', params: {}, isArray: true },
                         put: { method: 'PUT', params: {} }
                     }),
-                    taxgrouptemplate: defineResource(apiVer + "/taxes/group/template", {}, {
-                    }),
+                    taxgrouptemplate: defineResource(apiVer + "/taxes/group/template", {}, {}),
 
                     productsResource: defineResource(apiVer + "/products/:productType/:resourceType", { productType: '@productType', resourceType: '@resourceType' }, {
                         template: { method: 'GET', params: {} },
@@ -726,7 +739,7 @@
                     }),
                     spotRateResource: defineResource(apiVer + "/spotrate", {}, {
                         save: { method: 'POST' },
-                        get: {method: 'GET', isArray: true}
+                        get: { method: 'GET', isArray: true }
                     }),
                     exchangeResource: defineResource(apiVer + "/exchange", {}, {
                         save: { method: 'POST' }
@@ -743,9 +756,9 @@
             }];
         }
     });
-    mifosX.ng.services.config(function ($provide) {
+    mifosX.ng.services.config(function($provide) {
         $provide.provider('ResourceFactory', mifosX.services.ResourceFactoryProvider);
-    }).run(function ($log) {
+    }).run(function($log) {
         $log.info("ResourceFactory initialized");
     });
 }(mifosX.services || {}));

@@ -4314,6 +4314,11 @@
             scope.districtkh = [];
             scope.communekh = [];
             scope.villagekh = [];
+            scope.village = "";
+            scope.commune = "";
+            scope.district = "";
+            scope.province = "";
+            scope.country = "";
 
             //familymembers
             scope.formData.familyMembers = [];
@@ -4419,26 +4424,46 @@
             scope.changeCountry = function(Id) {
                 resourceFactory.addressProvince.get({ id: Id }, function(data) {
                     scope.provincekh = data;
-                })
+                });
+
+                resourceFactory.getOneCountry.get({ id: Id }, function(data) {
+                    scope.country = data.Des_In_Khmer;
+                });
             };
 
             scope.changeProvince = function(ProvinceID) {
                 resourceFactory.addressDistrict.get({ id: ProvinceID }, function(data) {
                     scope.districtkh = data;
-                })
+                });
+
+                resourceFactory.getOneProvince.get({ id: ProvinceID }, function(data) {
+                    scope.province = data.Des_In_Khmer;
+                });
             };
 
             scope.changeDistrict = function(DistrictID) {
                 resourceFactory.addressCommune.get({ id: DistrictID }, function(data) {
                     scope.communekh = data;
-                })
+                });
+
+                resourceFactory.getOneDistrict.get({ id: DistrictID }, function(data) {
+                    scope.district = data.Des_In_Khmer;
+                });
             }
 
             scope.changeCommune = function(CommuneID) {
                 resourceFactory.addressVillage.get({ id: CommuneID }, function(data) {
                     scope.villagekh = data;
-                })
+                });
+
+                resourceFactory.getOneCommune.get({ id: CommuneID }, function(data) {
+                    scope.commune = data.Des_In_Khmer;
+                });
             }
+
+
+
+
 
 
             //----------------------------------
@@ -4553,6 +4578,10 @@
                 this.formData.dateFormat = scope.df;
                 this.formData.activationDate = reqDate;
 
+                resourceFactory.getOneVilalge.get({ id: this.formData.tbl_village_id }, function(data) {
+                    scope.village = data.Des_In_Khmer;
+                });
+
                 if (!_.isUndefined(scope.datatables) && scope.datatables.length > 0) {
                     angular.forEach(scope.datatables, function(datatable, index) {
                         scope.columnHeaders = datatable.columnHeaderData;
@@ -4615,6 +4644,7 @@
                 if (scope.enableAddress === true) {
                     for (var i = 0; i < scope.addressArray.length; i++) {
                         var temp = new Object();
+
                         if (scope.addressArray[i].addressTypeId) {
                             temp.addressTypeId = scope.addressArray[i].addressTypeId;
                         }
@@ -4657,7 +4687,6 @@
                         if (scope.addressArray[i].isActive) {
                             temp.isActive = scope.addressArray[i].isActive;
                         }
-
                         scope.formData.address.push(temp);
                     }
                 }
@@ -4713,9 +4742,7 @@
                     scope.formData.familyMembers.push(temp);
                 }
                 //
-
-
-
+                console.log(scope.formData);
                 resourceFactory.clientResource.save(this.formData, function(data) {
                     location.path('/viewclient/' + data.clientId);
                 });
@@ -4962,12 +4989,42 @@
 
 
                 resourceFactory.familyMember.get({ clientId: clientId, clientFamilyMemberId: familyMemberId }, function(data) {
-                    scope.formData = data;
+                    // scope.formData = data;
+                    scope.formData = {
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        khmerName: data.khmerName,
+                        middleName: data.middleName,
+                        genderId: data.genderId,
+                        age: data.age,
+                        mobileNumber: data.mobileNumber,
+                        qualification: data.qualification,
+                        relationshipId: data.relationshipId,
+                        professionId: data.professionId,
+                        maritalStatusId: data.maritalStatusId,
+                        isDependent: data.isDependent
+                    };
 
                     if (data.dateOfBirth) {
                         var dobDate = dateFilter(data.dateOfBirth, scope.df);
                         scope.date.dateOfBirth = new Date(dobDate);
                     }
+
+                    if (data.genderId) {
+                        scope.formData.genderId = data.genderId;
+                    }
+                    if (data.maritalStatusId) {
+                        scope.formData.maritalStatusId = data.maritalStatusId;
+                    }
+
+                    if (data.professionId) {
+                        scope.formData.professionId = data.professionId;
+                    }
+
+                    if (data.relationshipId) {
+                        scope.formData.relationshipId = data.relationshipId;
+                    }
+
                 });
 
 
@@ -5994,9 +6051,7 @@
                 });
             };
 
-            scope.downloadClientIdentifierDocument = function(identifierId, documentId) {
-                console.log(identifierId, documentId);
-            };
+            scope.downloadClientIdentifierDocument = function(identifierId, documentId) {};
 
             scope.waiveCharge = function(chargeId) {
                 resourceFactory.clientChargesResource.waive({ clientId: routeParams.id, resourceType: chargeId }, function(data) {
@@ -7390,7 +7445,6 @@
             });
             resourceFactory.externalServicesSMTPResource.get(function(data) {
                 for (var i in data) {
-                    //console.log(data[0]);
                     if (data[i].name != "") {
                         data[i].showEditvalue = true;
                         scope.SMTPConfigs.push(data[i])
@@ -34124,4 +34178,5 @@
         $log.info("ViewUserController initialized");
     });
 }(mifosX.controllers || {}));
-//Edite
+//Edited.controllers || {}));
+//Edited3

@@ -307,8 +307,8 @@
                                         <label>{{ 'label.input.relationship' | translate }}<span class="required">*</span></label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <select chosen="relationshipIdOptions" id="relationshipIdOption" ng-model="familyArray[$index].relationshipId" class="form-control" ng-options="relationshipIdOption.id as relationshipIdOption.name for relationshipIdOption in relationshipIdOptions track by relationshipIdOption.id"
-                                            value="formData.relationshipId"></select>
+                                        <select id="relationshipIdOption" ng-model="familyArray[$index].relationshipId" class="form-control" ng-options="relationshipIdOption.id as relationshipIdOption.name for relationshipIdOption in relationshipIdOptions" value="{{formData.relationshipId}}">
+                                            </select>
                                     </div>
                                     <div class="col-sm-2">
                                         <form-validate valattributeform="createclientform" valattribute="addressType" />
@@ -410,7 +410,9 @@
                                         <label>{{ 'label.input.gender' | translate }}</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <select chosen="genderIdOptions" id="genderIdOption" ng-model="familyArray[$index].genderId" class="form-control" ng-options="genderIdOption.id as genderIdOption.name for genderIdOption in genderIdOptions track by genderIdOption.id" value="formData.genderId"></select>
+                                        <!-- <select chosen="genderIdOptions" id="genderIdOption" ng-model="familyArray[$index].genderId" class="form-control" ng-options="genderIdOption.id as genderIdOption.name for genderIdOption in genderIdOptions track by genderIdOption.id" value="{{formData.genderId}}"></select> -->
+                                        <select id="genderId" ng-model="familyArray[$index].genderId" class="form-control" ng-options="gender.id as gender.name for gender in genderIdOptions" value="{{formData.genderId}}">
+                                        </select>
                                     </div>
                                 </div>
 
@@ -420,8 +422,10 @@
                                         <label>{{ 'label.input.profession' | translate }}</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <select chosen="professionIdOptions" id="professionIdOption" ng-model="familyArray[$index].professionId" class="form-control" ng-options="professionIdOption.id as professionIdOption.name for professionIdOption in professionIdOptions track by professionIdOption.id"
-                                            value="formData.professionId"></select>
+                                        <!-- <select chosen="professionIdOptions" id="professionIdOption" ng-model="familyArray[$index].professionId" class="form-control" ng-options="professionIdOption.id as professionIdOption.name for professionIdOption in professionIdOptions track by professionIdOption.id"
+                                            value="{{formData.professionId}}"></select> -->
+                                        <select id="professionIdOption" ng-model="familyArray[$index].professionId" class="form-control" ng-options="professionIdOption.id as professionIdOption.name for professionIdOption in professionIdOptions" value="{{formData.professionId}}">
+                                            </select>
                                     </div>
                                 </div>
 
@@ -431,8 +435,10 @@
                                         <label>{{ 'label.input.maritalstatus' | translate }}</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <select chosen="maritalStatusIdOptions" id="maritalStatusId" ng-model="familyArray[$index].maritalStatusId" class="form-control" ng-options="maritalStatusIdOption.id as maritalStatusIdOption.name for maritalStatusIdOption in maritalStatusIdOptions track by maritalStatusIdOption.id"
-                                            value="formData.maritalStatusId"></select>
+                                        <!-- <select chosen="maritalStatusIdOptions" id="maritalStatusId" ng-model="familyArray[$index].maritalStatusId" class="form-control" ng-options="maritalStatusIdOption.id as maritalStatusIdOption.name for maritalStatusIdOption in maritalStatusIdOptions track by maritalStatusIdOption.id"
+                                            value="{{formData.maritalStatusId}}"></select> -->
+                                        <select id="maritalStatusId" ng-model="familyArray[$index].maritalStatusId" class="form-control" ng-options="maritalStatusIdOption.id as maritalStatusIdOption.name for maritalStatusIdOption in maritalStatusIdOptions" value="{{formData.maritalStatusId}}">
+                                            </select>
                                     </div>
                                 </div>
 
@@ -518,7 +524,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2">{{ 'label.form.Village' | translate }}</label>
                                 <div class="col-sm-3">
-                                    <select id="tbl_village_id" ng-model="formData.tbl_village_id" class="form-control" ng-options="vill.id as vill.Des_In_Khmer for vill in villagekh" value="{{vill.id}}">
+                                    <select id="tbl_village_id" ng-model="formData.tbl_village_id" class="form-control" ng-options="vill.id as vill.Des_In_Khmer for vill in villagekh" ng-change="changeVillage(formData.tbl_village_id)" value="{{vill.id}}">
                                     </select>
                                 </div>
 
