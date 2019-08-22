@@ -152,7 +152,7 @@
                             <label class="control-label col-sm-2" for="mobileNo">{{'label.input.mobilenumber' |
                                 translate}}</label>
                             <div class="col-sm-3">
-                                <input type="text" id="mobileNo" name="mobileNo" ng-model="formData.mobileNo" ng-pattern="/^[0-9]+$/" class="form-control" />
+                                <input type="text" id="mobileNo" name="mobileNo" ng-model="formData.mobileNo" class="form-control" />
                             </div>
                             <div class="col-sm-2">
                                 <span ng-show="createclientform.mobileNo.$invalid && createclientform.mobileNo.$dirty">
@@ -453,7 +453,61 @@
                                 </div>
 
 
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">{{ 'label.form.Country' | translate }}</label>
+                                    <div class="col-sm-3">
+                                        <select id="CountryID" ng-model="familyArray[$index].CountryDataId" class="form-control" ng-options="c.Id as c.Des_In_Khmer for c in familycountrykh" value="{{c.Id}}" ng-change="changeFamilyCountry(familyArray[$index].CountryDataId, $index)">
+                                        </select>
+                                    </div>
+                                </div>
 
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">{{ 'label.form.Province' | translate }}</label>
+                                    <div class="col-sm-3">
+                                        <select id="ProvinceID" ng-model="familyArray[$index].ProvinceDataid" class="form-control" ng-options="pro.id as pro.Des_In_Khmer for pro in familyArray[$index].familyprovincekh" value="{{pro.id}}" ng-change="changeFamilyProvince(familyArray[$index].ProvinceDataid, $index)">
+                                            </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">{{ 'label.form.District' | translate }}</label>
+                                    <div class="col-sm-3">
+                                        <select id="DistrictID" ng-model="familyArray[$index].DistrictDataid" class="form-control" ng-options="dist.id as dist.Des_In_Khmer for dist in familyArray[$index].familydistrictkh" value="{{dist.id}}" ng-change="changeFamilyDistrict(familyArray[$index].DistrictDataid, $index)">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">{{ 'label.form.Commune' | translate }}</label>
+                                    <div class="col-sm-3">
+                                        <select id="CommuneID" ng-model="familyArray[$index].CommuneDataid" class="form-control" ng-options="comm.id as comm.Des_In_Khmer for comm in familyArray[$index].familycommunekh" value="{{comm.id}}" ng-change="changeFamilyCommune(familyArray[$index].CommuneDataid, $index)">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">{{ 'label.form.Village' | translate }}</label>
+                                    <div class="col-sm-3">
+                                        <select id="tbl_village_id" ng-model="familyArray[$index].tbl_village_id" class="form-control" ng-options="vill.id as vill.Des_In_Khmer for vill in familyArray[$index].familyVillageKh" value="{{vill.id}}">
+                                        </select>
+                                        <!-- ng-change="changeVillage(familyArray[$index].tbl_village_id)" -->
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">{{'label.input.Street' | translate}}</label>
+
+                                    <div class="col-sm-3">
+                                        <input type="text" id="streetid" name="streetid" ng-model="familyArray[$index].streetid" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">{{'label.input.HouseNo' | translate}}</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" id="houseno" name="houseno" ng-model="familyArray[$index].houseno" class="form-control" />
+                                    </div>
+                                </div>
 
 
 
@@ -484,7 +538,7 @@
                                  <div class="col-sm-3">
                                     <select chosen="addressTypes" name="addressType" ng-model="addressArray[$index].addressTypeId" class="form-control" ng-options="addressType.id as addressType.name for addressType in addressTypes track by addressType.id"
                                         value="addressTypeId" required late-validate></select>
-                                </div> -->
+                                    </div> -->
                                 <div class="col-sm-2">
                                     <form-validate valattributeform="createclientform" valattribute="addressType" />
                                 </div>
@@ -503,7 +557,7 @@
                                 <label class="control-label col-sm-2">{{ 'label.form.Province' | translate }}</label>
                                 <div class="col-sm-3">
                                     <select id="ProvinceID" ng-model="ProvinceData.id" class="form-control" ng-options="pro.id as pro.Des_In_Khmer for pro in provincekh" value="{{pro.id}}" ng-change="changeProvince(ProvinceData.id)">
-                                        </select>
+                                    </select>
                                 </div>
                             </div>
 
@@ -534,7 +588,22 @@
                                     <textarea id="description" class="form-control ng-pristine ng-valid ng-empty ng-touched" ng-model="formData.description"
                                         rows="4" cols="" placeholder="Address"></textarea>
                                 </div> -->
+                                <label class="control-label col-sm-2">{{'label.input.Street' | translate}}</label>
+
+                                <div class="col-sm-3">
+                                    <input type="text" id="streetid" name="streetid" ng-model="formData.streetid" class="form-control" />
+                                </div>
+
                             </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">{{'label.input.HouseNo' | translate}}</label>
+
+                                <div class="col-sm-3">
+                                    <input type="text" id="houseno" name="houseno" ng-model="formData.houseno" class="form-control" />
+                                </div>
+                            </div>
+
                             <div class="pull-right">
                                 <button id="save1" class="btn btn-primary" ng-if="datatables" wz-next>
                                     {{'label.button.proceed' | translate}}

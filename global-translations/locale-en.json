@@ -1439,6 +1439,8 @@
     "label.form.District": "District",
     "label.form.Commune": "Commune",
     "label.form.Village": "Village",
+    "label.input.HouseNo": "Nº",
+    "label.input.Street": "Street",
     "label.form.Address": "Address",
 
 

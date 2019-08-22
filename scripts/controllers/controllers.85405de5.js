@@ -193,7 +193,6 @@
 
                 for (var i = 0; i < data.accountTypeOptions.length; i++) {
                     if (data.accountTypeOptions[i].value == $routeParams.acctype) {
-                        console.log($routeParams.acctype + data.accountTypeOptions[i].value)
                         scope.formData.type = scope.accountTypes[i].id;
                     }
                 }
@@ -206,7 +205,6 @@
 
                 for (var i = 0; i < scope.headerTypes.length; i++) {
                     if (scope.headerTypes[i].id == $routeParams.parent) {
-                        console.log($routeParams.parent + scope.headerTypes[i].id)
                         scope.formData.parentId = scope.headerTypes[i].id;
                     }
                 }
@@ -1630,7 +1628,6 @@
 
             resourceFactory.spotRateResource.get(function(data) {
                 scope.viewdata = data;
-                console.log(data);
             });
         }
     });
@@ -1908,6 +1905,7 @@
                         route.reload();
 
                     });
+                    $uibModalInstance.dismiss('cancel');
                 };
                 $scope.cancel = function() {
                     $uibModalInstance.dismiss('cancel');
@@ -2141,7 +2139,6 @@
                     scope.allowclientedit = 'false';
                     scope.formData.toOfficeId = scope.formData.fromOfficeId;
                     scope.formData.toClientId = scope.formData.fromClientId;
-                    console.log(scope.formData);
                     scope.changeEvent();
                 } else {
                     scope.allowclientedit = 'true';
@@ -3466,6 +3463,68 @@
             });
 
 
+            //address khmer
+            scope.countrykh = [];
+            scope.provincekh = [];
+            scope.districtkh = [];
+            scope.communekh = [];
+            scope.villagekh = [];
+            scope.village = "";
+            scope.commune = "";
+            scope.district = "";
+            scope.province = "";
+            scope.country = "";
+
+            resourceFactory.addressCountry.get(function(data) {
+                scope.countrykh = data;
+            });
+
+            scope.changeCountry = function(Id) {
+                resourceFactory.addressProvince.get({ id: Id }, function(data) {
+                    scope.provincekh = data;
+                });
+
+                resourceFactory.getOneCountry.get({ id: Id }, function(data) {
+                    scope.country = data.Des_In_Khmer;
+                });
+            };
+
+            scope.changeProvince = function(ProvinceID) {
+                scope.districtkh = resourceFactory.addressDistrict.get({ id: ProvinceID }, function(data) {
+
+                });
+
+                resourceFactory.getOneProvince.get({ id: ProvinceID }, function(data) {
+                    scope.province = data.Des_In_Khmer;
+                });
+            };
+
+            scope.changeDistrict = function(DistrictID) {
+                resourceFactory.addressCommune.get({ id: DistrictID }, function(data) {
+                    scope.communekh = data;
+                });
+
+                resourceFactory.getOneDistrict.get({ id: DistrictID }, function(data) {
+                    scope.district = data.Des_In_Khmer;
+                });
+            }
+
+            scope.changeCommune = function(CommuneID) {
+                resourceFactory.addressVillage.get({ id: CommuneID }, function(data) {
+                    scope.villagekh = data;
+                });
+
+                resourceFactory.getOneCommune.get({ id: CommuneID }, function(data) {
+                    scope.commune = data.Des_In_Khmer;
+                });
+            }
+
+            scope.changeVillage = function(VillageID) {
+                resourceFactory.getOneVillage.get({ id: VillageID }, function(data) {
+                    scope.village = data.Des_In_Khmer;
+                });
+            }
+
 
 
 
@@ -4314,6 +4373,7 @@
             scope.districtkh = [];
             scope.communekh = [];
             scope.villagekh = [];
+
             scope.village = "";
             scope.commune = "";
             scope.district = "";
@@ -4330,6 +4390,12 @@
             scope.formDat.datatables = [];
             scope.tf = "HH:mm";
             scope.clientId = routeParams.clientId;
+
+            // scope.familycountrykh = [, ];
+            // scope.familyprovincekh = [, ];
+            // scope.familydistrictkh = [, ];
+            // scope.familycommunekh = [, ];
+            // scope.familyvillagekh = [], [];
 
 
             var requestParams = { staffInSelectedOfficeOnly: true };
@@ -4412,6 +4478,7 @@
 
                     resourceFactory.addressCountry.get(function(data) {
                         scope.countrykh = data;
+                        scope.familycountrykh = data;
                     });
                 }
 
@@ -4464,6 +4531,30 @@
             scope.changeVillage = function(VillageID) {
                 resourceFactory.getOneVillage.get({ id: VillageID }, function(data) {
                     scope.village = data.Des_In_Khmer;
+                });
+            }
+
+            scope.changeFamilyCountry = function(Id, index) {
+                resourceFactory.addressProvince.get({ id: Id }, function(data) {
+                    scope.familyArray[index].familyprovincekh = data;
+                });
+            };
+
+            scope.changeFamilyProvince = function(ProvinceID, index) {
+                resourceFactory.addressDistrict.get({ id: ProvinceID }, function(data) {
+                    scope.familyArray[index].familydistrictkh = data;
+                });
+            };
+
+            scope.changeFamilyDistrict = function(DistrictID, index) {
+                resourceFactory.addressCommune.get({ id: DistrictID }, function(data) {
+                    scope.familyArray[index].familycommunekh = data;
+                });
+            }
+
+            scope.changeFamilyCommune = function(CommuneID, index) {
+                resourceFactory.addressVillage.get({ id: CommuneID }, function(data) {
+                    scope.familyArray[index].familyVillageKh = data;
                 });
             }
 
@@ -4739,13 +4830,20 @@
 
                         temp.dateOfBirth = dateFilter(scope.familyArray[i].dateOfBirth, scope.df);
                     }
+                    if (scope.familyArray[i].streetid) {
+                        temp.streetid = scope.familyArray[i].streetid;
+                    }
+                    if (scope.familyArray[i].houseno) {
+                        temp.houseno = scope.familyArray[i].houseno;
+                    }
+                    if (scope.familyArray[i].tbl_village_id) {
+                        temp.tbl_village_id = scope.familyArray[i].tbl_village_id;
+                    }
 
                     temp.locale = scope.optlang.code;
                     temp.dateFormat = scope.df;
                     scope.formData.familyMembers.push(temp);
                 }
-                //
-                console.log(scope.formData);
                 resourceFactory.clientResource.save(this.formData, function(data) {
                     location.path('/viewclient/' + data.clientId);
                 });
@@ -4979,6 +5077,7 @@
 
                 scope.formData = {};
                 scope.date = {};
+                scope.tempAddress = {};
                 clientId = routeParams.clientId;
                 familyMemberId = routeParams.familyMemberId;
 
@@ -4989,7 +5088,6 @@
                     scope.professionIdOptions = data.professionIdOptions;
 
                 });
-
 
                 resourceFactory.familyMember.get({ clientId: clientId, clientFamilyMemberId: familyMemberId }, function(data) {
                     // scope.formData = data;
@@ -5005,8 +5103,62 @@
                         relationshipId: data.relationshipId,
                         professionId: data.professionId,
                         maritalStatusId: data.maritalStatusId,
-                        isDependent: data.isDependent
+                        isDependent: data.isDependent,
+                        houseno: data.houseNo,
+                        streetid: data.streetNo
                     };
+
+                    resourceFactory.addressCountry.get({}, function(data_country) {
+                        scope.countrykh = data_country;
+                    });
+
+                    resourceFactory.addressAllVillage.get({ id: data.villageId }, function(data_village) {
+                        scope.villagekh = data_village;
+                        scope.formData.tbl_village_id = data.villageId;
+
+                        resourceFactory.addressAllCommune.get({ id: data_village[0].tbl_commune_id }, function(data_commune) {
+                            scope.communekh = data_commune;
+                            scope.tempAddress.tbl_commune_id = data_village[0].tbl_commune_id;
+
+                            resourceFactory.addressAllDistrict.get({ id: data_commune[0].tbl_district_id }, function(data_district) {
+                                scope.districtkh = data_district;
+                                scope.tempAddress.tbl_district_id = data_commune[0].tbl_district_id;
+
+                                resourceFactory.addressAllProvince.get({ id: data_district[0].tbl_province_id }, function(data_province) {
+                                    scope.provincekh = data_province;
+                                    scope.tempAddress.tbl_province_id = data_district[0].tbl_province_id;
+                                    scope.tempAddress.tbl_country_id = data_province[0].tbl_country_id;
+
+
+                                })
+                            })
+                        })
+                    });
+
+                    //address
+                    scope.changeCountry = function(Id) {
+                        resourceFactory.addressProvince.get({ id: Id }, function(data) {
+                            scope.provincekh = data;
+                        })
+                    };
+
+                    scope.changeProvince = function(ProvinceID) {
+                        resourceFactory.addressDistrict.get({ id: ProvinceID }, function(data) {
+                            scope.districtkh = data;
+                        })
+                    };
+
+                    scope.changeDistrict = function(DistrictID) {
+                        resourceFactory.addressCommune.get({ id: DistrictID }, function(data) {
+                            scope.communekh = data;
+                        })
+                    }
+
+                    scope.changeCommune = function(CommuneID) {
+                        resourceFactory.addressVillage.get({ id: CommuneID }, function(data) {
+                            scope.villagekh = data;
+                        })
+                    }
 
                     if (data.dateOfBirth) {
                         var dobDate = dateFilter(data.dateOfBirth, scope.df);
@@ -5275,6 +5427,11 @@
             scope.updateDefaultSavings = false;
             scope.charges = [];
 
+            scope.village = "";
+            scope.commune = "";
+            scope.district = "";
+            scope.province = "";
+            scope.country = "";
 
             // address
             scope.addresses = [];
@@ -5359,7 +5516,6 @@
             resourceFactory.familyMembers.get({ clientId: routeParams.id }, function(data) {
 
                 scope.families = data;
-
 
             });
 
@@ -12788,8 +12944,6 @@
 
                 function numberOfDays(year, month, day) {
                     var d = new Date(year, month, 0);
-                    console.log(year, month);
-                    console.log(d.getDate(), day);
                     if (d.getDate() < day) {
                         return d.getDate();
                     } else {
@@ -14387,7 +14541,6 @@
                                 loanChargeId: scope.disbursementDetails[i].loanChargeId
                             });
                         }
-                        console.log("DISBURSEMENT DATA", this.formData.expectedDisbursementDate);
                     }
                     if (scope.formData.approvedLoanAmount == null) {
                         scope.formData.approvedLoanAmount = scope.showTrancheAmountTotal;
@@ -14761,7 +14914,6 @@
                     resourceFactory.loanResource.get(scope.inparams, function(data) {
 
                         scope.productDetails = data.product;
-                        console.log('scope', scope.productDetails);
                         scope.group.clients = data.group.clientMembers.map(function(client) {
                             client.principal = data.product.principal;
                             client.charges = data.product.charges.map(function(charge) {
@@ -15059,6 +15211,7 @@
                 if (data.group) {
                     scope.groupName = data.group.name;
                 }
+
             });
 
             scope.loanProductChange = function(loanProductId) {
@@ -15189,7 +15342,6 @@
             scope.formValue = function(array, model, findattr, retAttr) {
                 findattr = findattr ? findattr : 'id';
                 retAttr = retAttr ? retAttr : 'value';
-                console.log(findattr, retAttr, model);
                 return _.find(array, function(obj) {
                     return obj[findattr] === model;
                 })[retAttr];
@@ -15903,10 +16055,6 @@
                                 taskPermissionName: 'DELETE_LOAN'
                             },
                             {
-                                name: "button.addcollateral",
-                                taskPermissionName: 'CREATE_COLLATERAL'
-                            },
-                            {
                                 name: "button.listguarantor",
                                 taskPermissionName: 'READ_GUARANTOR'
                             },
@@ -16031,6 +16179,10 @@
                             {
                                 name: "button.recoverguarantee",
                                 taskPermissionName: 'RECOVERGUARANTEES_LOAN'
+                            },
+                            {
+                                name: "button.addcollateral",
+                                taskPermissionName: 'CREATE_COLLATERAL'
                             }
                         ]
 
@@ -16180,7 +16332,6 @@
                     genericResultSet: 'true'
                 }, function(data) {
                     scope.datatabledetails = data;
-                    console.log(data);
                     scope.datatabledetails.isData = data.data.length > 0 ? true : false;
                     scope.datatabledetails.isMultirow = data.columnHeaders[0].columnName == "id" ? true : false;
                     scope.showDataTableAddButton = !scope.datatabledetails.isData || scope.datatabledetails.isMultirow;
@@ -17076,12 +17227,8 @@
                 });
             }
 
-            scope.$on('scrollbar.show', function() {
-                console.log('Scrollbar show');
-            });
-            scope.$on('scrollbar.hide', function() {
-                console.log('Scrollbar hide');
-            });
+            scope.$on('scrollbar.show', function() {});
+            scope.$on('scrollbar.hide', function() {});
 
             uiConfigService.init();
             //hides loader
@@ -17260,7 +17407,6 @@
                 scope.optlang = scope.langs[0];
                 tmhDynamicLocale.set(scope.langs[0].code);
             }
-            console.log(translate.use);
             translate.use(scope.optlang.code);
 
             scope.isActive = function(route) {
@@ -19223,7 +19369,6 @@
 
             resourceFactory.officeResource.getAllOffices(function(data) {
                 scope.offices = data;
-                console.log("Office ID :" + scope.offices);
             });
 
             scope.first.queryParams = '&';
@@ -21424,7 +21569,7 @@
             }
 
             scope.doBlur = function(index) {
-                //console.log("Blur") ;
+
             }
         }
     });
@@ -22098,7 +22243,6 @@
                 if (!_.isUndefined(scope.paramValues)) {
                     var obj = scope.paramValues;
                     for (var key in obj) {
-                        console.log(' name=' + key + ' value=' + obj[key]);
                         scope.formData["R_" + key] = String(obj[key]);
                     }
                 }
@@ -22704,7 +22848,6 @@
             scope.formValue = function(array, model, findattr, retAttr) {
                 findattr = findattr ? findattr : 'id';
                 retAttr = retAttr ? retAttr : 'value';
-                console.log(findattr, retAttr, model);
                 return _.find(array, function(obj) {
                     return obj[findattr] === model;
                 })[retAttr];
@@ -23436,7 +23579,6 @@
             $rootScope.formValue = function(array, model, findattr, retAttr) {
                 findattr = findattr ? findattr : 'id';
                 retAttr = retAttr ? retAttr : 'value';
-                console.log(findattr, retAttr, model);
                 return _.find(array, function(obj) {
                     return obj[findattr] === model;
                 })[retAttr];
@@ -23792,7 +23934,6 @@
             scope.formValue = function(array, model, findattr, retAttr) {
                 findattr = findattr ? findattr : 'id';
                 retAttr = retAttr ? retAttr : 'value';
-                console.log(findattr, retAttr, model);
                 return _.find(array, function(obj) {
                     return obj[findattr] === model;
                 })[retAttr];
@@ -24195,7 +24336,6 @@
             scope.formValue = function(array, model, findattr, retAttr) {
                 findattr = findattr ? findattr : 'id';
                 retAttr = retAttr ? retAttr : 'value';
-                console.log(findattr, retAttr, model);
                 return _.find(array, function(obj) {
                     return obj[findattr] === model;
                 })[retAttr];
@@ -24377,7 +24517,6 @@
             scope.formValue = function(array, model, findattr, retAttr) {
                 findattr = findattr ? findattr : 'id';
                 retAttr = retAttr ? retAttr : 'value';
-                console.log(findattr, retAttr, model);
                 return _.find(array, function(obj) {
                     return obj[findattr] === model;
                 })[retAttr];
@@ -25554,7 +25693,6 @@
 
                 }
                 if (scope.product.allowAttributeOverrides != null) {
-                    console.log('scope.product.allowAttributeOverrides : ', scope.product.allowAttributeOverrides);
                     scope.amortization = scope.product.allowAttributeOverrides.amortizationType;
                     scope.arrearsTolerance = scope.product.allowAttributeOverrides.inArrearsTolerance;
                     scope.graceOnArrearsAging = scope.product.allowAttributeOverrides.graceOnArrearsAgeing;
@@ -28395,7 +28533,6 @@
                         for (var i = 0; i < result.length; i++) {
                             scope.reports[i].report_locale_name = result[i].value;
                         }
-                        //console.log(JSON.stringify(scope.reports));
                     }
                     scope.onFilter();
                 }
@@ -28957,7 +29094,6 @@
             scope.formValue = function(array, model, findattr, retAttr) {
                 findattr = findattr ? findattr : 'id';
                 retAttr = retAttr ? retAttr : 'value';
-                console.log(findattr, retAttr, model);
                 return _.find(array, function(obj) {
                     return obj[findattr] === model;
                 })[retAttr];
@@ -29809,7 +29945,6 @@
                                     " " + dateFilter(columnHeader.dateTimeType.time, scope.tf);
                             }
                         });
-                        console.log(scope.entityformData);
                         var action = submitStatus[cnt];
                         resourceFactory.DataTablesResource[action](params, formData.data, function(data) {
 
@@ -30594,7 +30729,6 @@
             scope.formValue = function(array, model, findattr, retAttr) {
                 findattr = findattr ? findattr : 'id';
                 retAttr = retAttr ? retAttr : 'value';
-                console.log(findattr, retAttr, model);
                 return _.find(array, function(obj) {
                     return obj[findattr] === model;
                 })[retAttr];
@@ -34182,4 +34316,8 @@
     });
 }(mifosX.controllers || {}));
 //Edited.controllers || {}));
+//Edited3
+// }(mifosX.controllers || {}));
+//Edited.controllers || {}));
+//Edited3controllers || {}));
 //Edited3

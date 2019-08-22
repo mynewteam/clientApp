@@ -3175,6 +3175,8 @@
     "label.form.District": "ស្រុក",
     "label.form.Commune": "ឃំុ",
     "label.form.Village": "ភូមិ",
-    "label.form.Address": "អាសយដ្ឋាន",
+    "label.form.Street": "ផ្លូវ",
+    "label.input.HouseNo": "ផ្ទះ",
+    "label.input.Address": "អាសយដ្ឋាន",
     "label.anchor.teller": "បេឡាករ"
 }
