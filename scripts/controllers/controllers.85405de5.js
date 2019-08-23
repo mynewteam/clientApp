@@ -1618,6 +1618,22 @@
 
 (function(module) {
     mifosX.controllers = _.extend(module, {
+        topnavbarController: function(scope, resourceFactory, location, dateFilter) {
+
+            scope.date = "2019-08-22";
+            resourceFactory.systemDateResource.get(function(data) {
+                console.log(data);
+            });
+
+        }
+    });
+    mifosX.ng.application.controller('topnavbarController', ['$scope', 'ResourceFactory', '$location', 'dateFilter', mifosX.controllers.topnavbarController]).run(function($log) {
+        $log.info("topnavbarController initialized");
+    });
+}(mifosX.controllers || {}));;
+
+(function(module) {
+    mifosX.controllers = _.extend(module, {
         ViewSpotRateController: function(scope, resourceFactory, location, dateFilter) {
 
             scope.viewdata = [];

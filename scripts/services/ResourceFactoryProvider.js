@@ -280,6 +280,9 @@
                         get: { method: 'GET', params: {}, isArray: true },
                         getView: { method: 'GET', params: {} }
                     }),
+                    systemDateResource: defineResource(apiVer + "/glclosures/systemDateToday", {}, {
+                        get: { method: 'GET', params: {} }
+                    }),
                     periodicAccrualAccountingResource: defineResource(apiVer + "/runaccruals", {}, {
                         run: { method: 'POST', params: {} }
                     }),

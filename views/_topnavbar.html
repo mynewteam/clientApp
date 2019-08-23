@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" data-ng-controller="topnavbarController">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" ng-click="isNavCollapsed = !isNavCollapsed">
@@ -21,18 +21,6 @@
                         <i class="fa fa-users"></i> {{ 'label.anchor.clients' | translate }}
                     </a>
                 </li>
-                <!-- <li class="" uib-dropdown is-open="li.client.status.isopen" ng-mouseenter="li.client.status.isopen = true" ng-mouseleave="li.client.status.isopen = false">
-                    <a class="" uib-dropdown-toggle data-toggle="uib-dropdown" ng-class="{ activate: isActive('clients') }" href>
-                        <i class="fa fa-users"></i> {{ 'label.anchor.clients' | translate }}<b class="caret"></b></a>
-                    <ul class="" uib-dropdown-menu id="swatch-menu">
-                        <li><a href="#/clients" has-permission='READ_CLIENT'>{{ 'label.anchor.clients' | translate
-                            }}</a></li>
-                        <li><a href="#/groups" has-permission='READ_GROUP'>{{ 'label.anchor.groups' | translate
-                            }}</a></li>
-                        <li><a href="#/centers" has-permission='READ_CENTER'>{{ 'label.anchor.centers' | translate
-                            }}</a></li>
-                    </ul>
-                </li> -->
                 <li uib-dropdown is-open="li.accounting.status.isopen" ng-mouseenter="li.accounting.status.isopen = true" ng-mouseleave="li.accounting.status.isopen = false">
                     <a ng-class="{ activate: isActive('acc') }" href="#/accounting">
                         <i class="fa fa-money"></i> {{ 'label.anchor.accounting' | translate }}
@@ -106,6 +94,12 @@
                         <li><a id="logout" data-ng-click="logout()"><i class="fa fa-power-off"></i> {{
                             'label.anchor.logout' | translate }}</a></li>
                     </ul>
+                </li>
+
+                <li class="" uib-dropdown id="date-menu" is-open="li.date.status.isopen" ng-mouseenter="li.date.status.isopen = true" ng-mouseleave="li.date.status.isopen = false">
+                    <a href class="" uib-dropdown-toggle data-toggle="uib-dropdown" ng-click="fetchItemsInNotificationTray()">
+                        <span>{{date}}</span>
+                    </a>
                 </li>
 
             </ul>
